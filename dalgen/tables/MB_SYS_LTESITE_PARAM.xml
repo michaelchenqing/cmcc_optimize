@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="mb_sys_ltesite_param" dummyPk="enodeb_glb_id">
+
+	<!-- 通过基站的全局ID编号查询4G基站参数详情 -->
+	<operation name="getLteSiteByEnodebGlbId" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    select enodeb_glb_id,enodeb_id,enodeb_name,operastate,update_time,record_time from mb_sys_ltesite_param where enodeb_glb_id=?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 插入新4G基站参数记录 -->
+	<operation name="insertLteSite" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into mb_sys_ltesite_param 
+	  (enodeb_glb_id,enodeb_id,enodeb_name,operastate,update_time,record_time)
+		values
+	  (?,?,?,?,sysdate,?)
+			]]>
+		</sql>
+	</operation>
+	
+	<!-- 查询基站信息 -->
+	<operation name="getLteSiteByParam" paramtype="primitive" multiplicity="many"  paging="true">
+		<extraparams>
+			<param name="startTime" javatype="java.lang.String" />
+		</extraparams>
+		<extraparams>
+			<param name="endTime" javatype="java.lang.String" />
+		</extraparams>
+		<sql>
+			<![CDATA[
+			    select enodeb_glb_id, enodeb_id, enodeb_name,operastate, update_time,record_time from mb_sys_ltesite_param
+ 				where record_time >='' and record_time < ''
+
+			]]>
+		</sql>
+		<sqlmap><![CDATA[
+			select enodeb_glb_id, enodeb_id, enodeb_name,operastate, update_time,record_time from mb_sys_ltesite_param
+ 				where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss') 
+        ]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 修改4G基站参数 -->
+	<operation name="updateLteSite" paramtype="object">
+		<sql>
+			<![CDATA[
+			    update mb_sys_ltesite_param
+				   set 
+				   enodeb_glb_id=?,
+				   enodeb_id=?,
+				   enodeb_name=?,
+				   operastate=?,
+				   update_time=sysdate,
+				   record_time=?
+				  where enodeb_glb_id = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 删除4G基站参数 -->
+	<operation name="deleteLteSiteRecord" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    delete mb_sys_ltesite_param where enodeb_glb_id = ?
+			]]>
+		</sql>
+	</operation>
+</table>	

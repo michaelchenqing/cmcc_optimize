@@ -1,0 +1,65 @@
+{
+  "SignalWSPModel": {
+     "_id": {
+      "path": "id"
+    },
+    "properties": {
+	"id": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+      "time": {
+        "type": "long",
+        "index": "not_analyzed"
+      },
+      "imsi": {
+         "type": "string",
+        "index": "not_analyzed"
+      },
+      "wsp_session": {
+         "type": "string",
+        "index": "not_analyzed"
+      },
+	  "event": {
+         "type": "integer",
+        "index": "not_analyzed"
+      },
+      "lac": {
+        "type": "long",
+       "index": "not_analyzed"
+      },
+      "cell": {
+         "type": "integer",
+		"index": "not_analyzed"
+      },
+      "sub_session": {
+        "type": "long"
+		 "index": "not_analyzed"
+      },
+	   "method": {
+         "type": "integer",
+		"index": "not_analyzed"
+      },
+	   "wtp_abort_reason": {
+         "type": "long",
+		"index": "not_analyzed"
+      },
+	    "wsp_response_status": {
+         "type": "integer",
+		"index": "not_analyzed"
+      },
+	  "mobile_type": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+	    "url1": {
+        "type": "string",
+        "index": "not_analyzed"
+      },
+	    "hour": {
+		 "type": "string",
+         "index": "not_analyzed"   
+      }
+    }
+  }
+}

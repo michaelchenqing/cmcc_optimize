@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_SYS_GSMCELL_RF -->
+    <resultMap id="RM-MB-SYS-GSMCELL-RF" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbSysGsmcellRfDO">
+        <result property="cellId" column="CELL_ID" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="cellName" column="CELL_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="azimuth" column="AZIMUTH" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="height" column="HEIGHT" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="mtilt" column="MTILT" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="etilt" column="ETILT" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="antenna" column="ANTENNA" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="fakeAntenna" column="FAKE_ANTENNA" javaType="boolean" jdbcType="NUMBER" nullValue="false"/>
+        <result property="updateTime" column="UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="recordTime" column="RECORD_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="updateUser" column="UPDATE_USER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellGlbId" column="CELL_GLB_ID" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="siteGlbId" column="SITE_GLB_ID" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbSysGsmcellRfDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbSysGsmcellRfDAO.getGSMCellRFbyId -->
+    <select id="MS-MB-SYS-GSMCELL-RF-GET-GSM-CELL-R-FBY-ID" resultMap="RM-MB-SYS-GSMCELL-RF">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-SYS-GSMCELL-RF-GET-GSM-CELL-R-FBY-ID*/ CELL_ID, CELL_NAME, AZIMUTH, HEIGHT, MTILT, ETILT, ANTENNA, FAKE_ANTENNA, UPDATE_TIME, RECORD_TIME, UPDATE_USER, CELL_GLB_ID, SITE_GLB_ID from MB_SYS_GSMCELL_RF where (CELL_ID = #value#)
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbSysGsmcellRfDAO.insertGSMCellRF -->
+    <insert id="MS-MB-SYS-GSMCELL-RF-INSERT-GSM-CELL-RF">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-SYS-GSMCELL-RF-INSERT-GSM-CELL-RF*/ into MB_SYS_GSMCELL_RF(CELL_ID,CELL_NAME,AZIMUTH,HEIGHT,MTILT,ETILT,ANTENNA,FAKE_ANTENNA,UPDATE_TIME,RECORD_TIME,UPDATE_USER,CELL_GLB_ID,SITE_GLB_ID) values (#cellId#, #cellName#, #azimuth#, #height#, #mtilt#, #etilt#, #antenna#, #fakeAntenna#, sysdate, sysdate, #updateUser#, #cellGlbId#, #siteGlbId#)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbSysGsmcellRfDAO.updateGSMCellRF -->
+    <update id="MS-MB-SYS-GSMCELL-RF-UPDATE-GSM-CELL-RF">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-SYS-GSMCELL-RF-UPDATE-GSM-CELL-RF*/ MB_SYS_GSMCELL_RF set CELL_NAME=#cellName#, AZIMUTH=#azimuth#, HEIGHT=#height#, MTILT=#mtilt#, ETILT=#etilt#, ANTENNA=#antenna#, FAKE_ANTENNA=#fakeAntenna#, UPDATE_TIME=sysdate, RECORD_TIME=sysdate, UPDATE_USER=#updateUser#, CELL_GLB_ID=#cellGlbId#, SITE_GLB_ID=#siteGlbId# where (CELL_ID = #cellId#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbSysGsmcellRfDAO.deleteGSMCellRF -->
+    <delete id="MS-MB-SYS-GSMCELL-RF-DELETE-GSM-CELL-RF">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-SYS-GSMCELL-RF-DELETE-GSM-CELL-RF*/ from MB_SYS_GSMCELL_RF where (CELL_ID = #value#)
+    ]]>
+    </delete>
+
+</sqlMap>

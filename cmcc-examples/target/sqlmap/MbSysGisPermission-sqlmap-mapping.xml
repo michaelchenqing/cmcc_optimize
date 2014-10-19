@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_SYS_GIS_PERMISSION -->
+    <resultMap id="RM-MB-SYS-GIS-PERMISSION" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbSysGisPermissionDO">
+        <result property="province" column="PROVINCE" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="city" column="CITY" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="county" column="COUNTY" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="enodebGlbId" column="ENODEB_GLB_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="enodebId" column="ENODEB_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="enodebName" column="ENODEB_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="netgrid" column="NETGRID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="environ" column="ENVIRON" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="vendor" column="VENDOR" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="recordTime" column="RECORD_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="updateTime" column="UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="updateUser" column="UPDATE_USER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="address" column="ADDRESS" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbSysGisPermissionDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbSysGisPermissionDAO.getLTEPERMISSIONbyId -->
+    <select id="MS-MB-SYS-GIS-PERMISSION-GET-LTEPERMISSIO-NBY-ID" resultMap="RM-MB-SYS-GIS-PERMISSION">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-SYS-GIS-PERMISSION-GET-LTEPERMISSIO-NBY-ID*/ PROVINCE, CITY, COUNTY, ENODEB_GLB_ID, ENODEB_ID, ENODEB_NAME, NETGRID, ENVIRON, VENDOR, record_time, UPDATE_TIME, UPDATE_USER, ADDRESS from MB_SYS_GIS_PERMISSION where (ENODEB_GLB_ID = #value#)
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbSysGisPermissionDAO.insertLTEPERMISSION -->
+    <insert id="MS-MB-SYS-GIS-PERMISSION-INSERT-LTEPERMISSION">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-SYS-GIS-PERMISSION-INSERT-LTEPERMISSION*/ into MB_SYS_GIS_PERMISSION(PROVINCE,CITY,COUNTY,ENODEB_GLB_ID,ENODEB_ID,ENODEB_NAME,NETGRID,ENVIRON,VENDOR,record_time,UPDATE_TIME,UPDATE_USER,ADDRESS) values (#province#, #city#, #county#, #enodebGlbId#, #enodebId#, #enodebName#, #netgrid#, #environ#, #vendor#, sysdate, sysdate, #updateUser#, #address#)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbSysGisPermissionDAO.updateLTEPERMISSION -->
+    <update id="MS-MB-SYS-GIS-PERMISSION-UPDATE-LTEPERMISSION">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-SYS-GIS-PERMISSION-UPDATE-LTEPERMISSION*/ MB_SYS_GIS_PERMISSION set PROVINCE=#province#, CITY=#city#, COUNTY=#county#, ENODEB_GLB_ID=#enodebGlbId#, ENODEB_ID=#enodebId#, ENODEB_NAME=#enodebName#, NETGRID=#netgrid#, ENVIRON=#environ#, VENDOR=#vendor#, record_time=sysdate, UPDATE_TIME=sysdate, UPDATE_USER=#updateUser#, ADDRESS=#address# where (ENODEB_GLB_ID = #enodebGlbId2#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbSysGisPermissionDAO.deleteLTEPERMISSION -->
+    <delete id="MS-MB-SYS-GIS-PERMISSION-DELETE-LTEPERMISSION">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-SYS-GIS-PERMISSION-DELETE-LTEPERMISSION*/ from MB_SYS_GIS_PERMISSION where (ENODEB_GLB_ID = #value#)
+    ]]>
+    </delete>
+
+</sqlMap>

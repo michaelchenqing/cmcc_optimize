@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="mb_perf_gsm_busistat" dummyPk="cell_glb_id">
+	
+	<!-- 通过GSM小区ID查询业务量 -->
+	<operation name="getperfbyId" paramtype="primitive">
+		<sql>
+			<![CDATA[
+	select CELL_GLB_ID,CELL_ID,CELL_NAME,CYCLE_DATE,PERIOD,TRAFFIC,GPRS_THROU,EGPRS_THROU,OPER_TIME,RECORD_TIME from 
+	mb_perf_gsm_busistat where CELL_GLB_ID = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 插入新GSM小区业务量记录 -->
+	<operation name="insertperf" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into mb_perf_gsm_busistat 
+	  (CELL_GLB_ID,CELL_ID,CELL_NAME,CYCLE_DATE,PERIOD,TRAFFIC,GPRS_THROU,EGPRS_THROU,OPER_TIME,RECORD_TIME)
+		values
+	  (?,?,?,?,?,?,?,?,sysdate,?)
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 修改GSM小区业务量 -->
+	<operation name="updateperf" paramtype="object">
+		<sql>
+			<![CDATA[
+			    update mb_perf_gsm_busistat
+				set 
+				CELL_ID=?,
+				CELL_NAME=?,
+				CYCLE_DATE=?,
+				PERIOD=?,
+				TRAFFIC=?,
+				GPRS_THROU=?,
+				EGPRS_THROU=?,
+				OPER_TIME=sysdate,
+				RECORD_TIME=?
+				where CELL_GLB_ID = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 删除GSM小区业务量 -->
+	<operation name="deleteperfRecord" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    delete mb_perf_gsm_busistat where CELL_GLB_ID = ?
+			]]>
+		</sql>
+	</operation>
+</table>	

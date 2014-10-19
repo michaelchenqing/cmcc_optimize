@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ftp下载定时任务配置 -->
+<root>
+	<!-- 本地下载临时目录 -->
+	<local_temp_folder>/data/ftpcache/ftp/</local_temp_folder>
+
+	<ftp_down_conf>
+		<!-- ftp开始 -->
+		<!-- 亿阳数据td/gsm -->
+		<ftp>
+			<host>10.101.16.10</host><!-- ftp ip地址 -->
+			<port>21</port><!-- ftp端口 -->
+			<user_name>ftp-wy1</user_name> <!-- ftp用户名，匿名为：anonymous -->
+			<password>gAaC%^Aq</password><!-- ftp密码 -->
+			<corn_string>0 30/30 6-14 * * ?</corn_string><!-- 定时调度表达式，8-12点，每30分钟检查一次 -->
+			<file_name_rule>(sichuan_.*_YY_[0-9]{8}/sichuan_.*_YY_[0-9]{8,10}\.csv\.gz)|(sichuan_(TD|GSM)_.*_YY_[0-9]{1,10}.csv.gz)</file_name_rule><!-- 下载ftp目录下的文件类型 -->
+			<ftp_folder>/backupnew/data_center/${data:yyyyMMdd}</ftp_folder><!-- ftp文件监视目录 -->
+			<local_folder>td_gsm/</local_folder><!-- 本地子目录，为防止多个应用商文件重名 -->
+			<custom_job_class>com.cmcc.optimize.datasyc.scheduler.FtpDownLoadSchedulerJob</custom_job_class>
+			<list_sub>true</list_sub><!-- 是否列出所有的子目录 -->
+		</ftp>
+
+		<!-- 亿阳数据 工参数据 -->
+		<ftp>
+			<host>10.101.16.10</host><!-- ftp ip地址 -->
+			<port>21</port><!-- ftp端口 -->
+			<user_name>ftp-wy1</user_name> <!-- ftp用户名，匿名为：anonymous -->
+			<password>gAaC%^Aq</password><!-- ftp密码 -->
+			<corn_string>0 30/30 8-14 * * ?</corn_string><!-- 定时调度表达式，8-12点，每30分钟检查一次 -->
+			<file_name_rule>sichuan_Lte_.*_YY_[0-9]{1,8}\.csv\.gz</file_name_rule><!-- 下载ftp目录下的文件类型 -->
+			<ftp_folder>/backupnew/data_center/${data:yyyyMMdd}</ftp_folder><!-- ftp文件监视目录 -->
+			<local_folder>mianyang/</local_folder><!-- 本地子目录，为防止多个应用商文件重名 -->
+			<check><!-- 验证ftp上的文件是否在指定的时间内存在，不需要验证文件是否按点到达，可不需要配置check节点 -->
+				<file_list>sichuan_Lte_LteProject_YY_${data:yyyyMMdd}.csv.gz,sichuan_Lte_LteEnodeb_YY_${data:yyyyMMdd}.csv.gz,sichuan_Lte_LteEutranCell_YY_${data:yyyyMMdd}.csv.gz,sichuan_Lte_LtePlan_YY_${data:yyyyMMdd}.csv.gz</file_list>
+				<corn_string>0 30 12 * * ?</corn_string><!-- 12.30分检测文件是否在ftp存在 -->
+			</check>
+			<custom_job_class>com.cmcc.optimize.datasyc.scheduler.FtpDownLoadSchedulerJob</custom_job_class>
+			<list_sub>false</list_sub><!-- 是否列出所有的子目录 -->
+		</ftp>
+
+		<!-- 泰岳数据(路测) -->
+		<ftp>
+			<host>10.101.159.52</host><!-- ftp ip地址 -->
+			<port>21</port><!-- ftp端口 -->
+			<user_name>sichuan</user_name> <!-- ftp用户名，匿名为：anonymous -->
+			<password>scftp123456</password><!-- ftp密码 -->
+			<corn_string>0 30/30 8-14 * * ?</corn_string><!-- 定时调度表达式，8-12点，每30分钟检查一次 -->
+			<!-- <file_name_rule>sicuan_mianyang_Lte_DT_TY_.*\.csv</file_name_rule>下载ftp目录下的文件类型 -->
+			<!--<file_name_rule>sichuan_mianyang_Lte_DT_TY_.*\.csv</file_name_rule> 下载ftp目录下的文件类型 -->
+			<file_name_rule>sichuan_.*_Lte_DT_.*_.*\.csv</file_name_rule>
+			<ftp_folder>/${data:yyyyMMdd}</ftp_folder><!-- ftp文件监视目录 -->
+			<local_folder>taiyue/</local_folder><!-- 本地子目录，为防止多个应用商文件重名 -->
+			<custom_job_class>com.cmcc.optimize.datasyc.scheduler.FtpDownLoadSchedulerJob</custom_job_class>
+			<list_sub>false</list_sub><!-- 是否列出所有的子目录 -->
+		</ftp>
+
+		<!-- 泰岳数据(手机测速) -->
+		<ftp>
+			<host>10.101.159.53</host><!-- ftp ip地址 -->
+			<port>21</port><!-- ftp端口 -->
+			<user_name>upst_data</user_name> <!-- ftp用户名，匿名为：anonymous -->
+			<password>upst_data</password><!-- ftp密码 -->
+			<corn_string>0 0 */2 * * ?</corn_string><!-- 定时调度表达式，每两小时检查一次 -->
+			<!-- <file_name_rule>sichuan_lte_st_.*_ty_[0-9]{1,8}\.csv</file_name_rule>下载ftp目录下的文件类型 -->
+			<file_name_rule>sichuan_lte_st_(ftp|http|ping|video)_ty_${data:yyyyMMdd}\.csv</file_name_rule><!-- 下载ftp目录下的文件类型 -->
+			<ftp_folder>/</ftp_folder><!-- ftp文件监视目录 -->
+			<local_folder>taiyue/</local_folder><!-- 本地子目录，为防止多个应用商文件重名 -->
+			<custom_job_class>com.cmcc.optimize.datasyc.scheduler.FtpDownLoadSchedulerJob</custom_job_class>
+			<list_sub>false</list_sub><!-- 是否列出所有的子目录 -->
+		</ftp>
+		<!-- ftp结束 -->
+
+		<!-- mro开始 -->
+		<!-- 华为数据 -->
+		<ftp>
+			<host>10.101.147.167</host><!-- ftp ip地址 -->
+			<port>21</port><!-- ftp端口 -->
+			<user_name>northuser</user_name> <!-- ftp用户名，匿名为：anonymous -->
+			<password>Changeme_123</password><!-- ftp密码 -->
+			<corn_string>0 0 */2 * * ?</corn_string><!-- 定时调度表达式，每两小时检查一次 -->
+			<!-- <file_name_rule>HUAWEI-TDD-LTE-${data:yyyyMMdd}.tar.gz</file_name_rule> --><!-- 下载ftp目录下的文件类型 -->
+			<file_name_rule>TD-LTE_.*_HUAWEI_[0-9]{0,13}_[0-9]{0,6}_[0-9]{14}.xml.gz</file_name_rule>
+			<ftp_folder>/export/home/northdata/LCMCCMR/${data:yyyyMMdd}</ftp_folder><!-- ftp文件监视目录 -->
+			<local_folder>/data/dataservice/mr/</local_folder><!-- 本地子目录，为防止多个应用商文件重名 -->
+			<custom_job_class>com.cmcc.optimize.datasyc.scheduler.MRODownLoadSchedulerJob</custom_job_class>
+			<list_sub>true</list_sub><!-- 是否列出所有的子目录 -->
+		</ftp>
+
+		<!-- 诺西 -->
+		<ftp>
+			<host>10.101.152.57</host><!-- ftp ip地址 -->
+			<port>21</port><!-- ftp端口 -->
+			<user_name>yiyang</user_name> <!-- ftp用户名，匿名为：anonymous -->
+			<password>Yyboco2010</password><!-- ftp密码 -->
+			<corn_string>0 0 */2 * * ?</corn_string><!-- 定时调度表达式，每两小时检查一次 -->
+			<!-- <file_name_rule>NSN-LTE-MRO-${data:yyyy-MM-dd}.tar.gz</file_name_rule> --><!-- 下载ftp目录下的文件类型 -->
+			<file_name_rule>TD-LTE_.*_NSN_OMC_[0-9]{0,6}_[0-9]{14}.xml.tar.gz</file_name_rule>
+			<ftp_folder>/home/richuser/l3fw_mr/xml_output/${data:yyyyMMdd}</ftp_folder><!-- ftp文件监视目录 -->
+			<local_folder>/data/dataservice/mr/</local_folder><!-- 本地子目录，为防止多个应用商文件重名 -->
+			<custom_job_class>com.cmcc.optimize.datasyc.scheduler.MRODownLoadSchedulerJob</custom_job_class>
+			<list_sub>true</list_sub><!-- 是否列出所有的子目录 -->
+		</ftp>
+
+		<!-- 中兴 -->
+		<ftp>
+			<host>10.98.148.236</host><!-- ftp ip地址 -->
+			<port>1003</port><!-- ftp端口 -->
+			<user_name>nds</user_name> <!-- ftp用户名，匿名为：anonymous -->
+			<password>nds</password><!-- ftp密码 -->
+			<corn_string>0 0 */2 * * ?</corn_string><!-- 定时调度表达式，每两小时检查一次 -->
+			<!-- <file_name_rule>ZTE-LTE-MRO-${data:yyyy-MM-dd}.tar.gz</file_name_rule> --><!-- 下载ftp目录下的文件类型 -->
+			<file_name_rule>TD-LTE_.*_ZTE_OMCR1_[0-9]{0,6}_[0-9]{14}.zip</file_name_rule>
+			<ftp_folder>/${data:yyyy-MM-dd}</ftp_folder><!-- ftp文件监视目录 -->
+			<local_folder>/data/dataservice/mr/</local_folder><!-- 本地子目录，为防止多个应用商文件重名 -->
+			<custom_job_class>com.cmcc.optimize.datasyc.scheduler.MRODownLoadSchedulerJob</custom_job_class>
+			<list_sub>true</list_sub><!-- 是否列出所有的子目录 -->
+		</ftp>
+
+		<!-- 爱立信 遂宁 -->
+		<ftp>
+			<host>10.101.141.35</host><!-- ftp ip地址 -->
+			<port>21</port><!-- ftp端口 -->
+			<user_name>nmsuser</user_name> <!-- ftp用户名，匿名为：anonymous -->
+			<password>nmsuser123</password><!-- ftp密码 -->
+			<corn_string>0 0 */2 * * ?</corn_string><!-- 定时调度表达式，每两小时检查一次 -->
+			<!-- <file_name_rule>ericsson-lte-mro-${data:yyyy-MM-dd}.tar.gz</file_name_rule> --><!-- 下载ftp目录下的文件类型 -->
+			<file_name_rule>TD-LTE_.*_ERICSSON_OMC1_[0-9]{0,6}_[0-9]{14}.xml.zip</file_name_rule>
+			<ftp_folder>/home/nmsuser/wyftp/${data:yyyy-MM-dd}</ftp_folder><!-- ftp文件监视目录 -->
+			<ftp_folder>/opt/MR/data/northbound/mrfiles</ftp_folder>
+			<local_folder>/data/dataservice/mr/</local_folder><!-- 本地子目录，为防止多个应用商文件重名 -->
+			<custom_job_class>com.cmcc.optimize.datasyc.scheduler.MRODownLoadSchedulerJob</custom_job_class>
+			<list_sub>true</list_sub><!-- 是否列出所有的子目录 -->
+		</ftp>
+
+		<!-- 爱立信 资阳 -->
+		<ftp>
+			<host>10.101.141.36</host><!-- ftp ip地址 -->
+			<port>21</port><!-- ftp端口 -->
+			<user_name>nmsuser</user_name> <!-- ftp用户名，匿名为：anonymous -->
+			<password>nmsuser123</password><!-- ftp密码 -->
+			<corn_string>0 0 */2 * * ?</corn_string><!-- 定时调度表达式，每两小时检查一次 -->
+			<file_name_rule>TD-LTE_.*_ERICSSON_OMC1_[0-9]{0,6}_[0-9]{14}.xml.zip</file_name_rule><!-- 下载ftp目录下的文件类型 -->
+			<!-- <ftp_folder>/home/nmsuser/wyftp/${data:yyyy-MM-dd}</ftp_folder>ftp文件监视目录 -->
+			<ftp_folder>/opt/MR/data/northbound/mrfiles</ftp_folder>
+			<local_folder>/data/dataservice/mr/</local_folder><!-- 本地子目录，为防止多个应用商文件重名 -->
+			<custom_job_class>com.cmcc.optimize.datasyc.scheduler.MRODownLoadSchedulerJob</custom_job_class>
+			<list_sub>true</list_sub><!-- 是否列出所有的子目录 -->
+		</ftp>
+
+		<!-- mro结束 -->
+
+		<!--信令数据 -->
+		<ftp>
+			<host>10.101.159.11</host><!-- ftp ip地址 -->
+			<port>21</port><!-- ftp端口 -->
+			<!-- <user_name>Asion</user_name> ftp用户名，匿名为：anonymous <password>asionsys2012</password>ftp密码 -->
+			<user_name>ftp2014</user_name> <!-- ftp用户名，匿名为：anonymous -->
+			<password>ftp2014</password>
+			<corn_string>0 10/10 * * * ?</corn_string><!-- 定时调度表达式，8-12点，每30分钟检查一次 -->
+			<file_name_rule>.*[0-9]{8,14}\.csv</file_name_rule><!-- 下载ftp目录下的文件类型 -->
+			<ftp_folder>/src</ftp_folder><!-- ftp文件监视目录 -->
+			<local_folder>xinling/</local_folder><!-- 本地子目录，为防止多个应用商文件重名 -->
+			<custom_job_class>com.cmcc.optimize.datasyc.scheduler.FtpFileToReidsSchedulerJob</custom_job_class>
+			<list_sub>true</list_sub><!-- 是否列出所有的子目录 -->
+		</ftp>
+
+		<!--扫频数据 -->
+		<ftp>
+			<host>10.101.159.66</host>
+			<port>21</port>
+			<user_name>Administrator</user_name>
+			<password>111111</password>
+			<corn_string>0 10/10 * * * ?</corn_string>
+			<file_name_rule>Scan_(BIN|OPTS)_.*\.csv</file_name_rule>
+			<ftp_folder>/CSV_SRC</ftp_folder>
+			<local_folder>scanfreq/</local_folder>
+			<custom_job_class>com.cmcc.optimize.datasyc.scheduler.SacnFreqDownLoadSchedulerJob</custom_job_class>
+			<list_sub>true</list_sub>
+		</ftp>
+		<ftp>
+			<host>10.101.159.66</host>
+			<port>21</port>
+			<user_name>Administrator</user_name>
+			<password>111111</password>
+			<corn_string>0 10/10 * * * ?</corn_string>
+			<file_name_rule>Scan_OPTS_.*_.*_.*.csv</file_name_rule>
+			<ftp_folder>/OPTS/optsoutput/ASPS</ftp_folder>
+			<local_folder>scanfreq/</local_folder>
+			<custom_job_class>com.cmcc.optimize.datasyc.scheduler.SacnFreqDownLoadSchedulerJob</custom_job_class>
+			<list_sub>true</list_sub>
+		</ftp>
+		<ftp>
+			<host>10.101.159.66</host>
+			<port>21</port>
+			<user_name>Administrator</user_name>
+			<password>111111</password>
+			<corn_string>0 10/10 * * * ?</corn_string>
+			<file_name_rule>Scan_BIN_.*_.*_.*.csv</file_name_rule>
+			<ftp_folder>/Transcom/cyoutput</ftp_folder>
+			<local_folder>scanfreq/</local_folder>
+			<custom_job_class>com.cmcc.optimize.datasyc.scheduler.SacnFreqDownLoadSchedulerJob</custom_job_class>
+			<list_sub>true</list_sub>
+		</ftp>
+		<!-- 单站验收回传数据 -->
+		<ftp>
+			<host>10.101.159.54</host><!-- ftp ip地址 -->
+			<port>21</port><!-- ftp端口 -->
+			<user_name>ltebasedata</user_name> <!-- ftp用户名，匿名为：anonymous -->
+			<password>ltebasedata</password><!-- ftp密码 -->
+			<corn_string>0 30/30 20-0 * * ?</corn_string><!-- 定时调度表达式，8-12点，每30分钟检查一次 -->
+			<file_name_rule>LTE_ty_data_[0-9]{8}.csv</file_name_rule><!-- 下载ftp目录下的文件类型 -->
+			<ftp_folder>/</ftp_folder><!-- ftp文件监视目录 -->
+			<local_folder>taiyue/</local_folder><!-- 本地子目录，为防止多个应用商文件重名 -->
+			<custom_job_class>com.cmcc.optimize.datasyc.scheduler.FtpDownLoadSchedulerJob</custom_job_class>
+			<list_sub>false</list_sub><!-- 是否列出所有的子目录 -->
+		</ftp>
+
+	</ftp_down_conf>
+
+</root>

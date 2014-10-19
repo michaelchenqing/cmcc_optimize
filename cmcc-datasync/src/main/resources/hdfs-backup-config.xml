@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- hdfs备份定时任务配置 -->
+<root>
+	<!-- lte 文件备份 -->
+	<hdfs_backup>
+		<cornStr>0 * */2 * * ?</cornStr><!-- corn表达式，用于调起备份 -->
+		<args></args><!-- 传入的参数 -->
+		<backupClass>com.cmcc.optimize.datasyc.backup.impl.HdfsBackupLteFiles</backupClass><!-- 备份类 -->
+		<localTempFolder>/data/ftpcache/ftp/</localTempFolder><!-- 根目录 -->
+		<folder>td_gsm/,mianyang/,taiyue/</folder><!-- 备份目录 -->
+	</hdfs_backup>
+	
+	<!-- mro文件备份 -->
+	<hdfs_backup>
+		<cornStr>0 * */2 * * ?</cornStr><!-- corn表达式，用于调起备份 -->
+		<args></args><!-- 传入的参数 -->
+		<backupClass>com.cmcc.optimize.datasyc.backup.impl.HdfsBackupMroFiles</backupClass><!-- 备份类 -->
+		<localTempFolder>/data/dataservice/mr/lte/</localTempFolder>
+		<folder>huawei/,nsn/,zte/,ericsson/</folder><!-- 备份目录 -->
+	</hdfs_backup>
+
+	<!-- signal信令文件备份 -->
+	<hdfs_backup>
+		<cornStr>0 */30 * * * ?</cornStr>
+		<args></args>
+		<backupClass>com.cmcc.optimize.datasyc.backup.impl.HdfsBackupSignalFiles</backupClass>
+		<localTempFolder>/data/ftpcache/ftp/</localTempFolder>
+		<folder>xinling/</folder>
+	</hdfs_backup>
+	
+</root>

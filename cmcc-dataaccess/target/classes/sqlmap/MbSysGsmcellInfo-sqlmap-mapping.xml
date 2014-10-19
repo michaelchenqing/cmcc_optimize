@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_SYS_GSMCELL_INFO -->
+    <resultMap id="RM-MB-SYS-GSMCELL-INFO" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbSysGsmcellInfoDO">
+        <result property="cellId" column="CELL_ID" javaType="long" jdbcType="NUMBER" nullValue="0"/>
+        <result property="cellName" column="CELL_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellEnglishName" column="CELL_ENGLISH_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="siteId" column="SITE_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cgi" column="CGI" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="rruRemote" column="RRU_REMOTE" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellLongitude" column="CELL_LONGITUDE" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="cellLatitude" column="CELL_LATITUDE" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="sectorId" column="SECTOR_ID" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="powerdivisiontype" column="POWERDIVISIONTYPE" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="powerdivisionindex" column="POWERDIVISIONINDEX" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="ncc" column="NCC" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="bcc" column="BCC" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="bcch" column="BCCH" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="covertype" column="COVERTYPE" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="bandindicatorforfrequency" column="BANDINDICATORFORFREQUENCY" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="rac" column="RAC" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="recordTime" column="RECORD_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="uptimeTime" column="UPTIME_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="updateUser" column="UPDATE_USER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellGlbId" column="CELL_GLB_ID" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="siteGlbId" column="SITE_GLB_ID" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbSysGsmcellInfoDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbSysGsmcellInfoDAO.getGSMCellInfobyId -->
+    <select id="MS-MB-SYS-GSMCELL-INFO-GET-GSM-CELL-INFOBY-ID" resultMap="RM-MB-SYS-GSMCELL-INFO">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-SYS-GSMCELL-INFO-GET-GSM-CELL-INFOBY-ID*/ CELL_ID, CELL_NAME, CELL_ENGLISH_NAME, SITE_ID, CGI, RRU_REMOTE, CELL_LONGITUDE, CELL_LATITUDE, SECTOR_ID, POWERDIVISIONTYPE, POWERDIVISIONINDEX, NCC, BCC, BCCH, COVERTYPE, BANDINDICATORFORFREQUENCY, RAC, RECORD_TIME, UPTIME_TIME, UPDATE_USER, CELL_GLB_ID, SITE_GLB_ID from MB_SYS_GSMCELL_INFO where (CELL_ID = #value#)
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbSysGsmcellInfoDAO.insertGSMCellInfo -->
+    <insert id="MS-MB-SYS-GSMCELL-INFO-INSERT-GSM-CELL-INFO">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-SYS-GSMCELL-INFO-INSERT-GSM-CELL-INFO*/ into MB_SYS_GSMCELL_INFO(CELL_ID,CELL_NAME,CELL_ENGLISH_NAME,SITE_ID,CGI,RRU_REMOTE,CELL_LONGITUDE,CELL_LATITUDE,SECTOR_ID,POWERDIVISIONTYPE,POWERDIVISIONINDEX,NCC,BCC,BCCH,COVERTYPE,BANDINDICATORFORFREQUENCY,RAC,RECORD_TIME,UPTIME_TIME,UPDATE_USER,CELL_GLB_ID,SITE_GLB_ID) values (#cellId#, #cellName#, #cellEnglishName#, #siteId#, #cgi#, #rruRemote#, #cellLongitude#, #cellLatitude#, #sectorId#, #powerdivisiontype#, #powerdivisionindex#, #ncc#, #bcc#, #bcch#, #covertype#, #bandindicatorforfrequency#, #rac#, sysdate, sysdate, #updateUser#, #cellGlbId#, #siteGlbId#)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbSysGsmcellInfoDAO.updateGSMCellInfo -->
+    <update id="MS-MB-SYS-GSMCELL-INFO-UPDATE-GSM-CELL-INFO">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-SYS-GSMCELL-INFO-UPDATE-GSM-CELL-INFO*/ MB_SYS_GSMCELL_INFO set CELL_NAME=#cellName#, CELL_ENGLISH_NAME=#cellEnglishName#, SITE_ID=#siteId#, CGI=#cgi#, RRU_REMOTE=#rruRemote#, CELL_LONGITUDE=#cellLongitude#, CELL_LATITUDE=#cellLatitude#, SECTOR_ID=#sectorId#, POWERDIVISIONTYPE=#powerdivisiontype#, POWERDIVISIONINDEX=#powerdivisionindex#, NCC=#ncc#, BCC=#bcc#, BCCH=#bcch#, COVERTYPE=#covertype#, BANDINDICATORFORFREQUENCY=#bandindicatorforfrequency#, RAC=#rac#, RECORD_TIME=sysdate, UPTIME_TIME=sysdate, UPDATE_USER=#updateUser#, CELL_GLB_ID=#cellGlbId#, SITE_GLB_ID=#siteGlbId# where (CELL_ID = #cellId#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbSysGsmcellInfoDAO.deleteGSMCellInfo -->
+    <delete id="MS-MB-SYS-GSMCELL-INFO-DELETE-GSM-CELL-INFO">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-SYS-GSMCELL-INFO-DELETE-GSM-CELL-INFO*/ from MB_SYS_GSMCELL_INFO where (CELL_ID = #value#)
+    ]]>
+    </delete>
+
+</sqlMap>

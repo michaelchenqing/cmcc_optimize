@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tables>
+
+	<!-- 数据类型映射 -->
+	<typemap from="java.sql.Date" to="java.util.Date" />
+	<typemap from="java.sql.Timestamp" to="java.util.Date" />
+	<typemap from="java.math.BigDecimal" to="java.lang.Float" />
+	<typemap from="byte" to="java.lang.Integer" />
+	<typemap from="short" to="java.lang.Integer" />
+	<typemap from="number" to="java.lang.Integer" />
+	<typemap from="int" to="java.lang.Integer" />
+
+	<appName>cas_dalgen</appName>
+
+	<!-- 生成表结果查询 -->
+
+	<include table="tables/MB_MR_RECORD.xml" />
+	<include table="tables/MB_SYS_LTECELL_INFO.xml" />
+	<include table="tables/MB_SYS_LTESITE_PARAM.xml" />
+	<include table="tables/MB_PLAN_LTESITE_INFO.xml" />
+	
+	<include table="tables/MB_SYS_LTECELL_INFO_T.xml" />
+	<include table="tables/MB_SYS_LTESITE_INFO_T.xml" />
+
+	<include table="tables/MB_SYS_GIS_PERMISSION.xml" />
+	<include table="tables/MB_PERF_LTE_CELLBUSISTAT.xml" />
+	<include table="tables/MB_PERF_TDS_BUSISTAT.xml" />
+	
+	<include table="tables/MB_SYS_LTECELL_LTENBR.xml" />
+	<include table="tables/MB_SYS_LTECELL_GSMNBR.xml" />
+	<include table="tables/MB_SYS_LTECELL_PARAM.xml" />
+
+	<include table="tables/MB_PERF_GSM_BUSISTAT.xml" />
+	<include table="tables/MB_SYS_LTECELL_TDSNBR.xml" />
+	
+	<include table="tables/MB_OMC_LO_LA.xml" />
+	<include table="tables/MB_PLAN_LTECELL_INFO.xml" />
+	
+
+	<!-- <include table="tables/MB_SYS_TDSCELL_RF.xml" /> -->
+	<!-- <include table="tables/MB_GIS_GSM_PERMISSION.xml" /> -->
+	<!-- <include table="tables/MB_GIS_TDS_PERMISSION.xml" /> -->
+
+	<!-- <include table="tables/MB_GSM_CELL_INFO.xml" /> -->
+	<!-- <include table="tables/MB_GSM_CELL_RF.xml" /> -->
+	<!-- <include table="tables/MB_GSM_SITE_INFO.xml" /> -->
+
+	
+
+	<!-- <include table="tables/MB_SYS_LTESITE_INFO.xml" /> -->
+	<!-- <include table="tables/MB_SYS_TDSCELL_INFO.xml" /> -->
+
+	<!-- <include table="tables/MB_SYS_LTECELL_RF.xml" /> -->
+	<!-- <include table="tables/MB_TEST_SCANFREQ.xml" /> -->
+	<!-- <include table="tables/MB_SYS_TDSSITE_INFO.xml" /> -->
+
+	<!-- 生成序列查询 -->
+	<!-- <seq name="seq_id_index"/> -->
+
+</tables>

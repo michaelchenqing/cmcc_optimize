@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_SYS_LTESITE_INFO -->
+    <resultMap id="RM-MB-SYS-LTESITE-INFO" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbSysLtesiteInfoDO">
+        <result property="enodebGlbId" column="ENODEB_GLB_ID" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="enodebId" column="ENODEB_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="enodebName" column="ENODEB_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="tac" column="TAC" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="vendor" column="VENDOR" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="longitude" column="LONGITUDE" javaType="long" jdbcType="NUMBER" nullValue="0"/>
+        <result property="latitude" column="LATITUDE" javaType="long" jdbcType="NUMBER" nullValue="0"/>
+        <result property="netgrid" column="NETGRID" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="environ" column="ENVIRON" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="freqBand" column="FREQ_BAND" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="coverType" column="COVER_TYPE" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="projectPeriod" column="PROJECT_PERIOD" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="singlePass" column="SINGLE_PASS" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="initTime" column="INIT_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="runTime" column="RUN_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="recordTime" column="RECORD_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="updateTime" column="UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="updateUser" column="UPDATE_USER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbSysLtesiteInfoDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbSysLtesiteInfoDAO.getLtesiteInfoByEnodebGlbId -->
+    <select id="MS-MB-SYS-LTESITE-INFO-GET-LTESITE-INFO-BY-ENODEB-GLB-ID" resultMap="RM-MB-SYS-LTESITE-INFO">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-SYS-LTESITE-INFO-GET-LTESITE-INFO-BY-ENODEB-GLB-ID*/ enodeb_glb_id, enodeb_id, enodeb_name, tac, vendor, longitude, latitude, netgrid, environ, freq_band, cover_type, project_period, single_pass, init_time, run_time, record_time, update_time, update_user from mb_sys_ltesite_info where (enodeb_glb_id = #value#)
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbSysLtesiteInfoDAO.insertLtesiteInfo -->
+    <insert id="MS-MB-SYS-LTESITE-INFO-INSERT-LTESITE-INFO">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-SYS-LTESITE-INFO-INSERT-LTESITE-INFO*/ into mb_sys_ltesite_info(enodeb_glb_id,enodeb_id,enodeb_name,tac,vendor,longitude,latitude,netgrid,environ,freq_band,cover_type,project_period,single_pass,init_time,run_time,record_time,update_time,update_user) values (#enodebGlbId#, #enodebId#, #enodebName#, #tac#, #vendor#, #longitude#, #latitude#, #netgrid#, #environ#, #freqBand#, #coverType#, #projectPeriod#, #singlePass#, sysdate, sysdate, sysdate, sysdate, #updateUser#)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbSysLtesiteInfoDAO.updateLtesiteInfo -->
+    <update id="MS-MB-SYS-LTESITE-INFO-UPDATE-LTESITE-INFO">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-SYS-LTESITE-INFO-UPDATE-LTESITE-INFO*/ mb_sys_ltesite_info set enodeb_glb_id=#enodebGlbId#, enodeb_id=#enodebId#, enodeb_name=#enodebName#, tac=#tac#, vendor=#vendor#, longitude=#longitude#, latitude=#latitude#, netgrid=#netgrid#, environ=#environ#, freq_band=#freqBand#, cover_type=#coverType#, project_period=#projectPeriod#, single_pass=#singlePass#, init_time=sysdate, run_time=sysdate, record_time=sysdate, update_time=sysdate, update_user=#updateUser# where (enodeb_glb_id = #enodebGlbId2#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbSysLtesiteInfoDAO.deleteLtesiteInfo -->
+    <delete id="MS-MB-SYS-LTESITE-INFO-DELETE-LTESITE-INFO">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-SYS-LTESITE-INFO-DELETE-LTESITE-INFO*/ from mb_sys_ltesite_info where (enodeb_glb_id = #value#)
+    ]]>
+    </delete>
+
+</sqlMap>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+    <settings cacheModelsEnabled="true" enhancementEnabled="false" lazyLoadingEnabled="false" maxRequests="3000" maxSessions="3000" maxTransactions="3000" useStatementNamespaces="false"/>
+    
+    <sqlMap resource="sqlmap/common-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/MbMrRecord-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/MbOmcLoLa-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/MbPerfGsmBusistat-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/MbPerfLteCellbusistat-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/MbPerfTdsBusistat-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/MbPlanLtecellInfo-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/MbPlanLtesiteInfo-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/MbSysGisPermission-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/MbSysLtecellGsmnbr-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/MbSysLtecellInfo-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/MbSysLtecellInfoT-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/MbSysLtecellLtenbr-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/MbSysLtecellParam-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/MbSysLtecellTdsnbr-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/MbSysLtesiteInfoT-sqlmap-mapping.xml"/>
+    <sqlMap resource="sqlmap/MbSysLtesiteParam-sqlmap-mapping.xml"/>
+
+	<!-- extends dao config for groups sql count,sum,etc-->
+	<sqlMap resource="sqlmap/Ext-CommonProcess-sqlmap-mapping.xml"/>	
+	<sqlMap resource="sqlmap/Ext-CustomProcess-sqlmap-mapping.xml"/>
+	<sqlMap resource="sqlmap/Ext-Speed-sqlmap-mapping.xml"/>	
+	<sqlMap resource="sqlmap/Ext-ExpVolReduction-sqlmap-mapping.xml"/>
+</sqlMapConfig>

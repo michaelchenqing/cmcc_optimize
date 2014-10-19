@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 数据文件转换模板 -->
+<root>
+	<template_desc>
+		<name>四川LTE 规划工参</name>
+		<desc>四川LTE 规划工参</desc>
+		<ver>1.0</ver>
+		<other>示例：sichuan_Lte_LtePlan_YY_20140627.csv.gz</other>
+		<split_flag>,</split_flag>
+		<ignore_rows>1</ignore_rows>
+	</template_desc>
+
+	<!-- 规划基站信息表 -->
+	<mapping table="MB_PLAN_LTESITE_INFO">
+		<field>
+			<col_index>0</col_index>
+			<db_column>record_time</db_column>
+			<data_type>timestamp</data_type>
+			<data_format>yyyy-MM-dd HH:mm:ss</data_format>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>1</col_index>
+			<db_column>PENODEBCLASS</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,64}</rule_valid>
+		</field>
+		<field>
+			<col_index>2</col_index>
+			<db_column>PENODEBNAME</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>3</col_index>
+			<db_column>PROVINCE_NAME</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>4</col_index>
+			<db_column>CITY_NAME</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>5</col_index>
+			<db_column>LONGITUDE</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?(([1-9]{1}\d{0,3})|((([1-9]{1}\d{0,3})|(0))\.\d{1,8})))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>6</col_index>
+			<db_column>LATITUDE</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?(([1-9]{1}\d{0,3})|((([1-9]{1}\d{0,3})|(0))\.\d{1,8})))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>7</col_index>
+			<db_column>COUNTRY_NAME</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>8</col_index>
+			<db_column>REGIONTYPE</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>9</col_index>
+			<db_column>PROJECTPHASE</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>10</col_index>
+			<db_column>PENODEBID</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>11</col_index>
+			<db_column>ISOPEN</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>12</col_index>
+			<db_column>COVERAGECHARACTER</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>13</col_index>
+			<db_column>WORK_FRQBAND</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>14</col_index>
+			<db_column>ISCHECK</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>15</col_index>
+			<db_column>ISNODEBNAME</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>16</col_index>
+			<db_column>ISCHECKLON</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?(([1-9]{1}\d{0,3})|((([1-9]{1}\d{0,3})|(0))\.\d{1,8})))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>17</col_index>
+			<db_column>ISCHECKLAT</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?(([1-9]{1}\d{0,3})|((([1-9]{1}\d{0,3})|(0))\.\d{1,8})))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>18</col_index>
+			<db_column>AZIMUTHCELL1</db_column>
+			<data_type>number</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>19</col_index>
+			<db_column>AZIMUTHCELL2</db_column>
+			<data_type>number</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>20</col_index>
+			<db_column>AZIMUTHCELL3</db_column>
+			<data_type>number</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>21</col_index>
+			<db_column>HEIGHTCELL1</db_column>
+			<data_type>number</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>22</col_index>
+			<db_column>HEIGHTCELL2</db_column>
+			<data_type>number</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>23</col_index>
+			<db_column>HEIGHTCELL3</db_column>
+			<data_type>number</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>24</col_index>
+			<db_column>DOWNTILTCELL1</db_column>
+			<data_type>number</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>25</col_index>
+			<db_column>DOWNTILTCELL2</db_column>
+			<data_type>number</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>26</col_index>
+			<db_column>DOWNTILTCELL3</db_column>
+			<data_type>number</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>27</col_index>
+			<db_column>ELECTRICALDOWNTILTCELL1</db_column>
+			<data_type>number</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>28</col_index>
+			<db_column>ELECTRICALDOWNTILTCELL2</db_column>
+			<data_type>number</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>29</col_index>
+			<db_column>ELECTRICALDOWNTILTCELL3</db_column>
+			<data_type>number</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		
+		<field>
+			<col_index>30</col_index>
+			<db_column>ISCHECKTYPE</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,64}</rule_valid>
+		</field>
+		<field>
+			<col_index>31</col_index>
+			<db_column>NETGRNAME</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,64}</rule_valid>
+		</field>
+	</mapping>
+
+
+	<!-- 复杂映射,指定类解析 ，传入指定参数 -->
+	<!-- <mapping params="tbl_table2,1000"> <parser_class>com.xxxx.proj.ccc.Class</parser_class> 
+		</mapping> -->
+
+	<!-- 复杂映射,指定类外挂脚本解析，传入指定参数，参见：com.cmcc.optimize.datasyc.parser.RuleEngineParserHelper -->
+	<!-- <mapping params="tbl_table3,1000"> <extends_code>extends/10001.rule</extends_code> 
+		</mapping> -->
+
+</root>

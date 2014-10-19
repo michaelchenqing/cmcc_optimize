@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ========================================================== -->
+<!-- 自定义扩展：自定义sql查询，返回List<Map<String,Object>> -->
+<!-- ========================================================== -->
+
+<!-- @author yuminglang -->
+<!-- @apply 手机测速报表 -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+	<!-- FTP分页查询 -->
+	<select id="MULTI-QUERY-FTP-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+      select  record_time,city,network_type,business_type,avg_rate_ftp,con_suc_rate_ftp,land_suc_rate_ftp, trans_suc_rate_ftp,throughput_ftp,time_amount_ftp,max_rate_ftp,min_rate_ftp,avg_rsrp_ftp from ( select row_.*, rownum rownum_  from ( 
+		select to_char(record_time,'yyyy-mm-dd') record_time,city,network_type,business_type,avg_rate_ftp,con_suc_rate_ftp,land_suc_rate_ftp, trans_suc_rate_ftp,throughput_ftp,time_amount_ftp,max_rate_ftp,min_rate_ftp,avg_rsrp_ftp from mb_lte_st_ftp_ty
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		<dynamic>
+			<isNotEmpty prepend="and" property="city">
+				city = #city#
+			</isNotEmpty>
+		</dynamic>
+		order by record_time desc
+		 ) row_ ) where rownum_ &gt; #startRow#  and rownum_ &lt;= #endRow#
+	</select>
+	<!-- FTP总数查询 -->
+	<select id="MULTI-QUERY-FTP-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(*) from (
+		select to_char(record_time,'yyyy-mm-dd') record_time,city,network_type,business_type,avg_rate_ftp,con_suc_rate_ftp,land_suc_rate_ftp, trans_suc_rate_ftp,throughput_ftp,time_amount_ftp,max_rate_ftp,min_rate_ftp,avg_rsrp_ftp from mb_lte_st_ftp_ty
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		<dynamic>
+			<isNotEmpty prepend="and" property="city">
+				city = #city#
+			</isNotEmpty>
+		</dynamic>
+		order by record_time desc)
+	</select>
+	<!-- HTTP分页查询 -->
+	<select id="MULTI-QUERY-HTTP-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+      select  record_time,city,network_type,business_type,avg_rate_http,first_req_suc_rate_http,WORST_REQ_DURATION_HTTP, MAX_DOWNLOAD_RATE_HTTP,MIN_DOWNLOAD_RATE_HTTP,AVG_RSRP_HTTP from ( select row_.*, rownum rownum_  from ( 
+		select to_char(record_time,'yyyy-mm-dd') record_time,city,network_type,business_type,avg_rate_http,first_req_suc_rate_http,WORST_REQ_DURATION_HTTP, MAX_DOWNLOAD_RATE_HTTP,MIN_DOWNLOAD_RATE_HTTP,AVG_RSRP_HTTP from mb_lte_st_http_ty 
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		<dynamic>
+			<isNotEmpty prepend="and" property="city">
+				city = #city#
+			</isNotEmpty>
+		</dynamic>
+		order by record_time desc
+		 ) row_ ) where rownum_ &gt; #startRow#  and rownum_ &lt;= #endRow#
+	</select>
+	<!-- HTTP总数查询 -->
+	<select id="MULTI-QUERY-HTTP-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(*) from (
+		select to_char(record_time,'yyyy-mm-dd') record_time,city,network_type,business_type,avg_rate_http,first_req_suc_rate_http,WORST_REQ_DURATION_HTTP, MAX_DOWNLOAD_RATE_HTTP,MIN_DOWNLOAD_RATE_HTTP,AVG_RSRP_HTTP from mb_lte_st_http_ty  
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		<dynamic>
+			<isNotEmpty prepend="and" property="city">
+				city = #city#
+			</isNotEmpty>
+		</dynamic>
+		order by record_time desc)
+	</select>
+	<!-- PING分页查询 -->
+	<select id="MULTI-QUERY-PING-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+      select   record_time,city,network_type,business_type,suc_rate_ping,MIN_LAST_PING_PACKET,MAX_LAST_PING_PACKET, AVG_LAST_PING_PACKET ,AVG_RSRP_PING from ( select row_.*, rownum rownum_  from ( 
+		select to_char(record_time,'yyyy-mm-dd') record_time,city,network_type,business_type,suc_rate_ping,MIN_LAST_PING_PACKET,MAX_LAST_PING_PACKET, AVG_LAST_PING_PACKET ,AVG_RSRP_PING from mb_lte_st_ping_ty 
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		<dynamic>
+			<isNotEmpty prepend="and" property="city">
+				city = #city#
+			</isNotEmpty>
+		</dynamic>
+		order by record_time desc
+		 ) row_ ) where rownum_ &gt; #startRow#  and rownum_ &lt;= #endRow#
+	</select>
+	<!-- PING总数查询 -->
+	<select id="MULTI-QUERY-PING-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(*) from (
+		select to_char(record_time,'yyyy-mm-dd') record_time,city,network_type,business_type,suc_rate_ping,MIN_LAST_PING_PACKET,MAX_LAST_PING_PACKET, AVG_LAST_PING_PACKET ,AVG_RSRP_PING from mb_lte_st_ping_ty
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		<dynamic>
+			<isNotEmpty prepend="and" property="city">
+				city = #city#
+			</isNotEmpty>
+		</dynamic>
+		order by record_time desc)
+	</select>
+	<!-- VIDEO分页查询 -->
+	<select id="MULTI-QUERY-VIDEO-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+      select  record_time,city ,network_type ,business_type ,fluency_video ,suc_rate_video_play, duration_first_cideo_video,duration_wait  from ( select row_.*, rownum rownum_  from ( 
+ select to_char(record_time,'yyyy-mm-dd') record_time,city ,network_type ,business_type ,fluency_video ,suc_rate_video_play, duration_first_cideo_video,duration_wait  from mb_lte_st_video_ty 
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		<dynamic>
+			<isNotEmpty prepend="and" property="city">
+				city = #city#
+			</isNotEmpty>
+		</dynamic>
+		order by record_time desc
+		 ) row_ ) where rownum_ &gt; #startRow#  and rownum_ &lt;= #endRow#
+	</select>
+	<!-- VIDEO总数查询 -->
+	<select id="MULTI-QUERY-VIDEO-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(*) from (
+	select to_char(record_time,'yyyy-mm-dd') record_time,city ,network_type ,business_type ,fluency_video ,suc_rate_video_play , duration_first_cideo_video  ,duration_wait  from mb_lte_st_video_ty    
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		<dynamic>
+			<isNotEmpty prepend="and" property="city">
+				city = #city#
+			</isNotEmpty>
+		</dynamic>
+		order by record_time desc)
+	</select>
+	<!-- INDEX 查询 -->
+	<select id="MULTI-QUERY-INDEX-ABSTRACT1-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+		select  count(distinct city) count_city,to_char(wm_concat(distinct city)) all_city,to_char(wm_concat(distinct network_type)) network_type,avg(avg_rsrp_ftp) avg_ from (
+		select city,network_type,avg_rsrp_ftp from mb_lte_st_ftp_ty where record_time &gt;= trunc(sysdate - 2)  and record_time &lt; trunc(sysdate-1) 
+		union all
+		select city,network_type,avg_rsrp_http from mb_lte_st_http_ty where record_time &gt;= trunc(sysdate - 2)  and record_time &lt; trunc(sysdate-1)
+		union all
+		select city,network_type,avg_rsrp_ping from mb_lte_st_ping_ty where record_time &gt;= trunc(sysdate - 2)  and record_time &lt; trunc(sysdate-1)) 
+		
+		union all
+		
+		select count(distinct city) count_city,to_char(wm_concat(distinct city)) all_city,to_char(wm_concat(distinct network_type)) network_type,avg(avg_rsrp_ftp) avg_ from (
+		select city,network_type,avg_rsrp_ftp from mb_lte_st_ftp_ty 
+		union all
+		select city,network_type,avg_rsrp_http from mb_lte_st_http_ty 
+		union all
+		select city,network_type,avg_rsrp_ping from mb_lte_st_ping_ty )
+		
+		union all
+		
+		select count(distinct city) count_city,to_char(wm_concat(distinct city)) all_city,to_char(wm_concat(distinct network_type)) network_type,avg(avg_rsrp_ftp) avg_ from (
+		select city,network_type,avg_rsrp_ftp from mb_lte_st_ftp_ty where record_time &gt;= trunc(sysdate - 1)  and record_time &lt; trunc(sysdate) 
+		union all
+		select city,network_type,avg_rsrp_http from mb_lte_st_http_ty where record_time &gt;= trunc(sysdate - 1)  and record_time &lt; trunc(sysdate)
+		union all
+		select city,network_type,avg_rsrp_ping from mb_lte_st_ping_ty where record_time &gt;= trunc(sysdate - 1)  and record_time &lt; trunc(sysdate)) 
+	</select>
+	<select id="MULTI-QUERY-INDEX-ABSTRACT2-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+		select round(avg(avg_rate_ftp),2) avground from mb_lte_st_ftp_ty where record_time &gt;=trunc(sysdate-2)  and record_time &lt; trunc(sysdate-1)
+		union all 
+		select round(avg(avg_rate_http ),2) from mb_lte_st_http_ty where record_time &gt;=trunc(sysdate-2)  and record_time &lt; trunc(sysdate-1)
+		union all
+		select round(avg(avg_last_ping_packet),2) from mb_lte_st_ping_ty where record_time &gt;=trunc(sysdate-2)  and record_time &lt; trunc(sysdate-1)
+		union all
+		select round(avg(fluency_video),2) from mb_lte_st_video_ty where record_time &gt;=trunc(sysdate-2)  and record_time &lt; trunc(sysdate-1)
+		
+		union all
+		
+		select round(avg(avg_rate_ftp),2) avground from mb_lte_st_ftp_ty 
+		union all 
+		select round(avg(avg_rate_http ),2) from mb_lte_st_http_ty  
+		union all
+		select round(avg(avg_last_ping_packet),2) from mb_lte_st_ping_ty 
+		union all
+		select round(avg(fluency_video),2) from mb_lte_st_video_ty
+
+		union all
+		
+		select round(avg(avg_rate_ftp),2) avground from mb_lte_st_ftp_ty where record_time &gt;=trunc(sysdate-1)  and record_time &lt; trunc(sysdate)
+		union all 
+		select round(avg(avg_rate_http ),2) from mb_lte_st_http_ty where record_time &gt;=trunc(sysdate-1)  and record_time &lt; trunc(sysdate)
+		union all
+		select round(avg(avg_last_ping_packet),2) from mb_lte_st_ping_ty where record_time &gt;=trunc(sysdate-1)  and record_time &lt; trunc(sysdate)
+		union all
+		select round(avg(fluency_video),2) from mb_lte_st_video_ty where record_time &gt;=trunc(sysdate-1)  and record_time &lt; trunc(sysdate)
+	</select>
+	<select id="MULTI-QUERY-INDEX-CHART-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+		select to_char(h.record_time,'MM/dd') time,nvl(h.avg_rate_http,0) ha,nvl(h.avg_rsrp_http,0) hs,nvl(f.avg_rate_ftp,0) fa,
+		nvl(f.avg_rsrp_ftp,0) fs,nvl(p.avg_last_ping_packet,0) pa,nvl(p.avg_rsrp_ping,0) ps,nvl(v.fluency_video,0) va,0 vs
+		from mb_lte_st_http_ty h
+		left join mb_lte_st_ftp_ty f on h.record_time = f.record_time and h.city = f.city
+		left join mb_lte_st_ping_ty p on h.record_time = p.record_time and h.city = p.city
+		left join mb_lte_st_video_ty v on h.record_time = v.record_time and h.city = v.city
+		where h.record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and h.record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		<dynamic>
+			<isNotEmpty prepend="and" property="city">
+				h.city = #city#
+			</isNotEmpty>
+		</dynamic>
+		order by time
+	</select>
+	<select id="MULTI-QUERY-INDEX-CHART-MAXDAY-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.lang.String">
+		select to_char(max(record_time),'yyyy-MM-dd') from mb_lte_st_http_ty
+	</select>
+</sqlMap>	

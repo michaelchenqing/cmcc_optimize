@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_TEST_SCANFREQ -->
+    <resultMap id="RM-MB-TEST-SCANFREQ" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbTestScanfreqDO">
+        <result property="taskId" column="TASK_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellGlbId" column="CELL_GLB_ID" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="cellId" column="CELL_ID" javaType="long" jdbcType="NUMBER" nullValue="0"/>
+        <result property="cellName" column="CELL_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="pci" column="PCI" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="earfcn" column="EARFCN" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="rsRp" column="RS_RP" javaType="long" jdbcType="NUMBER" nullValue="0"/>
+        <result property="rsCinrSinr" column="RS_CINR_SINR" javaType="long" jdbcType="NUMBER" nullValue="0"/>
+        <result property="testTime" column="TEST_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbTestScanfreqDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbTestScanfreqDAO.getScanfreqByTackId -->
+    <select id="MS-MB-TEST-SCANFREQ-GET-SCANFREQ-BY-TACK-ID" resultMap="RM-MB-TEST-SCANFREQ">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-TEST-SCANFREQ-GET-SCANFREQ-BY-TACK-ID*/ task_id, cell_glb_id, cell_id, cell_name, pci, earfcn, rs_rp, rs_cinr_sinr, test_time from mb_test_scanfreq where (task_id = #value#)
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbTestScanfreqDAO.insertScanfreq -->
+    <insert id="MS-MB-TEST-SCANFREQ-INSERT-SCANFREQ">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-TEST-SCANFREQ-INSERT-SCANFREQ*/ into mb_test_scanfreq(task_id,cell_glb_id,cell_id,cell_name,pci,earfcn,rs_rp,rs_cinr_sinr,test_time) values (#taskId#, #cellGlbId#, #cellId#, #cellName#, #pci#, #earfcn#, #rsRp#, #rsCinrSinr#, sysdate)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbTestScanfreqDAO.updateScanfreq -->
+    <update id="MS-MB-TEST-SCANFREQ-UPDATE-SCANFREQ">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-TEST-SCANFREQ-UPDATE-SCANFREQ*/ mb_test_scanfreq set task_id=#taskId#, cell_glb_id=#cellGlbId#, cell_id=#cellId#, cell_name=#cellName#, pci=#pci#, earfcn=#earfcn#, rs_rp=#rsRp#, rs_cinr_sinr=#rsCinrSinr#, test_time=#testTime# where (task_id = #taskId2#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbTestScanfreqDAO.deleteScanfreq -->
+    <delete id="MS-MB-TEST-SCANFREQ-DELETE-SCANFREQ">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-TEST-SCANFREQ-DELETE-SCANFREQ*/ from mb_test_scanfreq where (task_id = #value#)
+    ]]>
+    </delete>
+
+</sqlMap>

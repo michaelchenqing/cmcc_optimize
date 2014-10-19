@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_PLAN_LTECELL_RF -->
+    <resultMap id="RM-MB-PLAN-LTECELL-RF" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbPlanLtecellRfDO">
+        <result property="cellId" column="CELL_ID" javaType="long" jdbcType="NUMBER" nullValue="0"/>
+        <result property="cellName" column="CELL_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="azimuth" column="AZIMUTH" javaType="long" jdbcType="NUMBER" nullValue="0"/>
+        <result property="downtilt" column="DOWNTILT" javaType="long" jdbcType="NUMBER" nullValue="0"/>
+        <result property="MDowntilt" column="M_DOWNTILT" javaType="long" jdbcType="NUMBER" nullValue="0"/>
+        <result property="EDowntilt" column="E_DOWNTILT" javaType="long" jdbcType="NUMBER" nullValue="0"/>
+        <result property="height" column="HEIGHT" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="altitude" column="ALTITUDE" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="antenna" column="ANTENNA" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="fakeAntenna" column="FAKE_ANTENNA" javaType="boolean" jdbcType="NUMBER" nullValue="false"/>
+        <result property="releaseTime" column="RELEASE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="updateTime" column="UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="updateUser" column="UPDATE_USER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbPlanLtecellRfDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbPlanLtecellRfDAO.getPlanCellRFbyId -->
+    <select id="MS-MB-PLAN-LTECELL-RF-GET-PLAN-CELL-R-FBY-ID" resultMap="RM-MB-PLAN-LTECELL-RF">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-PLAN-LTECELL-RF-GET-PLAN-CELL-R-FBY-ID*/ cell_id, cell_name, azimuth, downtilt, m_downtilt, e_downtilt, height, altitude, antenna, fake_antenna, release_time, update_time, update_user from MB_PLAN_LTECELL_RF where (cell_id = #value#)
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbPlanLtecellRfDAO.insertPlanCellRF -->
+    <insert id="MS-MB-PLAN-LTECELL-RF-INSERT-PLAN-CELL-RF">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-PLAN-LTECELL-RF-INSERT-PLAN-CELL-RF*/ into MB_PLAN_LTECELL_RF(cell_id,cell_name,azimuth,downtilt,m_downtilt,e_downtilt,height,altitude,antenna,fake_antenna,release_time,update_time,update_user) values (#cellId#, #cellName#, #azimuth#, #downtilt#, #MDowntilt#, #EDowntilt#, #height#, #altitude#, #antenna#, #fakeAntenna#, sysdate, sysdate, #updateUser#)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbPlanLtecellRfDAO.updatePlanCellRF -->
+    <update id="MS-MB-PLAN-LTECELL-RF-UPDATE-PLAN-CELL-RF">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-PLAN-LTECELL-RF-UPDATE-PLAN-CELL-RF*/ MB_PLAN_LTECELL_RF set cell_name=#cellName#, azimuth=#azimuth#, downtilt=#downtilt#, m_downtilt=#MDowntilt#, e_downtilt=#EDowntilt#, height=#height#, altitude=#altitude#, antenna=#antenna#, fake_antenna=#fakeAntenna#, release_time=sysdate, update_time=sysdate, update_user=#updateUser# where (cell_id = #cellId#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbPlanLtecellRfDAO.deletePlanCellRFRecord -->
+    <delete id="MS-MB-PLAN-LTECELL-RF-DELETE-PLAN-CELL-RF-RECORD">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-PLAN-LTECELL-RF-DELETE-PLAN-CELL-RF-RECORD*/ from MB_PLAN_LTECELL_RF where (cell_id = #value#)
+    ]]>
+    </delete>
+
+</sqlMap>

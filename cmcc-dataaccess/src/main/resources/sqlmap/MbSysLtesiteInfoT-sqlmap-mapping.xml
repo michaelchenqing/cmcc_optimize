@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_SYS_LTESITE_INFO_T -->
+    <resultMap id="RM-MB-SYS-LTESITE-INFO-T" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbSysLtesiteInfoTDO">
+        <result property="recordTime" column="RECORD_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="intId" column="INT_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="objectRdn" column="OBJECT_RDN" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="name" column="NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="zhName" column="ZH_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="omcId" column="OMC_ID" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="vendorId" column="VENDOR_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cityId" column="CITY_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="timeStamp" column="TIME_STAMP" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="updateStamp" column="UPDATE_STAMP" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="confirmed" column="CONFIRMED" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="state" column="STATE" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="enodebId" column="ENODEB_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="enbid" column="ENBID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="x2blacklist" column="X2BLACKLIST" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="x2whitelist" column="X2WHITELIST" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="x2hoblacklist" column="X2HOBLACKLIST" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="coverAreaInfo" column="COVER_AREA_INFO" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="x2ipaddresslist" column="X2IPADDRESSLIST" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="maxThroughputRate" column="MAX_THROUGHPUT_RATE" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="administrativestate" column="ADMINISTRATIVESTATE" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="operationalstate" column="OPERATIONALSTATE" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="x2Num" column="X2_NUM" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="integrityprotalgorithm" column="INTEGRITYPROTALGORITHM" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cipheringalgorithm" column="CIPHERINGALGORITHM" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="relatedMe" column="RELATED_ME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbSysLtesiteInfoTDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbSysLtesiteInfoTDAO.getLteSiteByEnodebGlbId_t -->
+    <select id="MS-MB-SYS-LTESITE-INFO-T-GET-LTE-SITE-BY-ENODEB-GLB-ID-T" resultMap="RM-MB-SYS-LTESITE-INFO-T">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-SYS-LTESITE-INFO-T-GET-LTE-SITE-BY-ENODEB-GLB-ID-T*/ record_time, int_id, object_rdn, name, zh_name, omc_id, vendor_id, city_id, time_stamp, update_stamp, confirmed, state, enodeb_id, enbid, x2blacklist, x2whitelist, x2hoblacklist, cover_area_info, x2ipaddresslist, max_throughput_rate, administrativestate, operationalstate, x2_num, integrityprotalgorithm, cipheringalgorithm, related_me from MB_SYS_LTESITE_INFO_T where (int_id = #value#)
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbSysLtesiteInfoTDAO.insertLteSite_t -->
+    <insert id="MS-MB-SYS-LTESITE-INFO-T-INSERT-LTE-SITE-T">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-SYS-LTESITE-INFO-T-INSERT-LTE-SITE-T*/ into mb_sys_ltesite_info_t(record_time,int_id,object_rdn,name,zh_name,omc_id,vendor_id,city_id,time_stamp,update_stamp,confirmed,state,enodeb_id,enbid,x2blacklist,x2whitelist,x2hoblacklist,cover_area_info,x2ipaddresslist,max_throughput_rate,administrativestate,operationalstate,x2_num,integrityprotalgorithm,cipheringalgorithm,related_me) values (sysdate, #intId#, #objectRdn#, #name#, #zhName#, #omcId#, #vendorId#, #cityId#, sysdate, sysdate, #confirmed#, #state#, #enodebId#, #enbid#, #x2blacklist#, #x2whitelist#, #x2hoblacklist#, #coverAreaInfo#, #x2ipaddresslist#, #maxThroughputRate#, #administrativestate#, #operationalstate#, #x2Num#, #integrityprotalgorithm#, #cipheringalgorithm#, #relatedMe#)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbSysLtesiteInfoTDAO.getLteSiteByParam_t -->
+    <select id="MS-MB-SYS-LTESITE-INFO-T-GET-LTE-SITE-BY-PARAM-T" resultMap="RM-MB-SYS-LTESITE-INFO-T">
+        select * from ( select row_.*, rownum rownum_ /*MS-CAS-DALGEN-MB-SYS-LTESITE-INFO-T-GET-LTE-SITE-BY-PARAM-T*/ from (select record_time,int_id,object_rdn,name,zh_name,omc_id,vendor_id,city_id,time_stamp,update_stamp,confirmed,
+			    state,enodeb_id,enbid,x2blacklist,x2whitelist,x2hoblacklist,cover_area_info,x2ipaddresslist,max_throughput_rate,
+			    administrativestate,operationalstate,x2_num,integrityprotalgorithm,cipheringalgorithm,related_me from MB_SYS_LTESITE_INFO_T
+ 				where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss') 
+				<dynamic>
+					<isNotEmpty prepend="AND" property="list">
+						city_id in         
+						<iterate close=")" open="(" conjunction="," property="list">
+						     #list[]#
+						</iterate>
+					</isNotEmpty>
+				</dynamic> ) row_ ) where rownum_ &gt; #startRow#  and rownum_ &lt; = #endRow#
+    </select>
+
+    <!-- mapped statement for IbatisMbSysLtesiteInfoTDAO.getLteSiteByParam_t, needed by paging -->
+    <select id="MS-MB-SYS-LTESITE-INFO-T-GET-LTE-SITE-BY-PARAM-T-COUNT-FOR-PAGING" resultClass="int">
+        select  /*MS-CAS-DALGEN-MB-SYS-LTESITE-INFO-T-GET-LTE-SITE-BY-PARAM-T-COUNT-FOR-PAGING*/  count(*) from MB_SYS_LTESITE_INFO_T
+ 				where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss') 
+				<dynamic>
+					<isNotEmpty prepend="AND" property="list">
+						city_id in         
+						<iterate close=")" open="(" conjunction="," property="list">
+						     #list[]#
+						</iterate>
+					</isNotEmpty>
+				</dynamic>
+    </select>
+
+    <!-- mapped statement for IbatisMbSysLtesiteInfoTDAO.updateLteSite_t -->
+    <update id="MS-MB-SYS-LTESITE-INFO-T-UPDATE-LTE-SITE-T">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-SYS-LTESITE-INFO-T-UPDATE-LTE-SITE-T*/ MB_SYS_LTESITE_INFO_T set name=#name#, zh_name=#zhName# where (int_id = #intId#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbSysLtesiteInfoTDAO.deleteLteSiteRecord_t -->
+    <delete id="MS-MB-SYS-LTESITE-INFO-T-DELETE-LTE-SITE-RECORD-T">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-SYS-LTESITE-INFO-T-DELETE-LTE-SITE-RECORD-T*/ from MB_SYS_LTESITE_INFO_T where (int_id = #value#)
+    ]]>
+    </delete>
+
+</sqlMap>

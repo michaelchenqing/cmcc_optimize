@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="mb_sys_ltecell_tdsnbr" dummyPk="cgi">
+
+	<!-- 通过小区ID查询4G小区与3G小区邻区详情 -->
+	<operation name="getLtecellByCellId" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    select cgi,name,object_rdn,zh_name,omc_id,city,vendor_id,time_stamp,update_stamp,confirmed,tac,pci,earfcn,m_name,n_name,id,adj_cgi,adjacentcellid,lac,rac,uarfcn,cellparameterid,update_user,ecord_time from mb_sys_ltecell_tdsnbr where cgi=?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 插入新mr记录 -->
+	<operation name="insertLtecell" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into mb_sys_ltecell_tdsnbr 
+	  (cgi,name,object_rdn,zh_name,omc_id,city,vendor_id,time_stamp,update_stamp,confirmed,tac,pci,earfcn,m_name,n_name,id,adj_cgi,adjacentcellid,lac,rac,uarfcn,cellparameterid,update_user,ecord_time)
+		values
+	  (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 修改4G小区与3G小区邻区-->
+	<operation name="updateLtecell" paramtype="object">
+		<sql>
+			<![CDATA[
+			    update mb_sys_ltecell_tdsnbr
+				   set 
+					cgi=?,
+					name=?,
+					object_rdn=?,
+					zh_name=?,
+					omc_id=?,
+					city=?,
+					vendor_id=?,
+					time_stamp=?,
+					update_stamp=?,
+					confirmed=?,
+					tac=?,
+					pci=?,
+					earfcn=?,
+					m_name=?,
+					n_name=?,
+					id=?,
+					adj_cgi=?,
+					adjacentcellid=?,
+					lac=?,
+					rac=?,
+					uarfcn=?,
+					cellparameterid=?,
+					update_user=?,
+					record_time=?
+				  where cgi = ?
+			]]>
+		</sql>
+	</operation> 
+
+	<!-- 删除4G小区与3G小区邻区 -->
+	<operation name="deleteLtecell" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    delete mb_sys_ltecell_tdsnbr where cgi = ?
+			]]>
+		</sql>
+	</operation>
+</table>	

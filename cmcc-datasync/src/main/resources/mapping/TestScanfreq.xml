@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 数据文件转换模板 -->
+<root>
+	<template_desc>
+		<name>创元-扫频数据</name>
+		<desc>创元-扫频数据</desc>
+		<ver>1.0</ver>
+		<other>chuangyuan_chengdu_scanfreq_20140823.csv.gz</other>
+		<split_flag>,</split_flag>
+		<ignore_rows>1</ignore_rows>
+	</template_desc>
+
+	<mapping table="MB_TEST_SCANFREQ">
+		<field>
+			<col_index>0</col_index>
+			<db_column>TEST_TIME</db_column>
+			<data_type>timestamp</data_type>
+			<rule_valid></rule_valid>
+			<data_format>yyyy-MM-dd HH:mm:ss.SSS</data_format>
+		</field>
+		<field>
+			<col_index>1</col_index>
+			<db_column>TEST_DEVICE_NAME</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>2</col_index>
+			<db_column>TASK_ID</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,64}</rule_valid>
+		</field>
+		<field>
+			<col_index>3</col_index>
+			<db_column>CELL_GLB_ID</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>4</col_index>
+			<db_column>CELL_ID</db_column>
+			<data_type>string</data_type>
+			<rule_valid>|(null)|(([-]?([1-9]{1}\d{0,11}))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>5</col_index>
+			<db_column>CELL_NAME</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>6</col_index>
+			<db_column>CGI</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,64}</rule_valid>
+		</field>
+		<field>
+			<col_index>7</col_index>
+			<db_column>PCI</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?([1-9]{1}\d{0,3}))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>8</col_index>
+			<db_column>EARFCN</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?([1-9]{1}\d{0,7}))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>9</col_index>
+			<db_column>RSRP</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?(([1-9]{1}\d{0,11})|((([1-9]{1}\d{0,11})|(0))\.\d{1,8})))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>10</col_index>
+			<db_column>RS_CINR_SINR</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?(([1-9]{1}\d{0,11})|((([1-9]{1}\d{0,11})|(0))\.\d{1,8})))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>11</col_index>
+			<db_column>LONGITUDE</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?(([1-9]{1}\d{0,11})|((([1-9]{1}\d{0,11})|(0))\.\d{1,8})))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>12</col_index>
+			<db_column>LATITUDE</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?(([1-9]{1}\d{0,11})|((([1-9]{1}\d{0,11})|(0))\.\d{1,8})))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>13</col_index>
+			<db_column>RSRQ</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?(([1-9]{1}\d{0,11})|((([1-9]{1}\d{0,11})|(0))\.\d{1,8})))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>14</col_index>
+			<db_column>SSS_RSSI</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?(([1-9]{1}\d{0,11})|((([1-9]{1}\d{0,11})|(0))\.\d{1,8})))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>15</col_index>
+			<db_column>SSS_RP</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?(([1-9]{1}\d{0,11})|((([1-9]{1}\d{0,11})|(0))\.\d{1,8})))|[0])</rule_valid>
+		</field>
+		
+		<!-- 从文件名中取属性值 -->
+		<field>
+			<handlerClass>com.cmcc.optimize.datamodel.sync.generator.GeneratorFileNameValue</handlerClass>
+			<handlerParam>_,2</handlerParam><!-- 处理参数：文件名分隔符，取第几列(从0开始) -->
+			<db_column>CITY</db_column>
+			<data_type>string</data_type>
+		</field>
+		<field>
+			<handlerClass>com.cmcc.optimize.datamodel.sync.generator.GeneratorFileNameValue</handlerClass>
+			<handlerParam>_,3</handlerParam><!-- 处理参数：文件名分隔符，取第几列(从0开始) -->
+			<db_column>GRID</db_column>
+			<data_type>string</data_type>
+		</field>
+		<field>
+			<handlerClass>com.cmcc.optimize.datamodel.sync.generator.GeneratorFileNameValue</handlerClass>
+			<handlerParam>_,1</handlerParam><!-- 处理参数：文件名分隔符，取第几列(从0开始) -->
+			<db_column>DATA_ORIGIN</db_column>
+			<data_type>string</data_type>
+		</field>
+		
+		<field>
+			<col_index>-1</col_index>
+			<db_column>RECORD_TIME</db_column><!-- 文件中存在多个test_time，创建一个当前的日期，做为分区使用 -->
+			<data_type>timestamp</data_type>
+			<rule_valid></rule_valid>
+			<defaultValue>${sysdate}</defaultValue>
+		</field>
+	</mapping>
+</root>

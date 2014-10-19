@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 匹配指定的文件名，使用指定的转换模板，将数据文件通过模板解析成sql或sdo对象 -->
+<!-- 文件名匹配按index从大到小顺序解析，默认的index值为100，可人为指定index，以提升序列值 -->
+<!-- 转换模板统一存放在/mapping目录下，目前不支持其他目录，但支持二级目录，如：subfolder/mapping.xml -->
+
+<mapping>
+
+	<file-table-mapping index="10001">
+		<name>sichuan_Lte_LteProject_YY_[0-9]{1,8}\.csv</name>
+		<parser_file>mapping/LteProject.xml</parser_file><!-- 映射模板文件 -->
+		<columnNums>125</columnNums><!-- csv文件列数，用于校验是否符合列，不符合的列，忽略，不入库，日志报错 -->
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>现网工参</type>
+		<province>四川</province><!-- 省份 -->
+		<city>锦阳</city><!-- 城市 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<data_generation>TDLTE</data_generation><!-- 数据网络制式:GSM/TDSCDMA/TDLTE -->
+		<time_count>0,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+		<area_count>56</area_count>
+	</file-table-mapping>
+
+	<file-table-mapping index="10002">
+		<name>sichuan_Lte_LtePlan_YY_[0-9]{1,8}\.csv</name>
+		<parser_file>mapping/LtePlan.xml</parser_file>
+		<columnNums>32</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>规划工参</type>
+		<province>四川</province><!-- 省份 -->
+		<city>锦阳</city><!-- 城市 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<data_generation>TDLTE</data_generation><!-- 数据网络制式:GSM/TDSCDMA/TDLTE -->
+		<time_count>0,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+		<area_count>4</area_count>
+	</file-table-mapping>
+
+	<file-table-mapping index="10003">
+		<name>sichuan_Lte_GSMTraffic_YY_[0-9]{1,8}\.csv</name>
+		<parser_file>mapping/GsmTraffic.xml</parser_file>
+		<columnNums>9</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>话统</type>
+		<province>四川</province><!-- 省份 -->
+		<city>锦阳</city><!-- 城市 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<data_generation>GSM</data_generation><!-- 数据网络制式:GSM/TDSCDMA/TDLTE -->
+		<time_count>0,yyyy-MM-dd HH</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按小时统计，文件中日期最后４位为０已经是小时 -->
+		<area_count>5</area_count>
+	</file-table-mapping>
+
+	<file-table-mapping index="10004">
+		<name>sichuan_Lte_LteEutranrelation_YY_[0-9]{1,8}\.csv</name>
+		<parser_file>mapping/LteEutranrelation.xml</parser_file>
+		<columnNums>30</columnNums>
+	</file-table-mapping>
+
+	<file-table-mapping index="10005">
+		<name>sichuan_Lte_LteGSMrelation_YY_[0-9]{1,8}\.csv</name>
+		<parser_file>mapping/LteGsmRelation.xml</parser_file>
+		<columnNums>27</columnNums>
+	</file-table-mapping>
+
+	<file-table-mapping index="10006">
+		<name>sichuan_Lte_LteTraffic_YY_[0-9]{1,8}\.csv</name>
+		<parser_file>mapping/LteTraffic.xml</parser_file>
+		<columnNums>14</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>话统</type>
+		<province>四川</province><!-- 省份 -->
+		<city>锦阳</city><!-- 城市 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<data_generation>TDLTE</data_generation><!-- 数据网络制式:GSM/TDSCDMA/TDLTE -->
+		<time_count>0,yyyy-MM-dd HH</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按小时统计，文件中日期最后４位为０已经是小时 -->
+		<area_count>5</area_count>
+	</file-table-mapping>
+
+	<file-table-mapping index="10007">
+		<name>sichuan_Lte_LteUtranrelation_YY_[0-9]{1,8}\.csv</name>
+		<parser_file>mapping/LteUtranRelation.xml</parser_file>
+		<columnNums>26</columnNums>
+	</file-table-mapping>
+
+	<file-table-mapping index="10008">
+		<name>sichuan_Lte_TDSTraffic_YY_[0-9]{1,8}\.csv</name>
+		<parser_file>mapping/TdsTraffic.xml</parser_file>
+		<columnNums>9</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>话统</type>
+		<province>四川</province><!-- 省份 -->
+		<city>锦阳</city><!-- 城市 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<data_generation>TDSCDMA</data_generation><!-- 数据网络制式:GSM/TDSCDMA/TDLTE -->
+		<time_count>0,yyyy-MM-dd HH</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按小时统计，文件中日期最后４位为０已经是小时 -->
+		<area_count>5</area_count>
+	</file-table-mapping>
+
+	<file-table-mapping index="10009">
+		<name>sichuan_Lte_LteEnodeb_YY_[0-9]{1,8}\.csv</name>
+		<parser_file>mapping/LteSiteInfoTemp.xml</parser_file>
+		<columnNums>26</columnNums>
+	</file-table-mapping>
+
+	<file-table-mapping index="10010">
+		<name>sichuan_Lte_LteEutranCell_YY_[0-9]{1,8}\.csv</name>
+		<parser_file>mapping/LteCellInfoTemp.xml</parser_file>
+		<columnNums>49</columnNums>
+	</file-table-mapping>
+
+	<file-table-mapping index="10011">
+		<name>sichuan_Lte_LtePlanCell_YY_[0-9]{1,8}\.csv</name>
+		<parser_file>mapping/LtePlanCell.xml</parser_file>
+		<columnNums>12</columnNums>
+	</file-table-mapping>
+
+	<!-- TODO: 需要更改name项，最好提供方的文件名能符合统一的规范 -->
+	<file-table-mapping index="10012">
+		<!-- <name>sichuan_mianyang_Lte_DT_TY_.*\.csv</name> -->
+		<name>sichuan_.*_Lte_DT_.*_.*\.csv</name>
+		<parser_file>mapping/DTrecord.xml</parser_file>
+		<columnNums>31</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>路测</type>
+		<province>四川</province><!-- 省份 -->
+		<city>锦阳</city><!-- 城市 -->
+		<provider>泰岳</provider><!-- 提供者 -->
+		<data_generation></data_generation>
+		<time_count>5,yyyy/MM/dd HH</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+		<area_count>3</area_count>
+	</file-table-mapping>
+
+	<!-- 手机测速 -->
+	<file-table-mapping index="10013">
+		<name>sichuan_lte_st_ftp_ty_[0-9]{1,8}\.csv</name>
+		<parser_file>mapping/LteStFtp.xml</parser_file>
+		<columnNums>62</columnNums>
+	</file-table-mapping>
+	<file-table-mapping index="10014">
+		<name>sichuan_lte_st_http_ty_[0-9]{1,8}\.csv</name>
+		<parser_file>mapping/LteStHttp.xml</parser_file>
+		<columnNums>64</columnNums>
+	</file-table-mapping>
+	<file-table-mapping index="10015">
+		<name>sichuan_lte_st_ping_ty_[0-9]{1,8}\.csv</name>
+		<parser_file>mapping/LteStPing.xml</parser_file>
+		<columnNums>59</columnNums>
+	</file-table-mapping>
+	<file-table-mapping index="10016">
+		<name>sichuan_lte_st_video_ty_[0-9]{1,8}\.csv</name>
+		<parser_file>mapping/LteStVideo.xml</parser_file>
+		<columnNums>71</columnNums>
+	</file-table-mapping>
+
+	<!-- TD/GSM扩减容 -->
+	<file-table-mapping index="10017">
+		<name>sichuan_GSM_Cell_YY_[0-9]{1,8}\.csv</name>
+		<parser_file>td_gsm_mapping/TccCell.xml</parser_file>
+		<columnNums>11</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!--省份 -->
+		<provider>亿阳</provider><!--提供者 -->
+		<time_count>1,yyyy-MM-dd</time_count><!--暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计按天统计 -->
+	</file-table-mapping>
+	<file-table-mapping index="10018">
+		<name>sichuan_GSM_Project_YY_[0-9]{1,8}\.csv</name>
+		<parser_file>td_gsm_mapping/TccTcoProCell.xml</parser_file>
+		<columnNums>13</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!-- 省份 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<time_count>1,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计按天统计 -->
+	</file-table-mapping>
+	<file-table-mapping index="10019">
+		<name>sichuan_GSM_Thw_cnt_cell_ho_6k_YY_[0-9]{1,10}\.csv</name>
+		<parser_file>td_gsm_mapping/ThwCntCellHo6k.xml</parser_file>
+		<columnNums>3</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!-- 省份 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<time_count>1,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+	</file-table-mapping>
+	<file-table-mapping index="10020">
+		<name>sichuan_GSM_Tpa_sts_cell_ne_YY_[0-9]{1,10}\.csv</name>
+		<parser_file>td_gsm_mapping/TpaStsCellNe.xml</parser_file>
+		<columnNums>10</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!-- 省份 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<time_count>1,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+	</file-table-mapping>
+	<file-table-mapping index="10021">
+		<name>sichuan_GSM_Tpa_sts_cell_gprs_ne_YY_[0-9]{1,10}\.csv</name>
+		<parser_file>td_gsm_mapping/TpaStsCellGprsNe.xml</parser_file>
+		<columnNums>5</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!-- 省份 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<time_count>1,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+	</file-table-mapping>
+	<file-table-mapping index="10022">
+		<name>sichuan_GSM_Thw_cnt_cell_gprs_6k_YY_[0-9]{1,10}\.csv</name>
+		<parser_file>td_gsm_mapping/ThwCntCellGprs6k.xml</parser_file>
+		<columnNums>4</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!-- 省份 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<time_count>1,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+	</file-table-mapping>
+	<file-table-mapping index="10023">
+		<name>sichuan_GSM_Tzx_cnt_cell_gprs_ul_v3_YY_[0-9]{1,10}\.csv</name>
+		<parser_file>td_gsm_mapping/TzxCntCellGprsUlV3.xml</parser_file>
+		<columnNums>3</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!-- 省份 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<time_count>1,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+	</file-table-mapping>
+	<file-table-mapping index="10024">
+		<name>sichuan_GSM_Tzx_cnt_cell_gprs_dl_v3_YY_[0-9]{1,10}\.csv</name>
+		<parser_file>td_gsm_mapping/TzxCntCellGprsDlV3.xml</parser_file>
+		<columnNums>3</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!-- 省份 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<time_count>1,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+	</file-table-mapping>
+	<file-table-mapping index="10025">
+		<name>sichuan_GSM_Tnk_cnt_cell_gprs_pack_YY_[0-9]{1,10}\.csv</name>
+		<parser_file>td_gsm_mapping/TnkCntCellGprsPack.xml</parser_file>
+		<columnNums>4</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!-- 省份 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<time_count>1,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+	</file-table-mapping>
+	<file-table-mapping index="10026">
+		<name>sichuan_GSM_Ter_cnt_cell_gprs_YY_[0-9]{1,10}\.csv</name>
+		<parser_file>td_gsm_mapping/TerCntCellGprs.xml</parser_file>
+		<columnNums>4</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!-- 省份 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<time_count>1,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+	</file-table-mapping>
+	<file-table-mapping index="10027">
+		<name>sichuan_GSM_Thw_cnt_cell2_6k_YY_[0-9]{1,10}\.csv</name>
+		<parser_file>td_gsm_mapping/ThwCntCell26k.xml</parser_file>
+		<columnNums>6</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!-- 省份 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<time_count>1,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+	</file-table-mapping>
+	<file-table-mapping index="10028">
+		<name>sichuan_GSM_Tzx_cnt_cell2_v3_YY_[0-9]{1,10}\.csv</name>
+		<parser_file>td_gsm_mapping/TzxCntCell2V3.xml</parser_file>
+		<columnNums>5</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!-- 省份 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<time_count>1,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+	</file-table-mapping>
+	<file-table-mapping index="10029">
+		<name>sichuan_GSM_Ter_cnt_cell_YY_[0-9]{1,10}\.csv</name>
+		<parser_file>td_gsm_mapping/TerCntCell.xml</parser_file>
+		<columnNums>6</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!-- 省份 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<time_count>1,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+	</file-table-mapping>
+	<file-table-mapping index="10030">
+		<name>sichuan_GSM_Tnk_cnt_cell_res_avail_YY_[0-9]{1,10}\.csv</name>
+		<parser_file>td_gsm_mapping/TnkCntCellResAvail.xml</parser_file>
+		<columnNums>13</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!-- 省份 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<time_count>1,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+	</file-table-mapping>
+	<file-table-mapping index="10031">
+		<name>sichuan_GSM_Bts_type_YY_[0-9]{1,10}\.csv</name>
+		<parser_file>td_gsm_mapping/BtsType.xml</parser_file>
+		<columnNums>4</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!-- 省份 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<time_count>0,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+	</file-table-mapping>
+	<file-table-mapping index="10032">
+		<name>sichuan_TD_Cell_YY_[0-9]{1,10}\.csv</name>
+		<parser_file>td_gsm_mapping/TccUtrancell.xml</parser_file>
+		<columnNums>13</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!-- 省份 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<time_count>1,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计按天统计 -->
+	</file-table-mapping>
+	<file-table-mapping index="10033">
+		<name>sichuan_TD_Project_YY_[0-9]{1,10}\.csv</name>
+		<parser_file>td_gsm_mapping/TccTcoProUtrancell.xml</parser_file>
+		<columnNums>7</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!-- 省份 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<time_count>1,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计按天统计 -->
+	</file-table-mapping>
+	<file-table-mapping index="10034">
+		<name>sichuan_TD_RNC_YY_[0-9]{1,10}\.csv</name>
+		<parser_file>td_gsm_mapping/TccRnc.xml</parser_file>
+		<columnNums>3</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!-- 省份 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<time_count>1,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计按天统计 -->
+	</file-table-mapping>
+	<file-table-mapping index="10035">
+		<name>sichuan_TD_Tpd_sts_utrancell1_q_YY_[0-9]{1,10}\.csv</name>
+		<parser_file>td_gsm_mapping/TpdStsUtrancell1Q.xml</parser_file>
+		<columnNums>12</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!-- 省份 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<time_count>1,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+	</file-table-mapping>
+	<file-table-mapping index="10036">
+		<name>sichuan_TD_Tpd_sts_utrancell2_q_YY_[0-9]{1,10}\.csv</name>
+		<parser_file>td_gsm_mapping/TpdStsUtrancell2Q.xml</parser_file>
+		<columnNums>7</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!-- 省份 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<time_count>1,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+	</file-table-mapping>
+	<file-table-mapping index="10037">
+		<name>sichuan_TD_Tpd_sts_carrier_q_YY_[0-9]{1,10}\.csv</name>
+		<parser_file>td_gsm_mapping/TpdStsCarrierQ.xml</parser_file>
+		<columnNums>7</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!-- 省份 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<time_count>1,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+	</file-table-mapping>
+	<file-table-mapping index="10038">
+		<name>sichuan_TD_Carrier_YY_[0-9]{1,10}\.csv</name>
+		<parser_file>td_gsm_mapping/TccCarrier.xml</parser_file>
+		<columnNums>3</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>TD/GSM</type>
+		<province>四川</province><!-- 省份 -->
+		<provider>亿阳</provider><!-- 提供者 -->
+		<time_count>1,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计按天统计 -->
+	</file-table-mapping>
+
+	<!-- 扫频数据 -->
+	<file-table-mapping index="10039">
+		<name>Scan_BIN_.*\.csv</name>
+		<parser_file>mapping/TestScanfreq.xml</parser_file>
+		<columnNums>16</columnNums>
+		<encoding>UTF-16</encoding><!-- 使用指定的文件解析编码 -->
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>SCAN</type>
+		<province>四川省</province><!-- 省份 -->
+		<provider>null</provider><!-- 提供者 -->
+		<time_count>0,yyyy-MM-dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+	</file-table-mapping>
+
+	<file-table-mapping index="10040">
+		<name>Scan_OPTS_.*\.csv</name>
+		<parser_file>mapping/OptsTestScanfreq.xml</parser_file>
+		<columnNums>15</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>SCAN</type>
+		<province>四川省</province><!-- 省份 -->
+		<provider>null</provider><!-- 提供者 -->
+		<time_count>0,yyyyMMdd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+	</file-table-mapping>
+
+	<file-table-mapping index="10041">
+		<name>LTE_ty_data_[0-9]{8}.csv</name>
+		<parser_file>mapping/SingleStationCheck.xml</parser_file>
+		<columnNums>26</columnNums>
+		<needCount>true</needCount><!-- 是否需要统计入库 -->
+		<type>LTE_TY</type>
+		<province>四川省</province><!-- 省份 -->
+		<provider>null</provider><!-- 提供者 -->
+		<time_count>0,yyyy/MM/dd</time_count><!-- 暂不考虑通用类的处理统计方法，目前只提供按时间，地区的合并统计 --><!-- 按天统计 -->
+		<area_count>2</area_count>
+	</file-table-mapping>
+</mapping>

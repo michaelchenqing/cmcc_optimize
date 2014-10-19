@@ -1,0 +1,60 @@
+Manifest-Version: 1.0
+Built-By: michael
+Build-Jdk: 1.6.0_20
+Class-Path: lib/jersey-container-grizzly2-http-2.5.1.jar lib/javax.inj
+ ect-2.2.0-b21.jar lib/grizzly-http-server-2.3.8.jar lib/grizzly-http-
+ 2.3.8.jar lib/grizzly-framework-2.3.8.jar lib/jersey-common-2.5.1.jar
+  lib/javax.annotation-api-1.2.jar lib/guava-14.0.1.jar lib/hk2-api-2.
+ 2.0-b21.jar lib/hk2-utils-2.2.0-b21.jar lib/hk2-locator-2.2.0-b21.jar
+  lib/asm-all-repackaged-2.2.0-b21.jar lib/cglib-2.2.0-b21.jar lib/osg
+ i-resource-locator-1.0.1.jar lib/jersey-server-2.5.1.jar lib/jersey-c
+ lient-2.5.1.jar lib/validation-api-1.1.0.Final.jar lib/javax.ws.rs-ap
+ i-2.0.jar lib/cmcc-dataaccess-0.0.1-SNAPSHOT.jar lib/cmcc-datamodel-0
+ .0.1-SNAPSHOT.jar lib/jdom-2.0.0.jar lib/commons-lang-2.6.jar lib/slf
+ 4j-log4j12-1.7.5.jar lib/hbase-client-0.98.3-hadoop2.jar lib/hbase-pr
+ otocol-0.98.3-hadoop2.jar lib/netty-3.6.6.Final.jar lib/htrace-core-2
+ .04.jar lib/hadoop-mapreduce-client-core-2.2.0.jar lib/hadoop-yarn-co
+ mmon-2.2.0.jar lib/hadoop-yarn-api-2.2.0.jar lib/guice-3.0.jar lib/ja
+ vax.inject-1.jar lib/jersey-guice-1.9.jar lib/guice-servlet-3.0.jar l
+ ib/findbugs-annotations-1.3.9-1.jar lib/hbase-common-0.98.3-hadoop2.j
+ ar lib/dps-hbase-0.1.1.jar lib/jedis-2.4.0.jar lib/commons-pool2-2.0.
+ jar lib/elasticsearch-1.2.1.jar lib/lucene-core-4.8.1.jar lib/lucene-
+ analyzers-common-4.8.1.jar lib/lucene-codecs-4.8.1.jar lib/lucene-que
+ ries-4.8.1.jar lib/lucene-memory-4.8.1.jar lib/lucene-highlighter-4.8
+ .1.jar lib/lucene-queryparser-4.8.1.jar lib/lucene-sandbox-4.8.1.jar 
+ lib/lucene-suggest-4.8.1.jar lib/lucene-misc-4.8.1.jar lib/lucene-joi
+ n-4.8.1.jar lib/lucene-grouping-4.8.1.jar lib/lucene-spatial-4.8.1.ja
+ r lib/spatial4j-0.4.1.jar lib/haddop-lzp-0.4.20.jar lib/commons-net-3
+ .3.jar lib/hadoop-common-2.4.0.jar lib/hadoop-annotations-2.4.0.jar l
+ ib/commons-cli-1.2.jar lib/commons-math3-3.1.1.jar lib/xmlenc-0.52.ja
+ r lib/commons-httpclient-3.1.jar lib/commons-codec-1.4.jar lib/common
+ s-io-2.4.jar lib/commons-collections-3.2.1.jar lib/servlet-api-2.5.ja
+ r lib/jetty-6.1.26.jar lib/jetty-util-6.1.26.jar lib/jersey-core-1.9.
+ jar lib/jersey-json-1.9.jar lib/jettison-1.1.jar lib/jaxb-impl-2.2.3-
+ 1.jar lib/jaxb-api-2.2.2.jar lib/stax-api-1.0-2.jar lib/activation-1.
+ 1.jar lib/jackson-jaxrs-1.8.3.jar lib/jackson-xc-1.8.3.jar lib/jersey
+ -server-1.9.jar lib/asm-3.1.jar lib/jasper-compiler-5.5.23.jar lib/ja
+ sper-runtime-5.5.23.jar lib/jsp-api-2.1.jar lib/commons-el-1.0.jar li
+ b/commons-logging-1.1.3.jar lib/jets3t-0.9.0.jar lib/httpclient-4.1.2
+ .jar lib/httpcore-4.1.2.jar lib/java-xmlbuilder-0.4.jar lib/commons-c
+ onfiguration-1.6.jar lib/commons-digester-1.8.jar lib/commons-beanuti
+ ls-1.7.0.jar lib/commons-beanutils-core-1.8.0.jar lib/jackson-core-as
+ l-1.8.8.jar lib/jackson-mapper-asl-1.8.8.jar lib/avro-1.7.4.jar lib/p
+ aranamer-2.3.jar lib/snappy-java-1.0.4.1.jar lib/protobuf-java-2.5.0.
+ jar lib/hadoop-auth-2.4.0.jar lib/jsch-0.1.42.jar lib/jsr305-1.3.9.ja
+ r lib/zookeeper-3.4.5.jar lib/commons-compress-1.4.1.jar lib/xz-1.0.j
+ ar lib/hadoop-hdfs-2.4.0.jar lib/commons-daemon-1.0.13.jar lib/ibatis
+ -core-3.0.jar lib/ibatis-sqlmap-2.3.4.726.jar lib/spring-core-3.0.5.R
+ ELEASE.jar lib/spring-asm-3.0.5.RELEASE.jar lib/spring-context-3.0.5.
+ RELEASE.jar lib/spring-aop-3.0.5.RELEASE.jar lib/aopalliance-1.0.jar 
+ lib/spring-beans-3.0.5.RELEASE.jar lib/spring-expression-3.0.5.RELEAS
+ E.jar lib/spring-orm-3.0.5.RELEASE.jar lib/spring-jdbc-3.0.5.RELEASE.
+ jar lib/spring-tx-3.0.5.RELEASE.jar lib/ojdbc6-11.2.0.4.jar lib/commo
+ ns-pool-1.6.jar lib/commons-dbcp-1.4.jar lib/ahocorasick-1.2.jar lib/
+ common-3.1.0.jar lib/fastjson-1.1.39.jar lib/org.apache.oltu.oauth2.a
+ uthzserver-1.0.0.jar lib/org.apache.oltu.oauth2.common-1.0.0.jar lib/
+ json-20131018.jar lib/slf4j-api-1.6.1.jar lib/org.apache.oltu.oauth2.
+ resourceserver-1.0.0.jar lib/cmcc-log4j-0.0.2.jar lib/log4j-1.2.17.jar
+Main-Class: com.cmcc.optimize.dataapi.runtime.Main
+Created-By: Maven Integration for Eclipse
+

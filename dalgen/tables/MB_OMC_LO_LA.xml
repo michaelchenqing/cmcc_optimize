@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="mb_omc_lo_la" dummyPk="city">
+
+	<!-- 通过city查询OMC小区经纬度信息详情 -->
+	<operation name="getOMClOlAByCity" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    select city,enodeb_id,enodeb_name,longitude,latitude,RECORD_TIME from mb_omc_lo_la where city=?
+			]]>
+		</sql>
+	</operation>
+	<!-- 最大时间查询OMC -->
+	<operation name="getOmcLoLabyParam" paramtype="primitive" multiplicity="many" paging="true">
+		<extraparams>
+			<param name="list" javatype="java.util.List" />
+		</extraparams>
+		
+		<sql>
+			<![CDATA[
+				select city,enodeb_id,enodeb_name,longitude,latitude,RECORD_TIME from mb_omc_lo_la 
+			]]>
+		</sql>
+		<sqlmap><![CDATA[
+				select city,enodeb_id,enodeb_name,longitude,latitude,RECORD_TIME from mb_omc_lo_la 
+				where RECORD_TIME =(select max(record_time) from mb_omc_lo_la)
+				<dynamic>
+					<isNotEmpty  prepend="AND"  property="list">
+						 city in         
+						<iterate close=")" open="(" conjunction="," property="list">
+						     #list[]#
+						</iterate>
+					</isNotEmpty>
+				</dynamic>
+				
+        ]]>
+        </sqlmap>
+     
+	</operation>
+	<operation name="getOmcLoLaMaxDate" paramtype="primitive" >
+		 <extraparams>
+			<param name="startTime" javatype="java.lang.String" />
+		</extraparams>
+		<sql>
+			<![CDATA[
+				select count(1) counter  from mb_omc_lo_la
+			]]>
+		</sql>
+		<sqlmap><![CDATA[
+				select count(1) counter  from mb_omc_lo_la where  RECORD_TIME =to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') 
+				 
+        ]]>
+        </sqlmap>
+	</operation>
+	
+		<!-- 根据时间查询OMC -->
+	<operation name="getOmcLoLabyDate" paramtype="primitive" multiplicity="many" paging="true">
+		<extraparams>
+			<param name="list" javatype="java.util.List" />
+		</extraparams>
+			 <extraparams>
+			<param name="startTime" javatype="java.lang.String" />
+		</extraparams>
+		<sql>
+			<![CDATA[
+				select city,enodeb_id,enodeb_name,longitude,latitude,RECORD_TIME from mb_omc_lo_la 
+			]]>
+		</sql>
+		<sqlmap><![CDATA[
+				select city,enodeb_id,enodeb_name,longitude,latitude,RECORD_TIME from mb_omc_lo_la 
+				where RECORD_TIME = to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss')
+				<dynamic>
+					<isNotEmpty  prepend="AND"  property="list">
+						 city in         
+						<iterate close=")" open="(" conjunction="," property="list">
+						     #list[]#
+						</iterate>
+					</isNotEmpty>
+				</dynamic>
+				
+        ]]>
+        </sqlmap>
+     
+	</operation>
+	
+	<!-- 插入小区经纬度信息记录 -->
+	<operation name="insertOMClOlA" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into mb_omc_lo_la 
+			  (city,enodeb_id,enodeb_name,longitude,latitude)
+				values
+			  (?,?,?,?,?)
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 修改小区经纬度信息 -->
+	<operation name="updateOMClOlA" paramtype="object">
+		<sql>
+			<![CDATA[
+			    update mb_omc_lo_la
+				   set 
+					city=?,
+					enodeb_id=?,
+					enodeb_name=?,
+					longitude=?,
+					latitude=?
+				  where city = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 删除小区经纬度信息-->
+	<operation name="deleteLtesiteInfo" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    delete mb_omc_lo_la where city = ?
+			]]>
+		</sql>
+	</operation>
+</table>	

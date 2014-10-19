@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_SYS_GSMSITE_INFO -->
+    <resultMap id="RM-MB-SYS-GSMSITE-INFO" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbSysGsmsiteInfoDO">
+        <result property="bscId" column="BSC_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="siteId" column="SITE_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="siteName" column="SITE_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="lac" column="LAC" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="vendor" column="VENDOR" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="longitude" column="LONGITUDE" javaType="long" jdbcType="NUMBER" nullValue="0"/>
+        <result property="latitude" column="LATITUDE" javaType="long" jdbcType="NUMBER" nullValue="0"/>
+        <result property="netgrid" column="NETGRID" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="environ" column="ENVIRON" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="freqBand" column="FREQ_BAND" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="coverType" column="COVER_TYPE" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="recordTime" column="RECORD_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="updateTime" column="UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="updateUser" column="UPDATE_USER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="siteGlbId" column="SITE_GLB_ID" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbSysGsmsiteInfoDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbSysGsmsiteInfoDAO.getGSMSiteInfobyId -->
+    <select id="MS-MB-SYS-GSMSITE-INFO-GET-GSM-SITE-INFOBY-ID" resultMap="RM-MB-SYS-GSMSITE-INFO">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-SYS-GSMSITE-INFO-GET-GSM-SITE-INFOBY-ID*/ BSC_ID, SITE_ID, SITE_NAME, LAC, VENDOR, LONGITUDE, LATITUDE, NETGRID, ENVIRON, FREQ_BAND, COVER_TYPE, RECORD_TIME, UPDATE_TIME, UPDATE_USER, SITE_GLB_ID from MB_SYS_GSMSITE_INFO where (SITE_GLB_ID = #value#)
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbSysGsmsiteInfoDAO.insertGSMSiteInfo -->
+    <insert id="MS-MB-SYS-GSMSITE-INFO-INSERT-GSM-SITE-INFO">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-SYS-GSMSITE-INFO-INSERT-GSM-SITE-INFO*/ into MB_SYS_GSMSITE_INFO(BSC_ID,SITE_ID,SITE_NAME,LAC,VENDOR,LONGITUDE,LATITUDE,NETGRID,ENVIRON,FREQ_BAND,COVER_TYPE,RECORD_TIME,UPDATE_TIME,UPDATE_USER,SITE_GLB_ID) values (#bscId#, #siteId#, #siteName#, #lac#, #vendor#, #longitude#, #latitude#, #netgrid#, #environ#, #freqBand#, #coverType#, sysdate, sysdate, #updateUser#, #siteGlbId#)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbSysGsmsiteInfoDAO.updateGSMSiteInfo -->
+    <update id="MS-MB-SYS-GSMSITE-INFO-UPDATE-GSM-SITE-INFO">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-SYS-GSMSITE-INFO-UPDATE-GSM-SITE-INFO*/ MB_SYS_GSMSITE_INFO set BSC_ID=#bscId#, SITE_ID=#siteId#, SITE_NAME=#siteName#, LAC=#lac#, VENDOR=#vendor#, LONGITUDE=#longitude#, LATITUDE=#latitude#, NETGRID=#netgrid#, ENVIRON=#environ#, FREQ_BAND=#freqBand#, COVER_TYPE=#coverType#, RECORD_TIME=sysdate, UPDATE_TIME=sysdate, UPDATE_USER=#updateUser# where (SITE_GLB_ID = #siteGlbId#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbSysGsmsiteInfoDAO.deleteGSMSiteInfo -->
+    <delete id="MS-MB-SYS-GSMSITE-INFO-DELETE-GSM-SITE-INFO">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-SYS-GSMSITE-INFO-DELETE-GSM-SITE-INFO*/ from MB_SYS_GSMSITE_INFO where (SITE_GLB_ID = #value#)
+    ]]>
+    </delete>
+
+</sqlMap>

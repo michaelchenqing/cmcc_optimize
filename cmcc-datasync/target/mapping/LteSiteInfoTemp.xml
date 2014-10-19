@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 数据文件转换模板 -->
+<root>
+	<template_desc>
+		<name>4G基站临时用表</name>
+		<desc>4G基站临时用表</desc>
+		<ver>1.0</ver>
+		<other>sichuan_Lte_LteEnodeb_YY_20140701.csv.gz</other>
+		<split_flag>,</split_flag>
+		<ignore_rows>1</ignore_rows>
+	</template_desc>
+
+	<!-- 4G基站临时用表 -->
+	<mapping table="MB_SYS_LTESITE_INFO_T">
+		<field>
+			<col_index>0</col_index><!-- 数据文件中的列值 -->
+			<db_column>RECORD_TIME</db_column><!-- 数据库表字段 -->
+			<data_type>timestamp</data_type><!-- 数据类型，java的基础类型及对象类型 -->
+			<rule_valid></rule_valid><!-- 数据校验规则，校验失败时，将整个文件不进行导入 -->
+			<data_format>yyyy-MM-dd HH:mm:ss</data_format>
+		</field>
+		<field> 
+			<col_index>1</col_index>
+			<db_column>INT_ID</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field> 
+			<col_index>2</col_index>
+			<db_column>OBJECT_RDN</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>3</col_index>
+			<db_column>NAME</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>4</col_index>
+			<db_column>ZH_NAME</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>5</col_index>
+			<db_column>OMC_ID</db_column>
+			<data_type>number</data_type>
+			<rule_valid>[0-9]{0,8}</rule_valid>
+		</field>
+		<field>
+			<col_index>6</col_index>
+			<db_column>VENDOR_ID</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,32}</rule_valid>
+		</field>
+		<field>
+			<col_index>7</col_index>
+			<db_column>CITY_ID</db_column>
+				<data_type>string</data_type>
+			<rule_valid>.{0,32}</rule_valid>
+		</field>
+		<field>
+			<col_index>8</col_index>
+			<db_column>UPDATE_STAMP</db_column>
+			<data_type>timestamp</data_type>
+			<rule_valid></rule_valid>
+			<data_format>yyyy-MM-dd HH:mm:ss</data_format>
+		</field>
+	 	<field>
+			<col_index>-1</col_index>
+			<db_column>TIME_STAMP</db_column>
+			<data_type>timestamp</data_type>
+			<rule_valid></rule_valid>
+			<defaultValue>${sysdate}</defaultValue><!-- 默认存入时间 -->
+		</field>
+		<field>
+			<col_index>10</col_index>
+			<db_column>CONFIRMED</db_column>
+				<data_type>string</data_type>
+			<rule_valid>.{0,16}</rule_valid>
+		</field>
+		<field>
+			<col_index>11</col_index>
+			<db_column>STATE</db_column>
+				<data_type>string</data_type>
+			<rule_valid>.{0,16}</rule_valid>
+		</field>
+		<field>
+			<col_index>12</col_index>
+			<db_column>ENODEB_ID</db_column>
+				<data_type>string</data_type>
+			<rule_valid>.{0,64}</rule_valid>
+		</field>
+		<field>
+			<col_index>13</col_index>
+			<db_column>ENBID</db_column>
+				<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>14</col_index>
+			<db_column>X2BLACKLIST</db_column>
+				<data_type>string</data_type>
+			<rule_valid>.{0,512}</rule_valid>
+		</field>
+		<field>
+			<col_index>15</col_index>
+			<db_column>X2WHITELIST</db_column>
+				<data_type>string</data_type>
+			<rule_valid>.{0,512}</rule_valid>
+		</field>
+		<field>
+			<col_index>16</col_index>
+			<db_column>X2HOBLACKLIST</db_column>
+				<data_type>string</data_type>
+			<rule_valid>.{0,512}</rule_valid>
+		</field>
+		<field>
+			<col_index>17</col_index>
+			<db_column>COVER_AREA_INFO</db_column>
+				<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>18</col_index>
+			<db_column>X2IPADDRESSLIST</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,512}</rule_valid>
+		</field>
+		<field>
+			<col_index>19</col_index>
+			<db_column>MAX_THROUGHPUT_RATE</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>20</col_index>
+			<db_column>ADMINISTRATIVESTATE</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,32}</rule_valid>
+		</field>
+		<field>
+			<col_index>21</col_index>
+			<db_column>OPERATIONALSTATE</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,32}</rule_valid>
+		</field>
+		<field>
+			<col_index>22</col_index>
+			<db_column>X2_NUM</db_column>
+				<data_type>number</data_type>
+			<rule_valid>[0-9]{0,4}</rule_valid>
+		</field>
+		<field>
+			<col_index>23</col_index>
+			<db_column>INTEGRITYPROTALGORITHM</db_column>
+				<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>24</col_index>
+			<db_column>CIPHERINGALGORITHM</db_column>
+				<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>25</col_index>
+			<db_column>RELATED_ME</db_column>
+				<data_type>string</data_type>
+			<rule_valid>.{0,64}</rule_valid>
+		</field>
+	</mapping>
+
+	<!-- 复杂映射,指定类解析 ，传入指定参数 -->
+	<!-- <mapping params="tbl_table2,1000"> <parser_class>com.xxxx.proj.ccc.Class</parser_class> 
+		</mapping> -->
+
+	<!-- 复杂映射,指定类外挂脚本解析，传入指定参数，参见：com.cmcc.optimize.datasyc.parser.RuleEngineParserHelper -->
+	<!-- <mapping params="tbl_table3,1000"> <extends_code>extends/10001.rule</extends_code> 
+		</mapping> -->
+
+</root>

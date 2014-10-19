@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="MB_SINGLE_STATION_CHECK" dummyPk="eventtimestamp">
+
+	<!-- 通过任务计划ID查询扫频数据详情 -->
+	<operation name="getsingleByeventTime" paramtype="primitive">
+		<sql>
+			<![CDATA[
+		   select eventtimestamp,province,city,region,base_name ,address ,base_id ,gps_longitude ,gps_latitude,same_address_type ,base_type_phy ,build_floor_num ,build_height,antenna_type_old,antenna_type_new,tower_type_new,build_function,cell_identity ,height,azimuth ,titl_t,titl_e,titl_m,antenna_vender,antenna_type,ante_block,record_time   from MB_SINGLE_STATION_CHECK where eventtimestamp = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 插入新扫频数据记录 -->
+	<operation name="insertSingle" paramtype="object">
+		<sql>
+			<![CDATA[
+  insert into MB_SINGLE_STATION_CHECK(eventtimestamp,province,city,region,base_name ,address ,base_id ,gps_longitude ,gps_latitude,same_address_type ,base_type_phy ,build_floor_num ,build_height,antenna_type_old,antenna_type_new,tower_type_new,build_function,cell_identity ,height,azimuth ,titl_t,titl_e,titl_m,antenna_vender,antenna_type,ante_block,record_time )values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate); 
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 修改扫频数据 -->
+	<operation name="updateSingle" paramtype="object">
+		<sql>
+			<![CDATA[
+			update MB_SINGLE_STATION_CHECK set 			                
+  province           =? ,               
+  city               =? ,                  
+  region             =? ,                  
+  base_name          =? ,                  
+  address            =? ,                  
+  base_id            =? ,                  
+  gps_longitude      =? ,                  
+  gps_latitude       =? ,                  
+  same_address_type  =? ,                  
+  base_type_phy      =? ,                  
+  build_floor_num    =? ,                  
+  build_height       =? ,                  
+  antenna_type_old   =? ,                  
+  antenna_type_new   =? ,                  
+  tower_type_new     =? ,                  
+  build_function     =? ,                  
+  cell_identity      =? ,                  
+  height             =? ,                  
+  azimuth            =? ,                  
+  titl_t             =? ,                  
+  titl_e             =? ,                  
+  titl_m             =? ,                  
+  antenna_vender     =? ,                  
+  antenna_type       =? ,                  
+  ante_block         =? ,                  
+  record_time        =?
+   where 	eventtimestamp       =?                   
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 删除扫频数据 -->
+	<operation name="deleteSingle" paramtype="primitive">
+		<sql>
+			<![CDATA[
+				delete from MB_SINGLE_STATION_CHECK where eventtimestamp = ?
+			]]>
+		</sql>
+	</operation>
+</table>	

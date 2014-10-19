@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_PLAN_LTESITE_INFO -->
+    <resultMap id="RM-MB-PLAN-LTESITE-INFO" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbPlanLtesiteInfoDO">
+        <result property="recordTime" column="RECORD_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="penodebclass" column="PENODEBCLASS" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="penodebname" column="PENODEBNAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="provinceName" column="PROVINCE_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cityName" column="CITY_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="longitude" column="LONGITUDE" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="latitude" column="LATITUDE" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="countryName" column="COUNTRY_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="regiontype" column="REGIONTYPE" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="projectphase" column="PROJECTPHASE" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="penodebid" column="PENODEBID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="isopen" column="ISOPEN" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="coveragecharacter" column="COVERAGECHARACTER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="workFrqband" column="WORK_FRQBAND" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="ischeck" column="ISCHECK" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="isnodebname" column="ISNODEBNAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="ischecklon" column="ISCHECKLON" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="ischecklat" column="ISCHECKLAT" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="azimuthcell1" column="AZIMUTHCELL1" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="azimuthcell2" column="AZIMUTHCELL2" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="azimuthcell3" column="AZIMUTHCELL3" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="heightcell1" column="HEIGHTCELL1" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="heightcell2" column="HEIGHTCELL2" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="heightcell3" column="HEIGHTCELL3" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="downtiltcell1" column="DOWNTILTCELL1" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="downtiltcell2" column="DOWNTILTCELL2" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="downtiltcell3" column="DOWNTILTCELL3" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="electricaldowntiltcell1" column="ELECTRICALDOWNTILTCELL1" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="electricaldowntiltcell2" column="ELECTRICALDOWNTILTCELL2" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="electricaldowntiltcell3" column="ELECTRICALDOWNTILTCELL3" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="ischecktype" column="ISCHECKTYPE" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="netgrname" column="NETGRNAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbPlanLtesiteInfoDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbPlanLtesiteInfoDAO.getPlanInfobyTime -->
+    <select id="MS-MB-PLAN-LTESITE-INFO-GET-PLAN-INFOBY-TIME" resultMap="RM-MB-PLAN-LTESITE-INFO">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-PLAN-LTESITE-INFO-GET-PLAN-INFOBY-TIME*/ record_time, penodebclass, penodebname, province_name, city_name, longitude, latitude, country_name, regiontype, projectphase, penodebid, isopen, coveragecharacter, work_frqband, ischeck, isnodebname, ischecklon, ischecklat, azimuthcell1, azimuthcell2, azimuthcell3, heightcell1, heightcell2, heightcell3, downtiltcell1, downtiltcell2, downtiltcell3, electricaldowntiltcell1, electricaldowntiltcell2, electricaldowntiltcell3, ISCHECKTYPE, NETGRNAME from mb_plan_ltesite_info where (record_time = #value#)
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbPlanLtesiteInfoDAO.getPlanInfobyParam -->
+    <select id="MS-MB-PLAN-LTESITE-INFO-GET-PLAN-INFOBY-PARAM" resultMap="RM-MB-PLAN-LTESITE-INFO">
+        select * from ( select row_.*, rownum rownum_ /*MS-CAS-DALGEN-MB-PLAN-LTESITE-INFO-GET-PLAN-INFOBY-PARAM*/ from (select record_time,penodebclass,penodebname,province_name,city_name,longitude,latitude,country_name,regiontype,projectphase,penodebid,isopen,coveragecharacter,work_frqband,ischeck,isnodebname,ischecklon,ischecklat,azimuthcell1,azimuthcell2,azimuthcell3,heightcell1,heightcell2,heightcell3,downtiltcell1,downtiltcell2,downtiltcell3,electricaldowntiltcell1,electricaldowntiltcell2,electricaldowntiltcell3,ISCHECKTYPE,NETGRNAME from mb_plan_ltesite_info
+ 			where record_time &gt; = to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss') 
+			<dynamic>
+				<isNotEmpty prepend="AND" property="list">
+					city_name in         
+					<iterate close=")" open="(" conjunction="," property="list">
+					     #list[]#
+					</iterate>
+				</isNotEmpty>
+			</dynamic> ) row_ ) where rownum_ &gt; #startRow#  and rownum_ &lt; = #endRow#
+    </select>
+
+    <!-- mapped statement for IbatisMbPlanLtesiteInfoDAO.getPlanInfobyParam, needed by paging -->
+    <select id="MS-MB-PLAN-LTESITE-INFO-GET-PLAN-INFOBY-PARAM-COUNT-FOR-PAGING" resultClass="int">
+        select  /*MS-CAS-DALGEN-MB-PLAN-LTESITE-INFO-GET-PLAN-INFOBY-PARAM-COUNT-FOR-PAGING*/  count(*) from mb_plan_ltesite_info
+ 			where record_time &gt; = to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss') 
+			<dynamic>
+				<isNotEmpty prepend="AND" property="list">
+					city_name in         
+					<iterate close=")" open="(" conjunction="," property="list">
+					     #list[]#
+					</iterate>
+				</isNotEmpty>
+			</dynamic>
+    </select>
+
+    <!-- mapped statement for IbatisMbPlanLtesiteInfoDAO.insertPlanInfo -->
+    <insert id="MS-MB-PLAN-LTESITE-INFO-INSERT-PLAN-INFO">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-PLAN-LTESITE-INFO-INSERT-PLAN-INFO*/ into mb_plan_ltesite_info(record_time,penodebclass,penodebname,province_name,city_name,longitude,latitude,country_name,regiontype,projectphase,penodebid,isopen,coveragecharacter,work_frqband,ischeck,isnodebname,ischecklon,ischecklat,azimuthcell1,azimuthcell2,azimuthcell3,heightcell1,heightcell2,heightcell3,downtiltcell1,downtiltcell2,downtiltcell3,electricaldowntiltcell1,electricaldowntiltcell2,electricaldowntiltcell3,ISCHECKTYPE,NETGRNAME) values (#recordTime#, #penodebclass#, #penodebname#, #provinceName#, #cityName#, #longitude#, #latitude#, #countryName#, #regiontype#, #projectphase#, #penodebid#, #isopen#, #coveragecharacter#, #workFrqband#, #ischeck#, #isnodebname#, #ischecklon#, #ischecklat#, #azimuthcell1#, #azimuthcell2#, #azimuthcell3#, #heightcell1#, #heightcell2#, #heightcell3#, #downtiltcell1#, #downtiltcell2#, #downtiltcell3#, #electricaldowntiltcell1#, #electricaldowntiltcell2#, #electricaldowntiltcell3#, #ischecktype#, #netgrname#)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbPlanLtesiteInfoDAO.updatePlanInfo -->
+    <update id="MS-MB-PLAN-LTESITE-INFO-UPDATE-PLAN-INFO">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-PLAN-LTESITE-INFO-UPDATE-PLAN-INFO*/ mb_plan_ltesite_info set record_time=#recordTime#, penodebclass=#penodebclass#, penodebname=#penodebname#, province_name=#provinceName#, city_name=#cityName#, longitude=#longitude#, latitude=#latitude#, country_name=#countryName#, regiontype=#regiontype#, projectphase=#projectphase#, penodebid=#penodebid#, isopen=#isopen#, coveragecharacter=#coveragecharacter#, work_frqband=#workFrqband#, ischeck=#ischeck#, isnodebname=#isnodebname#, ischecklon=#ischecklon#, ischecklat=#ischecklat#, azimuthcell1=#azimuthcell1#, azimuthcell2=#azimuthcell2#, azimuthcell3=#azimuthcell3#, heightcell1=#heightcell1#, heightcell2=#heightcell2#, heightcell3=#heightcell3#, downtiltcell1=#downtiltcell1#, downtiltcell2=#downtiltcell2#, downtiltcell3=#downtiltcell3#, electricaldowntiltcell1=#electricaldowntiltcell1#, electricaldowntiltcell2=#electricaldowntiltcell2#, electricaldowntiltcell3=#electricaldowntiltcell3#, ISCHECKTYPE=#ischecktype#, NETGRNAME=#netgrname# where (record_time = #recordTime2#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbPlanLtesiteInfoDAO.deletePlanInfoRecord -->
+    <delete id="MS-MB-PLAN-LTESITE-INFO-DELETE-PLAN-INFO-RECORD">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-PLAN-LTESITE-INFO-DELETE-PLAN-INFO-RECORD*/ from mb_plan_ltesite_info where (record_time = #value#)
+    ]]>
+    </delete>
+
+</sqlMap>

@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ========================================================== -->
+<!-- 自定义扩展：自定义sql查询，返回List<Map<String,Object>> -->
+<!-- ========================================================== -->
+
+<!-- @author yuminglang -->
+<!-- @apply 扩减容 -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+	<!-- mb_tcc_carrier分页查询 -->
+	<select id="MULTI-QUERY-MB_TCC_CARRIER-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select int_id , to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time, related_utrancell from ( select row_.*, rownum rownum_ from (
+		select int_id , record_time, related_utrancell from mb_tcc_carrier
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_tcc_carrier总数查询 -->
+	<select id="MULTI-QUERY-MB_TCC_CARRIER-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select int_id , record_time, related_utrancell from mb_tcc_carrier
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+	<!-- mb_tpd_sts_carrier_q分页查询 -->
+	<select id="MULTI-QUERY-MB_TPD_STS_CARRIER_Q-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select int_id,to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time,meannbruser_d,nbrassnbruul,nbrassnbrudl,nbravailbruul,nbravailbrudl from ( select row_.*, rownum rownum_ from (
+		select int_id,record_time,meannbruser_d,nbrassnbruul,nbrassnbrudl,nbravailbruul,nbravailbrudl from mb_tpd_sts_carrier_q
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_tpd_sts_carrier_q总数查询 -->
+	<select id="MULTI-QUERY-MB_TPD_STS_CARRIER_Q-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select int_id,record_time,meannbruser_d,nbrassnbruul,nbrassnbrudl,nbravailbruul,nbravailbrudl from mb_tpd_sts_carrier_q
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+	<!-- mb_tpd_sts_utrancell2_q分页查询 -->
+	<select id="MULTI-QUERY-MB_TPD_STS_UTRANCELL2_Q-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time,psuloct,psdloct,cstraffic_conv11,cstraffic_conv22,cstraffic_conv55,int_id from ( select row_.*, rownum rownum_ from (
+		select record_time,psuloct,psdloct,cstraffic_conv11,cstraffic_conv22,cstraffic_conv55,int_id from mb_tpd_sts_utrancell2_q 
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_tpd_sts_utrancell2_q总数查询 -->
+	<select id="MULTI-QUERY-MB_TPD_STS_UTRANCELL2_Q-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select record_time,psuloct,psdloct,cstraffic_conv11,cstraffic_conv22,cstraffic_conv55,int_id from mb_tpd_sts_utrancell2_q 
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+	<!-- mb_tpd_sts_utrancell1_q分页查询 -->
+	<select id="MULTI-QUERY-MB_TPD_STS_UTRANCELL1_Q-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select int_id,to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time,vendor_id,failestabcs_20,failestabcs_114,failestabps_20,failestabps_114,failconnestab,failestabcs_53,failestabps_53,failconnestab_1,failconnestab_cong from ( select row_.*, rownum rownum_ from (
+		select int_id,record_time,vendor_id,failestabcs_20,failestabcs_114,failestabps_20,failestabps_114,failconnestab,failestabcs_53,failestabps_53,failconnestab_1,failconnestab_cong from mb_tpd_sts_utrancell1_q  
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_tpd_sts_utrancell1_q总数查询 -->
+	<select id="MULTI-QUERY-MB_TPD_STS_UTRANCELL1_Q-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select int_id,record_time,vendor_id,failestabcs_20,failestabcs_114,failestabps_20,failestabps_114,failconnestab,failestabcs_53,failestabps_53,failconnestab_1,failconnestab_cong from mb_tpd_sts_utrancell1_q  
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+	<!-- mb_tcc_rnc分页查询 -->
+	<select id="MULTI-QUERY-MB_TCC_RNC-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select int_id,to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time,name from ( select row_.*, rownum rownum_ from (
+		select int_id,record_time,name from mb_tcc_rnc   
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_tcc_rnc总数查询 -->
+	<select id="MULTI-QUERY-MB_TCC_RNC-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select int_id,record_time,name from mb_tcc_rnc   
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+	<!-- mb_tcc_tco_pro_utrancell分页查询 -->
+	<select id="MULTI-QUERY-MB_TCC_TCO_PRO_UTRANCELL-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select int_id,to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time,dt_region_type_id grid_name,longitude,latitude,dir,indoor_support from ( select row_.*, rownum rownum_ from (
+		select int_id,record_time,dt_region_type_id,longitude,latitude,dir,indoor_support from mb_tcc_tco_pro_utrancell 
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_tcc_tco_pro_utrancell总数查询 -->
+	<select id="MULTI-QUERY-MB_TCC_TCO_PRO_UTRANCELL-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select int_id,record_time,dt_region_type_id,longitude,latitude,dir,indoor_support from mb_tcc_tco_pro_utrancell    
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+	<!-- mb_tcc_utrancell分页查询 -->
+	<select id="MULTI-QUERY-MB_TCC_UTRANCELL-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select int_id,to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time,city_id,name,lac,cid,hcarrier_number,r4carrier_number,rnc_name,cgi,confirmed,to_char(time_stamp,'YYYY-MM-DD HH24:mi:ss') time_stamp,related_rnc related_rnc from ( select row_.*, rownum rownum_ from (
+		select int_id,record_time,city_id,name,lac,cid,hcarrier_number,r4carrier_number,rnc_name,cgi,confirmed,time_stamp,related_rnc from mb_tcc_utrancell 
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_tcc_utrancell总数查询 -->
+	<select id="MULTI-QUERY-MB_TCC_UTRANCELL-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select int_id,record_time,city_id,name,lac,cid,hcarrier_number,r4carrier_number,rnc_name,cgi,confirmed,time_stamp,related_rnc from mb_tcc_utrancell     
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+	<!-- mb_bts_type分页查询 -->
+	<select id="MULTI-QUERY-MB_BTS_TYPE-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time,cgi,eqp_type,drx_type from ( select row_.*, rownum rownum_ from (
+		select record_time,cgi,eqp_type,drx_type from mb_bts_type  
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_bts_type总数查询 -->
+	<select id="MULTI-QUERY-MB_BTS_TYPE-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select record_time,cgi,eqp_type,drx_type from mb_bts_type      
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+	<!-- mb_tnk_cnt_cell_res_avail分页查询 -->
+	<select id="MULTI-QUERY-MB_TNK_CNT_CELL_RES_AVAIL-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select int_id,to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time,ave_avail_tch_sum,ave_avail_tch_den,ave_gprs_channels_sum,ave_gprs_channels_den,ave_permanent_gprs_ch_sum,ave_permanent_gprs_ch_den,ave_non_avail_tch_timeslot,non_avail_tch_denom,ave_sdcch_sub,res_av_denom3,ave_non_avail_sdcch from ( select row_.*, rownum rownum_ from (
+		select int_id,record_time,ave_avail_tch_sum,ave_avail_tch_den,ave_gprs_channels_sum,ave_gprs_channels_den,ave_permanent_gprs_ch_sum,ave_permanent_gprs_ch_den,ave_non_avail_tch_timeslot,non_avail_tch_denom,ave_sdcch_sub,res_av_denom3,ave_non_avail_sdcch from mb_tnk_cnt_cell_res_avail 
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_tnk_cnt_cell_res_avail总数查询 -->
+	<select id="MULTI-QUERY-MB_TNK_CNT_CELL_RES_AVAIL-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select int_id,record_time,ave_avail_tch_sum,ave_avail_tch_den,ave_gprs_channels_sum,ave_gprs_channels_den,ave_permanent_gprs_ch_sum,ave_permanent_gprs_ch_den,ave_non_avail_tch_timeslot,non_avail_tch_denom,ave_sdcch_sub,res_av_denom3,ave_non_avail_sdcch from mb_tnk_cnt_cell_res_avail    
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+	<!-- mb_ter_cnt_cell分页查询 -->
+	<select id="MULTI-QUERY-MB_TER_CNT_CELL-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select int_id,to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time,tavaacc,tavascan,cnuchcnt,tnuchcnt from ( select row_.*, rownum rownum_ from (
+		select int_id,record_time,tavaacc,tavascan,cnuchcnt,tnuchcnt from mb_ter_cnt_cell   
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_ter_cnt_cell总数查询 -->
+	<select id="MULTI-QUERY-MB_TER_CNT_CELL-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select int_id,record_time,tavaacc,tavascan,cnuchcnt,tnuchcnt from mb_ter_cnt_cell     
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+	<!-- mb_tzx_cnt_cell2_v3分页查询 -->
+	<select id="MULTI-QUERY-MB_TZX_CNT_CELL2_V3-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select int_id,to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time,c90108000030,c90108000031,c90108000007 from ( select row_.*, rownum rownum_ from (
+		select int_id,record_time,c90108000030,c90108000031,c90108000007 from mb_tzx_cnt_cell2_v3 
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_tzx_cnt_cell2_v3总数查询 -->
+	<select id="MULTI-QUERY-MB_TZX_CNT_CELL2_V3-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select int_id,record_time,c90108000030,c90108000031,c90108000007 from mb_tzx_cnt_cell2_v3      
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+	<!-- mb_thw_cnt_cell2_6k分页查询 -->
+	<select id="MULTI-QUERY-MB_THW_CNT_CELL2_6K-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select int_id,to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time,c1278469458,c1278469459,c1278469468,c1278469469 from ( select row_.*, rownum rownum_ from (
+		select int_id,record_time,c1278469458,c1278469459,c1278469468,c1278469469 from mb_thw_cnt_cell2_6k 
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_thw_cnt_cell2_6k总数查询 -->
+	<select id="MULTI-QUERY-MB_THW_CNT_CELL2_6K-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select int_id,record_time,c1278469458,c1278469459,c1278469468,c1278469469 from mb_thw_cnt_cell2_6k       
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+	<!-- mb_ter_cnt_cell_gprs分页查询 -->
+	<select id="MULTI-QUERY-MB_TER_CNT_CELL_GPRS-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select int_id,to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time,faildltbfest,prejtfi from ( select row_.*, rownum rownum_ from (
+		select int_id,record_time,faildltbfest,prejtfi from mb_ter_cnt_cell_gprs 
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_ter_cnt_cell_gprs总数查询 -->
+	<select id="MULTI-QUERY-MB_TER_CNT_CELL_GPRS-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select int_id,record_time,faildltbfest,prejtfi from mb_ter_cnt_cell_gprs        
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+	<!-- mb_tnk_cnt_cell_gprs_pack分页查询 -->
+	<select id="MULTI-QUERY-MB_TNK_CNT_CELL_GPRS_PACK-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select int_id,to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time,no_rad_res_ava_ul_t,no_rad_res_ava_dl_t from ( select row_.*, rownum rownum_ from (
+		select int_id,record_time,no_rad_res_ava_ul_t,no_rad_res_ava_dl_t from mb_tnk_cnt_cell_gprs_pack 
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_tnk_cnt_cell_gprs_pack总数查询 -->
+	<select id="MULTI-QUERY-MB_TNK_CNT_CELL_GPRS_PACK-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select int_id,record_time,no_rad_res_ava_ul_t,no_rad_res_ava_dl_t from mb_tnk_cnt_cell_gprs_pack         
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+	<!-- mb_tzx_cnt_cell_gprs_dl_v3分页查询 -->
+	<select id="MULTI-QUERY-MB_TZX_CNT_CELL_GPRS_DL_V3-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select int_id,to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time,c90118000008 from ( select row_.*, rownum rownum_ from (
+		select int_id,record_time,c90118000008 from mb_tzx_cnt_cell_gprs_dl_v3  
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_tzx_cnt_cell_gprs_dl_v3总数查询 -->
+	<select id="MULTI-QUERY-MB_TZX_CNT_CELL_GPRS_DL_V3-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select int_id,record_time,c90118000008 from mb_tzx_cnt_cell_gprs_dl_v3          
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+	<!-- mb_tzx_cnt_cell_gprs_ul_v3分页查询 -->
+	<select id="MULTI-QUERY-MB_TZX_CNT_CELL_GPRS_UL_V3-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select int_id,to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time,c90120000016 from ( select row_.*, rownum rownum_ from (
+		select int_id,record_time,c90120000016 from mb_tzx_cnt_cell_gprs_ul_v3  
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_tzx_cnt_cell_gprs_ul_v3总数查询 -->
+	<select id="MULTI-QUERY-MB_TZX_CNT_CELL_GPRS_UL_V3-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select int_id,record_time,c90120000016 from mb_tzx_cnt_cell_gprs_ul_v3          
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+	<!-- mb_thw_cnt_cell_gprs_6k分页查询 -->
+	<select id="MULTI-QUERY-MB_THW_CNT_CELL_GPRS_6K-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select int_id,to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time,c1279175419,c1279176419 from ( select row_.*, rownum rownum_ from (
+		select int_id,record_time,c1279175419,c1279176419 from mb_thw_cnt_cell_gprs_6k  
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_thw_cnt_cell_gprs_6k总数查询 -->
+	<select id="MULTI-QUERY-MB_THW_CNT_CELL_GPRS_6K-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select int_id,record_time,c1279175419,c1279176419 from mb_thw_cnt_cell_gprs_6k          
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+	<!-- mb_tpa_sts_cell_gprs_ne分页查询 -->
+	<select id="MULTI-QUERY-MB_TPA_STS_CELL_GPRS_NE-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time,m_occupy_pdch,static_pdch,int_id,sum_level from ( select row_.*, rownum rownum_ from (
+		select record_time,m_occupy_pdch,static_pdch,int_id,sum_level from mb_tpa_sts_cell_gprs_ne 
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_tpa_sts_cell_gprs_ne总数查询 -->
+	<select id="MULTI-QUERY-MB_TPA_STS_CELL_GPRS_NE-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select record_time,m_occupy_pdch,static_pdch,int_id,sum_level from mb_tpa_sts_cell_gprs_ne           
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+	<!-- mb_tpa_sts_cell_ne分页查询 -->
+	<select id="MULTI-QUERY-MB_TPA_STS_CELL_NE-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select int_id,to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time,tch_traffic_half,tch_traffic,att_tch_ovrfl_nho,tch_call_req_nho,att_tch_ovrfl,tch_call_req,tch_nbr,sum_level from ( select row_.*, rownum rownum_ from (
+		select int_id,record_time,tch_traffic_half,tch_traffic,att_tch_ovrfl_nho,tch_call_req_nho,att_tch_ovrfl,tch_call_req,tch_nbr,sum_level from mb_tpa_sts_cell_ne 
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_tpa_sts_cell_ne总数查询 -->
+	<select id="MULTI-QUERY-MB_TPA_STS_CELL_NE-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select int_id,record_time,tch_traffic_half,tch_traffic,att_tch_ovrfl_nho,tch_call_req_nho,att_tch_ovrfl,tch_call_req,tch_nbr,sum_level	 from mb_tpa_sts_cell_ne            
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+	<!-- mb_thw_cnt_cell_ho_6k分页查询 -->
+	<select id="MULTI-QUERY-MB_THW_CNT_CELL_HO_6K-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select int_id,to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time,c1278087446 from ( select row_.*, rownum rownum_ from (
+		select int_id,record_time,c1278087446 from mb_thw_cnt_cell_ho_6k 
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_thw_cnt_cell_ho_6k总数查询 -->
+	<select id="MULTI-QUERY-MB_THW_CNT_CELL_HO_6K-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select int_id,record_time,c1278087446 from mb_thw_cnt_cell_ho_6k            
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+	<!-- mb_tcc_tco_pro_cell分页查询 -->
+	<select id="MULTI-QUERY-MB_TCC_TCO_PRO_CELL-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select int_id,to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time,bsc_name,cgi,longitude,latitude,cover_type,ccch_num,lac,ci,dir,indoor_support,grid_name from ( select row_.*, rownum rownum_ from (
+		select int_id,record_time,bsc_name,cgi,longitude,latitude,cover_type,ccch_num,lac,ci,dir,indoor_support,grid_name from mb_tcc_tco_pro_cell 
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_tcc_tco_pro_cell总数查询 -->
+	<select id="MULTI-QUERY-MB_TCC_TCO_PRO_CELL-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select int_id,record_time,bsc_name,cgi,longitude,latitude,cover_type,ccch_num,LAC,CI,DIR,indoor_support,grid_name	from mb_tcc_tco_pro_cell             
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+	<!-- mb_tcc_cell分页查询 -->
+	<select id="MULTI-QUERY-MB_TCC_CELL-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select int_id,to_char(record_time,'YYYY-MM-DD HH24:mi:ss') record_time,region_id region_name,bts_name,vendor_id vendor_name,trx_number,sdcch_num,bsc_name,btssm_name,cgi,sys_type from ( select row_.*, rownum rownum_ from (
+		select int_id,record_time,region_id,bts_name,vendor_id,trx_number,sdcch_num,bsc_name,btssm_name,cgi,sys_type from mb_tcc_cell 
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		) row_ ) where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+	</select>
+	<!-- mb_tcc_cell总数查询 -->
+	<select id="MULTI-QUERY-MB_TCC_CELL-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(1) from (
+		select int_id,record_time,region_id,bts_name,vendor_id,trx_number,sdcch_num,bsc_name,btssm_name,cgi,sys_type from mb_tcc_cell            
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)
+	</select>
+</sqlMap>	

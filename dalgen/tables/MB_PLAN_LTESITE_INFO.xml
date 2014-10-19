@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="MB_PLAN_LTESITE_INFO" dummyPk="record_time">
+	
+	<!-- 通过小区ID查询规划小区信息 -->
+	<operation name="getPlanInfobyTime" paramtype="primitive">
+		<sql>
+			<![CDATA[
+select record_time,penodebclass,penodebname,province_name,city_name,longitude,latitude,country_name,regiontype,projectphase,penodebid,isopen,coveragecharacter,work_frqband,ischeck,isnodebname,ischecklon,ischecklat,azimuthcell1,azimuthcell2,azimuthcell3,heightcell1,heightcell2,heightcell3,downtiltcell1,downtiltcell2,downtiltcell3,electricaldowntiltcell1,electricaldowntiltcell2,electricaldowntiltcell3,ISCHECKTYPE,NETGRNAME  from mb_plan_ltesite_info where record_time=?
+			]]>
+		</sql>
+	</operation>
+	<operation name="getPlanInfobyParam" paramtype="primitive" multiplicity="many" paging="true">
+		<extraparams>
+			<param name="startTime" javatype="java.lang.String" />
+		</extraparams>
+		<extraparams>
+			<param name="endTime" javatype="java.lang.String" />
+		</extraparams>
+		<extraparams>
+			<param name="list" javatype="java.util.List" />
+		</extraparams>
+		<sql>
+			<![CDATA[
+		select record_time,penodebclass,penodebname,province_name,city_name,longitude,latitude,country_name,regiontype,projectphase,penodebid,isopen,coveragecharacter,work_frqband,ischeck,isnodebname,ischecklon,ischecklat,azimuthcell1,azimuthcell2,azimuthcell3,heightcell1,heightcell2,heightcell3,downtiltcell1,downtiltcell2,downtiltcell3,electricaldowntiltcell1,electricaldowntiltcell2,electricaldowntiltcell3,ISCHECKTYPE,NETGRNAME from mb_plan_ltesite_info
+		 where record_time >= '' and record_time<'' and city_name=''
+			]]>
+		</sql>
+		<sqlmap><![CDATA[
+			select record_time,penodebclass,penodebname,province_name,city_name,longitude,latitude,country_name,regiontype,projectphase,penodebid,isopen,coveragecharacter,work_frqband,ischeck,isnodebname,ischecklon,ischecklat,azimuthcell1,azimuthcell2,azimuthcell3,heightcell1,heightcell2,heightcell3,downtiltcell1,downtiltcell2,downtiltcell3,electricaldowntiltcell1,electricaldowntiltcell2,electricaldowntiltcell3,ISCHECKTYPE,NETGRNAME from mb_plan_ltesite_info
+ 			where record_time &gt; = to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss') 
+			<dynamic>
+				<isNotEmpty prepend="AND" property="list">
+					city_name in         
+					<iterate close=")" open="(" conjunction="," property="list">
+					     #list[]#
+					</iterate>
+				</isNotEmpty>
+			</dynamic>
+        ]]>
+        </sqlmap>
+	</operation>
+
+	<!-- 插入规划小区信息 -->
+	<operation name="insertPlanInfo" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into mb_plan_ltesite_info 
+	  (record_time,penodebclass,penodebname,province_name,city_name,longitude,latitude,country_name,regiontype,projectphase,penodebid,isopen,coveragecharacter,work_frqband,ischeck,isnodebname,ischecklon,ischecklat,azimuthcell1,azimuthcell2,azimuthcell3,heightcell1,heightcell2,heightcell3,downtiltcell1,downtiltcell2,downtiltcell3,electricaldowntiltcell1,electricaldowntiltcell2,electricaldowntiltcell3,ISCHECKTYPE,NETGRNAME)
+		values
+	  (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 修改规划小区信息 -->
+	<operation name="updatePlanInfo" paramtype="object">
+		<sql>
+			<![CDATA[
+			    update mb_plan_ltesite_info
+				set 				 
+			       record_time=?,
+			       penodebclass=?,
+			       penodebname=?,
+			       province_name=?,
+			       city_name=?,
+			       longitude=?,
+			       latitude=?,
+			       country_name=?,
+			       regiontype=?,
+			       projectphase=?,
+			       penodebid=?,
+			       isopen=?,
+			       coveragecharacter=?,
+			       work_frqband=?,
+			       ischeck=?,
+			       isnodebname=?,
+			       ischecklon=?,
+			       ischecklat=?,
+			       azimuthcell1=?,
+			       azimuthcell2=?,
+			       azimuthcell3=?,
+			       heightcell1=?,
+			       heightcell2=?,
+			       heightcell3=?,
+			       downtiltcell1=?,
+			       downtiltcell2=?,
+			       downtiltcell3=?,
+			       electricaldowntiltcell1=?,
+			       electricaldowntiltcell2=?,
+			       electricaldowntiltcell3=?,
+			       ISCHECKTYPE=?,
+			       NETGRNAME=?
+				where record_time = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 删除规划小区信息 -->
+	<operation name="deletePlanInfoRecord" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    delete mb_plan_ltesite_info where record_time = ?
+			]]>
+		</sql>
+	</operation>
+</table>	

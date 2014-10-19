@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="GBK"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:osgi="http://www.springframework.org/schema/osgi"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+         http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd"
+	default-autowire="byName">
+    <!-- ======================================================================== -->
+    <!--  DAO interface object                                                            -->
+    <!-- ======================================================================== -->
+    <bean id="mbMrRecordDAO" class="com.cmcc.optimize.dataaccess.dao.ibatis.IbatisMbMrRecordDAO" parent="baseCasSqlMapClientDAO"/>
+    <bean id="mbOmcLoLaDAO" class="com.cmcc.optimize.dataaccess.dao.ibatis.IbatisMbOmcLoLaDAO" parent="baseCasSqlMapClientDAO"/>
+    <bean id="mbPerfGsmBusistatDAO" class="com.cmcc.optimize.dataaccess.dao.ibatis.IbatisMbPerfGsmBusistatDAO" parent="baseCasSqlMapClientDAO"/>
+    <bean id="mbPerfLteCellbusistatDAO" class="com.cmcc.optimize.dataaccess.dao.ibatis.IbatisMbPerfLteCellbusistatDAO" parent="baseCasSqlMapClientDAO"/>
+    <bean id="mbPerfTdsBusistatDAO" class="com.cmcc.optimize.dataaccess.dao.ibatis.IbatisMbPerfTdsBusistatDAO" parent="baseCasSqlMapClientDAO"/>
+    <bean id="mbPlanLtecellInfoDAO" class="com.cmcc.optimize.dataaccess.dao.ibatis.IbatisMbPlanLtecellInfoDAO" parent="baseCasSqlMapClientDAO"/>
+    <bean id="mbPlanLtesiteInfoDAO" class="com.cmcc.optimize.dataaccess.dao.ibatis.IbatisMbPlanLtesiteInfoDAO" parent="baseCasSqlMapClientDAO"/>
+    <bean id="mbSysGisPermissionDAO" class="com.cmcc.optimize.dataaccess.dao.ibatis.IbatisMbSysGisPermissionDAO" parent="baseCasSqlMapClientDAO"/>
+    <bean id="mbSysLtecellGsmnbrDAO" class="com.cmcc.optimize.dataaccess.dao.ibatis.IbatisMbSysLtecellGsmnbrDAO" parent="baseCasSqlMapClientDAO"/>
+    <bean id="mbSysLtecellInfoDAO" class="com.cmcc.optimize.dataaccess.dao.ibatis.IbatisMbSysLtecellInfoDAO" parent="baseCasSqlMapClientDAO"/>
+    <bean id="mbSysLtecellInfoTDAO" class="com.cmcc.optimize.dataaccess.dao.ibatis.IbatisMbSysLtecellInfoTDAO" parent="baseCasSqlMapClientDAO"/>
+    <bean id="mbSysLtecellLtenbrDAO" class="com.cmcc.optimize.dataaccess.dao.ibatis.IbatisMbSysLtecellLtenbrDAO" parent="baseCasSqlMapClientDAO"/>
+    <bean id="mbSysLtecellParamDAO" class="com.cmcc.optimize.dataaccess.dao.ibatis.IbatisMbSysLtecellParamDAO" parent="baseCasSqlMapClientDAO"/>
+    <bean id="mbSysLtecellTdsnbrDAO" class="com.cmcc.optimize.dataaccess.dao.ibatis.IbatisMbSysLtecellTdsnbrDAO" parent="baseCasSqlMapClientDAO"/>
+    <bean id="mbSysLtesiteInfoTDAO" class="com.cmcc.optimize.dataaccess.dao.ibatis.IbatisMbSysLtesiteInfoTDAO" parent="baseCasSqlMapClientDAO"/>
+    <bean id="mbSysLtesiteParamDAO" class="com.cmcc.optimize.dataaccess.dao.ibatis.IbatisMbSysLtesiteParamDAO" parent="baseCasSqlMapClientDAO"/>
+
+	<bean id="seqDAO" class="com.cmcc.optimize.dataaccess.dao.ibatis.IbatisSeqDAO" parent="baseCasSqlMapClientDAO"/>
+	
+	<!-- extends dao config for groups sql(count,sum,etc.)-->
+	<bean id="extCommonProcessDAO" class="com.cmcc.optimize.dataaccess.dao.ibatis.ExtIbatisCommonProcessDAO" parent="baseCasSqlMapClientDAO"/>
+	<bean id="extCustomProcessDAO" class="com.cmcc.optimize.dataaccess.dao.ibatis.ExtIbatisCustomProcessDAO" parent="baseCasSqlMapClientDAO"/>
+
+</beans>

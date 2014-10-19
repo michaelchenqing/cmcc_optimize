@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_SYS_LTECELL_TDSNBR -->
+    <resultMap id="RM-MB-SYS-LTECELL-TDSNBR" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbSysLtecellTdsnbrDO">
+        <result property="cgi" column="CGI" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="name" column="NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="objectRdn" column="OBJECT_RDN" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="zhName" column="ZH_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="omcId" column="OMC_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="city" column="CITY" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="vendorId" column="VENDOR_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="timeStamp" column="TIME_STAMP" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="updateStamp" column="UPDATE_STAMP" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="confirmed" column="CONFIRMED" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="tac" column="TAC" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="pci" column="PCI" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="earfcn" column="EARFCN" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="MName" column="M_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="NName" column="N_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="id" column="ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="adjCgi" column="ADJ_CGI" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="adjacentcellid" column="ADJACENTCELLID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="lac" column="LAC" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="rac" column="RAC" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="uarfcn" column="UARFCN" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellparameterid" column="CELLPARAMETERID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="updateUser" column="UPDATE_USER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="recordTime" column="RECORD_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbSysLtecellTdsnbrDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbSysLtecellTdsnbrDAO.getLtecellByCellId -->
+    <select id="MS-MB-SYS-LTECELL-TDSNBR-GET-LTECELL-BY-CELL-ID" resultMap="RM-MB-SYS-LTECELL-TDSNBR">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-SYS-LTECELL-TDSNBR-GET-LTECELL-BY-CELL-ID*/ cgi, name, object_rdn, zh_name, omc_id, city, vendor_id, time_stamp, update_stamp, confirmed, tac, pci, earfcn, m_name, n_name, id, adj_cgi, adjacentcellid, lac, rac, uarfcn, cellparameterid, update_user, ecord_time from mb_sys_ltecell_tdsnbr where (cgi = #value#)
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbSysLtecellTdsnbrDAO.insertLtecell -->
+    <insert id="MS-MB-SYS-LTECELL-TDSNBR-INSERT-LTECELL">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-SYS-LTECELL-TDSNBR-INSERT-LTECELL*/ into mb_sys_ltecell_tdsnbr(cgi,name,object_rdn,zh_name,omc_id,city,vendor_id,time_stamp,update_stamp,confirmed,tac,pci,earfcn,m_name,n_name,id,adj_cgi,adjacentcellid,lac,rac,uarfcn,cellparameterid,update_user,ecord_time) values (#cgi#, #name#, #objectRdn#, #zhName#, #omcId#, #city#, #vendorId#, #timeStamp#, #updateStamp#, #confirmed#, #tac#, #pci#, #earfcn#, #MName#, #NName#, #id#, #adjCgi#, #adjacentcellid#, #lac#, #rac#, #uarfcn#, #cellparameterid#, #updateUser#, #ecordTime#)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbSysLtecellTdsnbrDAO.updateLtecell -->
+    <update id="MS-MB-SYS-LTECELL-TDSNBR-UPDATE-LTECELL">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-SYS-LTECELL-TDSNBR-UPDATE-LTECELL*/ mb_sys_ltecell_tdsnbr set cgi=#cgi#, name=#name#, object_rdn=#objectRdn#, zh_name=#zhName#, omc_id=#omcId#, city=#city#, vendor_id=#vendorId#, time_stamp=#timeStamp#, update_stamp=#updateStamp#, confirmed=#confirmed#, tac=#tac#, pci=#pci#, earfcn=#earfcn#, m_name=#MName#, n_name=#NName#, id=#id#, adj_cgi=#adjCgi#, adjacentcellid=#adjacentcellid#, lac=#lac#, rac=#rac#, uarfcn=#uarfcn#, cellparameterid=#cellparameterid#, update_user=#updateUser#, record_time=#recordTime# where (cgi = #cgi2#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbSysLtecellTdsnbrDAO.deleteLtecell -->
+    <delete id="MS-MB-SYS-LTECELL-TDSNBR-DELETE-LTECELL">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-SYS-LTECELL-TDSNBR-DELETE-LTECELL*/ from mb_sys_ltecell_tdsnbr where (cgi = #value#)
+    ]]>
+    </delete>
+
+</sqlMap>

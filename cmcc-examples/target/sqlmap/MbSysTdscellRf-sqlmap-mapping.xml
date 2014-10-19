@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_SYS_TDSCELL_RF -->
+    <resultMap id="RM-MB-SYS-TDSCELL-RF" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbSysTdscellRfDO">
+        <result property="cellId" column="CELL_ID" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="cellName" column="CELL_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="azimuth" column="AZIMUTH" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="height" column="HEIGHT" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="mtilt" column="MTILT" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="etilt" column="ETILT" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="antenna" column="ANTENNA" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="fakeAntenna" column="FAKE_ANTENNA" javaType="boolean" jdbcType="NUMBER" nullValue="false"/>
+        <result property="updateTime" column="UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="recordTime" column="RECORD_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="updateUser" column="UPDATE_USER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellGlbId" column="CELL_GLB_ID" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="siteGlbId" column="SITE_GLB_ID" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbSysTdscellRfDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbSysTdscellRfDAO.insertSysTD -->
+    <insert id="MS-MB-SYS-TDSCELL-RF-INSERT-SYS-TD">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-SYS-TDSCELL-RF-INSERT-SYS-TD*/ into MB_SYS_TDSCELL_RF(cell_id,cell_name,azimuth,height,mtilt,etilt,antenna,fake_antenna,update_time,record_time,update_user,cell_glb_id,site_glb_id) values (#cellId#, #cellName#, #azimuth#, #height#, #mtilt#, #etilt#, #antenna#, #fakeAntenna#, #updateTime#, #recordTime#, #updateUser#, #cellGlbId#, #siteGlbId#)
+    ]]>
+    </insert>
+
+</sqlMap>

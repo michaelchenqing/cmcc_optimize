@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="mb_sys_ltecell_gsmnbr" dummyPk="cgi">
+
+	<!-- 通过SCELL_GLB_ID查询4G小区与2G小区邻区详情 -->
+	<operation name="getLtecellById" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    select cgi,name,object_rdn,zh_name,omc_id,city,vendor_id,time_stamp,update_stamp,confirmed,tac,pci,earfcn,adj_gsm_frqlst,m_name,n_name,id,adjacentcellid,bcch,ncc,bcc,rac,update_user,distance,record_time from mb_sys_ltecell_gsmnbr where cgi=?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 插入新4G小区与2G小区邻区记录 -->
+	<operation name="insertLtecellGsmNbr" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into mb_sys_ltecell_gsmnbr 
+	  (cgi,name,object_rdn,zh_name,omc_id,city,vendor_id,time_stamp,update_stamp,confirmed,tac,pci,earfcn,adj_gsm_frqlst,m_name,n_name,id,adjacentcellid,bcch,ncc,bcc,rac,update_user,distance,record_time)
+		values
+	  (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 修改4G小区与2G小区邻区 -->
+	<operation name="updateLtecellGsmNbr" paramtype="object">
+		<sql>
+			<![CDATA[
+			    update mb_sys_ltecell_gsmnbr
+				   set name=?,
+				   object_rdn=?,zh_name=?,omc_id=?,city=?,vendor_id=?,
+				   update_stamp=sysdate,
+				   confirmed=?,tac=?,pci=?,earfcn=?,adj_gsm_frqlst=?,m_name=?,
+				   n_name=?,id=?,adjacentcellid=?,bcch=?,ncc=?,bcc=?,rac=?,
+				   update_user=?,distance=?,record_time=?
+				  where cgi = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 删除4G小区与2G小区邻区 -->
+	<operation name="deleteLtecellGsmNbr" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    delete mb_sys_ltecell_gsmnbr where cgi = ?
+			]]>
+		</sql>
+	</operation>
+</table>	

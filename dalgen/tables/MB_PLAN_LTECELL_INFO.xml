@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="mb_plan_ltecell_info" dummyPk="record_time">
+
+	<!-- 通过record_time查询规划小区信息详情 -->
+	<operation name="getPlanCellByTime" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    select record_time,cell_id,city,contry,min_distance,projectphase,cover_type,high,longitude,latitude,ISCHECKTYPE,NETGRNAME  from mb_plan_ltecell_info where record_time=?
+			]]>
+		</sql>
+	</operation>
+	<operation name="getPlanCellParam" paramtype="primitive" multiplicity="many" paging="true">
+		<extraparams>
+			<param name="list" javatype="java.util.List" />
+		</extraparams>
+				<extraparams>
+			<param name="startTime" javatype="java.lang.String" />
+		</extraparams>
+		<extraparams>
+			<param name="endTime" javatype="java.lang.String" />
+		</extraparams>
+		<sql>
+			<![CDATA[
+				select record_time,cell_id,city,contry,min_distance,projectphase,cover_type,high,longitude,latitude,ISCHECKTYPE,NETGRNAME  from mb_plan_ltecell_info  
+			]]>
+		</sql>
+		<sqlmap><![CDATA[
+				select record_time,cell_id,city,contry,min_distance,projectphase,cover_type,high,longitude,latitude,ISCHECKTYPE,NETGRNAME  from mb_plan_ltecell_info 
+						 	  where RECORD_TIME &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and RECORD_TIME &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss') 
+				
+				<dynamic>
+					<isNotEmpty prepend="AND" property="list">
+						  city in         
+						<iterate close=")" open="(" conjunction="," property="list">
+						     #list[]#
+						</iterate>
+					</isNotEmpty>
+				</dynamic>
+        ]]>
+        </sqlmap>
+	</operation>
+	<!-- 插入规划小区信息记录 -->
+	<operation name="insertPlanCell" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into mb_plan_ltecell_info 
+			  (record_time,cell_id,city,contry,min_distance,projectphase,cover_type,high,longitude,latitude,ISCHECKTYPE,NETGRNAME)
+				values
+			  (?,?,?,?,?,?,?,?,?,?,?,?)
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 修改小区经纬度信息 -->
+	<operation name="updatePlanCell" paramtype="object">
+		<sql>
+			<![CDATA[
+			    update mb_plan_ltecell_info
+				   set
+				       record_time=?,
+				       cell_id=?,
+				       city=?,
+				       contry=?,
+				       min_distance=?,
+				       projectphase=?,
+				       cover_type=?,
+				       high=?,
+				       longitude=?,
+				       latitude=?,
+				       ISCHECKTYPE=?,
+				       NETGRNAME=?
+				  where record_time = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 删除小区经纬度信息-->
+	<operation name="deleteLPlanCell" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    delete mb_plan_ltecell_info where record_time = ?
+			]]>
+		</sql>
+	</operation>
+</table>	

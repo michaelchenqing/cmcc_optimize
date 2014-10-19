@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_SYS_LTESITE_PARAM -->
+    <resultMap id="RM-MB-SYS-LTESITE-PARAM" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbSysLtesiteParamDO">
+        <result property="enodebGlbId" column="ENODEB_GLB_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="enodebId" column="ENODEB_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="enodebName" column="ENODEB_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="operastate" column="OPERASTATE" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="updateTime" column="UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="recordTime" column="RECORD_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbSysLtesiteParamDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbSysLtesiteParamDAO.getLteSiteByEnodebGlbId -->
+    <select id="MS-MB-SYS-LTESITE-PARAM-GET-LTE-SITE-BY-ENODEB-GLB-ID" resultMap="RM-MB-SYS-LTESITE-PARAM">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-SYS-LTESITE-PARAM-GET-LTE-SITE-BY-ENODEB-GLB-ID*/ enodeb_glb_id, enodeb_id, enodeb_name, operastate, update_time, record_time from mb_sys_ltesite_param where (enodeb_glb_id = #value#)
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbSysLtesiteParamDAO.insertLteSite -->
+    <insert id="MS-MB-SYS-LTESITE-PARAM-INSERT-LTE-SITE">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-SYS-LTESITE-PARAM-INSERT-LTE-SITE*/ into mb_sys_ltesite_param(enodeb_glb_id,enodeb_id,enodeb_name,operastate,update_time,record_time) values (#enodebGlbId#, #enodebId#, #enodebName#, #operastate#, sysdate, #recordTime#)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbSysLtesiteParamDAO.getLteSiteByParam -->
+    <select id="MS-MB-SYS-LTESITE-PARAM-GET-LTE-SITE-BY-PARAM" resultMap="RM-MB-SYS-LTESITE-PARAM">
+        select * from ( select row_.*, rownum rownum_ /*MS-CAS-DALGEN-MB-SYS-LTESITE-PARAM-GET-LTE-SITE-BY-PARAM*/ from (select enodeb_glb_id, enodeb_id, enodeb_name,operastate, update_time,record_time from mb_sys_ltesite_param
+ 				where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss') ) row_ ) where rownum_ &gt; #startRow#  and rownum_ &lt; = #endRow#
+    </select>
+
+    <!-- mapped statement for IbatisMbSysLtesiteParamDAO.getLteSiteByParam, needed by paging -->
+    <select id="MS-MB-SYS-LTESITE-PARAM-GET-LTE-SITE-BY-PARAM-COUNT-FOR-PAGING" resultClass="int">
+        select  /*MS-CAS-DALGEN-MB-SYS-LTESITE-PARAM-GET-LTE-SITE-BY-PARAM-COUNT-FOR-PAGING*/  count(*) from mb_sys_ltesite_param
+ 				where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+    </select>
+
+    <!-- mapped statement for IbatisMbSysLtesiteParamDAO.updateLteSite -->
+    <update id="MS-MB-SYS-LTESITE-PARAM-UPDATE-LTE-SITE">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-SYS-LTESITE-PARAM-UPDATE-LTE-SITE*/ mb_sys_ltesite_param set enodeb_glb_id=#enodebGlbId#, enodeb_id=#enodebId#, enodeb_name=#enodebName#, operastate=#operastate#, update_time=sysdate, record_time=#recordTime# where (enodeb_glb_id = #enodebGlbId2#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbSysLtesiteParamDAO.deleteLteSiteRecord -->
+    <delete id="MS-MB-SYS-LTESITE-PARAM-DELETE-LTE-SITE-RECORD">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-SYS-LTESITE-PARAM-DELETE-LTE-SITE-RECORD*/ from mb_sys_ltesite_param where (enodeb_glb_id = #value#)
+    ]]>
+    </delete>
+
+</sqlMap>

@@ -1,0 +1,70 @@
+{
+    "SignalHttpModel": {
+        "_id": {
+            "path": "id"
+        },
+        "_source": {
+            "enabled": true
+        },
+        "_all": {
+            "enabled": false
+        },
+        "properties": {
+            "id": {
+                "type": "string"
+            },
+            "time": {
+                "type": "long",
+                "index": "not_analyzed"
+            },
+            "imsi": {
+                "type": "string",
+                "index": "not_analyzed"
+            },
+            "http_session": {
+                "type": "string",
+                "index": "not_analyzed"
+            },
+            "event": {
+                "type": "integer",
+                "index": "not_analyzed"
+            },
+            "lac": {
+                "type": "long",
+                "index": "not_analyzed"
+            },
+            "cell": {
+                "type": "integer",
+                "index": "not_analyzed"
+            },
+            "sub_session": {
+                "type": "long",
+                "index": "not_analyzed"
+            },
+            "method": {
+                "type": "integer",
+                "index": "not_analyzed"
+            },
+            "response_status": {
+                "type": "long",
+                "index": "not_analyzed"
+            },
+            "mobile_type": {
+                "type": "string",
+                
+            },
+            "url": {
+                "type": "string",
+                "index": "not_analyzed"
+            },
+            "url1": {
+                "type": "string",
+                "index": "not_analyzed"
+            },
+            "hour": {
+                "type": "string",
+                "index": "not_analyzed"
+            }
+        }
+    }
+}

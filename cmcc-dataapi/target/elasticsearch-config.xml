@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<elasticsearch>
+	<result name="SignalHttpModel"><!-- 单个存入es的实例:信令 http -->
+		<class>com.cmcc.optimize.datamodel.signal.SignalHttpModel</class>
+		<hbaseDaoClass>com.cmcc.dataprocess.hbase.dao.SignalHttpModelDao</hbaseDaoClass>
+		<es-cluster>log-system</es-cluster><!-- TODO  暂与日志收集暂使用同一个 es集群 -->
+		<es-type>SignalHttpModel</es-type>
+		<es-indice>signalhttpmodel</es-indice>
+		<es-connect>cmcc3:9300</es-connect>
+		<es-mapping>esconfig/SignalHttpModel.json</es-mapping>
+	</result>
+	
+	<result name="SignalMMSModel"><!-- 单个存入es的实例:信令 彩信 -->
+		<class>com.cmcc.optimize.datamodel.signal.SignalMMSModel</class>
+		<hbaseDaoClass>com.cmcc.dataprocess.hbase.dao.SignalMMSModelDao</hbaseDaoClass>
+		<es-cluster>log-system</es-cluster>
+		<es-type>SignalMMSModel</es-type>
+		<es-indice>signalmmsmodel</es-indice>
+		<es-connect>cmcc3:9300</es-connect>
+		<es-mapping>esconfig/SignalMMSModel.json</es-mapping>
+	</result>
+	
+	<result name="SignalSigModel"><!-- 单个存入es的实例:信令 路由迁移 -->
+		<class>com.cmcc.optimize.datamodel.signal.SignalSigModel</class>
+		<hbaseDaoClass>com.cmcc.dataprocess.hbase.dao.SignalSigModelDao</hbaseDaoClass>
+		<es-cluster>log-system</es-cluster>
+		<es-type>SignalSigModel</es-type>
+		<es-indice>signalsigmodel</es-indice>
+		<es-connect>cmcc3:9300</es-connect>
+		<es-mapping>esconfig/SignalSigModel.json</es-mapping>
+	</result>
+	
+	<result name="SignalTcpModel"><!-- 单个存入es的实例:信令 tcp -->
+		<class>com.cmcc.optimize.datamodel.signal.SignalTcpModel</class>
+		<hbaseDaoClass>com.cmcc.dataprocess.hbase.dao.SignalTcpModelDao</hbaseDaoClass>
+		<es-cluster>log-system</es-cluster>
+		<es-type>SignalTcpModel</es-type>
+		<es-indice>signaltcpmodel</es-indice>
+		<es-connect>cmcc3:9300</es-connect>
+		<es-mapping>esconfig/SignalTcpModel.json</es-mapping>
+	</result>
+
+	<result name="SignalUdpModel"><!-- 单个存入es的实例:信令 udp -->
+		<class>com.cmcc.optimize.datamodel.signal.SignalUdpModel</class>
+		<hbaseDaoClass>com.cmcc.dataprocess.hbase.dao.SignalUdpModelDao</hbaseDaoClass>
+		<es-cluster>log-system</es-cluster>
+		<es-type>SignalUdpModel</es-type>
+		<es-indice>signaludpmodel</es-indice>
+		<es-connect>cmcc3:9300</es-connect>
+		<es-mapping>esconfig/SignalUdpModel.json</es-mapping>
+	</result>
+	
+	<result name="SignalWSPModel"><!-- 单个存入es的实例:信令 wap -->
+		<class>com.cmcc.optimize.datamodel.signal.SignalWSPModel</class>
+		<hbaseDaoClass>com.cmcc.dataprocess.hbase.dao.SignalWSPModelDao</hbaseDaoClass>
+		<es-cluster>log-system</es-cluster>
+		<es-type>SignalWSPModel</es-type>
+		<es-indice>signalwspmodel</es-indice>
+		<es-connect>cmcc3:9300</es-connect>
+		<es-mapping>esconfig/SignalWSPModel.json</es-mapping>
+	</result>
+
+</elasticsearch>

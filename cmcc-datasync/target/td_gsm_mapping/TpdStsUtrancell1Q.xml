@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 数据文件转换模板 -->
+<root>
+	<template_desc>
+		<name>亿阳</name>
+		<desc>亿阳</desc>
+		<ver>1.0</ver>
+		<other>.gz</other>
+		<split_flag>,</split_flag>
+		<ignore_rows>1</ignore_rows>
+	</template_desc>
+
+	<!--  -->
+	<mapping table="MB_TPD_STS_UTRANCELL1_Q">
+		<field>
+			<col_index>0</col_index>
+			<db_column>INT_ID</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?([1-9]{1}\d{0,28}))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>1</col_index>
+			<db_column>RECORD_TIME</db_column>
+			<data_type>timestamp</data_type>
+			<rule_valid></rule_valid>
+			<data_format>yyyy-MM-dd HH:mm:ss</data_format>
+		</field>
+		<field>
+			<col_index>2</col_index>
+			<db_column>VENDOR_ID</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>3</col_index>
+			<db_column>FAILESTABCS_20</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?([1-9]{1}\d{0,28}))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>4</col_index>
+			<db_column>FAILESTABCS_114</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?([1-9]{1}\d{0,28}))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>5</col_index>
+			<db_column>FAILESTABPS_20</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?([1-9]{1}\d{0,28}))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>6</col_index>
+			<db_column>FAILESTABPS_114</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?([1-9]{1}\d{0,28}))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>7</col_index>
+			<db_column>FAILCONNESTAB</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?([1-9]{1}\d{0,28}))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>8</col_index>
+			<db_column>FAILESTABCS_53</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?([1-9]{1}\d{0,28}))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>9</col_index>
+			<db_column>FAILESTABPS_53</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?([1-9]{1}\d{0,28}))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>10</col_index>
+			<db_column>FAILCONNESTAB_1</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?([1-9]{1}\d{0,28}))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>11</col_index>
+			<db_column>FAILCONNESTAB_CONG</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?([1-9]{1}\d{0,28}))|[0])</rule_valid>
+		</field>
+	</mapping>
+</root>

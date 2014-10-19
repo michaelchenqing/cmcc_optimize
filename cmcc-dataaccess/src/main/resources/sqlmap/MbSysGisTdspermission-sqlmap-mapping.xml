@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_SYS_GIS_TDSPERMISSION -->
+    <resultMap id="RM-MB-SYS-GIS-TDSPERMISSION" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbSysGisTdspermissionDO">
+        <result property="province" column="PROVINCE" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="city" column="CITY" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="county" column="COUNTY" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="rncid" column="RNCID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="siteOid" column="SITE_OID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="siteName" column="SITE_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="netgrid" column="NETGRID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="environ" column="ENVIRON" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="vendor" column="VENDOR" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="recordTime" column="RECORD_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="updateTime" column="UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="updateUser" column="UPDATE_USER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="siteGlbId" column="SITE_GLB_ID" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbSysGisTdspermissionDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbSysGisTdspermissionDAO.getTDSPERMISSIONbyId -->
+    <select id="MS-MB-SYS-GIS-TDSPERMISSION-GET-TDSPERMISSIO-NBY-ID" resultMap="RM-MB-SYS-GIS-TDSPERMISSION">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-SYS-GIS-TDSPERMISSION-GET-TDSPERMISSIO-NBY-ID*/ PROVINCE, CITY, COUNTY, RNCID, SITE_OID, SITE_NAME, NETGRID, ENVIRON, VENDOR, RECORD_TIME, UPDATE_TIME, UPDATE_USER, SITE_GLB_ID from MB_SYS_GIS_TDSPERMISSION where (SITE_GLB_ID = #value#)
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbSysGisTdspermissionDAO.insertTDSPERMISSION -->
+    <insert id="MS-MB-SYS-GIS-TDSPERMISSION-INSERT-TDSPERMISSION">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-SYS-GIS-TDSPERMISSION-INSERT-TDSPERMISSION*/ into MB_SYS_GIS_TDSPERMISSION(PROVINCE,CITY,COUNTY,RNCID,SITE_OID,SITE_NAME,NETGRID,ENVIRON,VENDOR,RECORD_TIME,UPDATE_TIME,UPDATE_USER,SITE_GLB_ID) values (#province#, #city#, #county#, #rncid#, #siteOid#, #siteName#, #netgrid#, #environ#, #vendor#, syadate, sysdate, #updateUser#, #siteGlbId#)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbSysGisTdspermissionDAO.updateTDSPERMISSION -->
+    <update id="MS-MB-SYS-GIS-TDSPERMISSION-UPDATE-TDSPERMISSION">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-SYS-GIS-TDSPERMISSION-UPDATE-TDSPERMISSION*/ MB_SYS_GIS_TDSPERMISSION set PROVINCE=#province#, CITY=#city#, COUNTY=#county#, RNCID=#rncid#, SITE_OID=#siteOid#, SITE_NAME=#siteName#, NETGRID=#netgrid#, ENVIRON=#environ#, VENDOR=#vendor#, RECORD_TIME=sysdate, UPDATE_TIME=sysdate, UPDATE_USER=#updateUser# where (SITE_GLB_ID = #siteGlbId#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbSysGisTdspermissionDAO.deleteTDSPERMISSION -->
+    <delete id="MS-MB-SYS-GIS-TDSPERMISSION-DELETE-TDSPERMISSION">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-SYS-GIS-TDSPERMISSION-DELETE-TDSPERMISSION*/ from MB_SYS_GIS_TDSPERMISSION where (SITE_GLB_ID = #value#)
+    ]]>
+    </delete>
+
+</sqlMap>

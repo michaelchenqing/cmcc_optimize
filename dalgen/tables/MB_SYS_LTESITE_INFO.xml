@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="mb_sys_ltesite_info" dummyPk="enodeb_glb_id">
+
+	<!-- 通过基站ID查询4G基站信息详情 -->
+	<operation name="getLtesiteInfoByEnodebGlbId" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    select enodeb_glb_id,enodeb_id,enodeb_name,tac,vendor,longitude,latitude,netgrid,environ,freq_band,cover_type,project_period,single_pass,init_time,run_time,record_time,update_time,update_user,REGIONTYPE from mb_sys_ltesite_info where enodeb_glb_id=?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 插入新4G基站信息记录 -->
+	<operation name="insertLtesiteInfo" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into mb_sys_ltesite_info 
+	  (enodeb_glb_id,enodeb_id,enodeb_name,tac,vendor,longitude,latitude,netgrid,environ,freq_band,cover_type,project_period,single_pass,init_time,run_time,record_time,update_time,update_user,REGIONTYPE)
+		values
+	  (?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,sysdate,sysdate,sysdate,?,?)
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 修改4G基站信息 -->
+	<operation name="updateLtesiteInfo" paramtype="object">
+		<sql>
+			<![CDATA[
+			    update mb_sys_ltesite_info
+				   set 
+				   enodeb_glb_id=?,
+				   enodeb_id=?,
+				   enodeb_name=?,
+				   tac=?,
+				   vendor=?,
+				   longitude=?,
+				   latitude=?,
+				   netgrid=?,
+				   environ=?,
+				   freq_band=?,
+				   cover_type=?,
+				   project_period=?,
+				   single_pass=?,
+				   init_time=sysdate,
+				   run_time=sysdate,
+				   record_time=sysdate,
+				   update_time=sysdate,
+				   update_user=?,
+				   REGIONTYPE=?  
+				  where enodeb_glb_id = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 删除4G基站信息-->
+	<operation name="deleteLtesiteInfo" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    delete mb_sys_ltesite_info where enodeb_glb_id = ?
+			]]>
+		</sql>
+	</operation>
+</table>	

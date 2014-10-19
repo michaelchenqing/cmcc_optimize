@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_PERF_GSM_BUSISTAT -->
+    <resultMap id="RM-MB-PERF-GSM-BUSISTAT" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbPerfGsmBusistatDO">
+        <result property="cellGlbId" column="CELL_GLB_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellId" column="CELL_ID" javaType="long" jdbcType="NUMBER" nullValue="0"/>
+        <result property="cellName" column="CELL_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cycleDate" column="CYCLE_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="period" column="PERIOD" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="traffic" column="TRAFFIC" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="gprsThrou" column="GPRS_THROU" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="egprsThrou" column="EGPRS_THROU" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="operTime" column="OPER_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="recordTime" column="RECORD_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="city" column="CITY" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbPerfGsmBusistatDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbPerfGsmBusistatDAO.getperfbyId -->
+    <select id="MS-MB-PERF-GSM-BUSISTAT-GETPERFBY-ID" resultMap="RM-MB-PERF-GSM-BUSISTAT">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-PERF-GSM-BUSISTAT-GETPERFBY-ID*/ CELL_GLB_ID, CELL_ID, CELL_NAME, CYCLE_DATE, PERIOD, TRAFFIC, GPRS_THROU, EGPRS_THROU, OPER_TIME, RECORD_TIME from mb_perf_gsm_busistat where (CELL_GLB_ID = #value#)
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbPerfGsmBusistatDAO.insertperf -->
+    <insert id="MS-MB-PERF-GSM-BUSISTAT-INSERTPERF">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-PERF-GSM-BUSISTAT-INSERTPERF*/ into mb_perf_gsm_busistat(CELL_GLB_ID,CELL_ID,CELL_NAME,CYCLE_DATE,PERIOD,TRAFFIC,GPRS_THROU,EGPRS_THROU,OPER_TIME,RECORD_TIME) values (#cellGlbId#, #cellId#, #cellName#, #cycleDate#, #period#, #traffic#, #gprsThrou#, #egprsThrou#, sysdate, #recordTime#)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbPerfGsmBusistatDAO.updateperf -->
+    <update id="MS-MB-PERF-GSM-BUSISTAT-UPDATEPERF">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-PERF-GSM-BUSISTAT-UPDATEPERF*/ mb_perf_gsm_busistat set CELL_ID=#cellId#, CELL_NAME=#cellName#, CYCLE_DATE=#cycleDate#, PERIOD=#period#, TRAFFIC=#traffic#, GPRS_THROU=#gprsThrou#, EGPRS_THROU=#egprsThrou#, OPER_TIME=sysdate, RECORD_TIME=#recordTime# where (CELL_GLB_ID = #cellGlbId#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbPerfGsmBusistatDAO.deleteperfRecord -->
+    <delete id="MS-MB-PERF-GSM-BUSISTAT-DELETEPERF-RECORD">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-PERF-GSM-BUSISTAT-DELETEPERF-RECORD*/ from mb_perf_gsm_busistat where (CELL_GLB_ID = #value#)
+    ]]>
+    </delete>
+
+</sqlMap>

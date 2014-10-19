@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="cas-cmcc-dalgen" default="release" basedir=".">
+	<!-- define properties -->
+	<property environment="env" />
+	<property name="name" value="cas-cmcc" />
+
+	<loadproperties srcFile="db.properties" />
+
+	<!-- properties for directory -->
+	<property name="dir.lib" value="${basedir}/libs" />
+	<property name="dir.target" value="${basedir}/../cmcc-dataaccess/src/main" />
+	<property name="dir.deploy" value="${dir.target}" />
+
+	<!-- properties for middlegen plugin -->
+	<property name="middlegen.templates" value="templates" />
+	<property name="middlegen.destination" value="${dir.deploy}" />
+	<property name="middlegen.config.file" value="${basedir}/dal-config.xml" />
+
+	<!--配置dao生成的包名称及路径-->
+	<property name="middlegen.package" value="com.cmcc.optimize.dataaccess.dao" />
+	<property name="middlegen.package.dir" value="com/cmcc/optimize/dataaccess/dao" />
+
+	<!-- insert database configuration here-->
+	<property name="database.driver.file" value="${dir.lib}/ojdbc14-10.2.0.4.0.jar" />
+	<property name="database.driver.classpath" value="${database.driver.file}" />
+	<property name="database.driver" value="oracle.jdbc.driver.OracleDriver" />
+
+	<!-- classpath -->
+	<path id="classpath.main">
+		<pathelement path="${basedir}/cn.cas.mota.daoler-1.0.1.jar" />
+		<fileset dir="${dir.lib}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<!-- sanity check (database driver must be available) -->
+	<target name="check-driver-present">
+		<available file="${database.driver.file}" type="file" property="driver.present" />
+	</target>
+
+	<target name="panic-if-driver-not-present" unless="driver.present">
+		<fail>
+        JDBC驱动程序"${database.driver.file}"不存在。
+        </fail>
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Run Middlegen                                                       -->
+	<!-- =================================================================== -->
+	<target name="middlegen" depends="check-driver-present,panic-if-driver-not-present" description="">
+		<taskdef name="middlegen" classname="com.gaoqs.daoler.MiddlegenTask" classpathref="classpath.main" />
+		<echo message="" />
+		<input message="请输入目标表名,多表以逗号分隔,全表生成请输入'*',只生成Sequence请输入'seq': " addproperty="tabs" />
+
+		<echo message="DAL配置文件：${middlegen.config.file}." />
+		<echo message="开始自动生成DAL..." />
+
+		<mkdir dir="${middlegen.destination}" />
+		<middlegen configfile="${middlegen.config.file}" runModel="SOFA" tabs="${tabs}" appname="${name}" databaseurl="${database.url}" driver="${database.driver}" username="${database.userid}" password="${database.password}" schema="${database.schema}" prefsdir="${dir.target}">
+
+			<iwallet destination="" mergedir="${middlegen.templates}/mergedir" package="${middlegen.package}">
+				<!-- 生成数据对象(DataObject)基类 -->
+				<fileproducer destination="${middlegen.destination}/java/${middlegen.package.dir}" template="${middlegen.templates}/base-do.vm" filename="dataobject/BaseDO.java" />
+
+				<!-- 为每一张表生成一个数据对象类 -->
+				<fileproducer destination="${middlegen.destination}/java/${middlegen.package.dir}" template="${middlegen.templates}/do.vm" filename="dataobject/{0}DO.java" />
+
+				<!-- 为每一张表生成一个DAO接口 -->
+				<fileproducer destination="${middlegen.destination}/java/${middlegen.package.dir}" template="${middlegen.templates}/dao.vm" filename="daointerface/{0}DAO.java" />
+
+				<!-- 为每一张表生成ibatis DAO实现 -->
+				<fileproducer destination="${middlegen.destination}/java/${middlegen.package.dir}" template="${middlegen.templates}/ibatis.vm" filename="ibatis/Ibatis{0}DAO.java" />
+
+				<!-- 生成访问sequence表的DAO接口 -->
+				<fileproducer destination="${middlegen.destination}/java/${middlegen.package.dir}" template="${middlegen.templates}/seq-dao.vm" filename="daointerface/SeqDAO.java" />
+
+				<!-- 生成SequenceDAO的Ibatis实现 -->
+				<fileproducer destination="${middlegen.destination}/java/${middlegen.package.dir}" template="${middlegen.templates}/seq-ibatis.vm" filename="ibatis/IbatisSeqDAO.java" />
+
+				<!-- 为每一张表生成一个sqlmapping文件 -->
+				<fileproducer destination="${middlegen.destination}/resources" template="${middlegen.templates}/table-sqlmap-mapping.vm" filename="sqlmap/{0}-sqlmap-mapping.xml" />
+
+				<!-- 生成公共的sqlmapping文件 -->
+				<fileproducer destination="${middlegen.destination}/resources" template="${middlegen.templates}/common-sqlmap-mapping.vm" filename="sqlmap/common-sqlmap-mapping.xml" />
+
+				<!-- 生成ibatis的配置文件 -->
+				<fileproducer destination="${middlegen.destination}/resources" template="${middlegen.templates}/sqlmap.vm" filename="sqlmap/sqlmap.xml" />
+
+				<!-- 生成DAO beans的Spring配置文件 -->
+				<fileproducer destination="${middlegen.destination}/resources/META-INF/spring" template="${middlegen.templates}/beans-dal-dao.vm" filename="common-dal-dao.xml" />
+			</iwallet>
+		</middlegen>
+		<echo message="DAL生成已成功!" />
+	</target>
+
+	<target name="clean" depends="" description="clean all generated stuff">
+		<delete dir="${dir.target}/cas-cmcc-prefs.properties" />
+		<echo message="修改数据库后，在Git环境下，请先手动移除文件： ${dir.target}/cas-cmcc-prefs.properties" />
+		<delete dir="${dir.target}/*.properties" />
+	</target>
+
+	<!-- The default target to use -->
+	<target name="release" depends="clean,middlegen" description="" />
+</project>

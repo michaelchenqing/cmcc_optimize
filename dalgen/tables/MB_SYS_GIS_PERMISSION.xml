@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="MB_SYS_GIS_PERMISSION" dummyPk="ENODEB_GLB_ID">
+
+	<!-- 通过4G基站ID查询位置信息 -->
+	<operation name="getLTEPERMISSIONbyId" paramtype="primitive">
+		<sql>
+			<![CDATA[
+	select  PROVINCE,CITY,COUNTY, ENODEB_GLB_ID,ENODEB_ID,ENODEB_NAME,NETGRID,ENVIRON,VENDOR,record_time,UPDATE_TIME
+	,UPDATE_USER,ADDRESS from 
+	MB_SYS_GIS_PERMISSION where ENODEB_GLB_ID = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 插入4G基站位置信息 -->
+	<operation name="insertLTEPERMISSION" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into MB_SYS_GIS_PERMISSION 
+	  (PROVINCE,CITY,COUNTY, ENODEB_GLB_ID,ENODEB_ID,ENODEB_NAME,NETGRID,ENVIRON,VENDOR,record_time,UPDATE_TIME
+	,UPDATE_USER,ADDRESS)
+		values
+	  (?,?,?,?,?,?,?,?,?,sysdate,sysdate,?,?)
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 修改4G基站位置信息 -->
+	<operation name="updateLTEPERMISSION" paramtype="object">
+		<sql>
+			<![CDATA[
+			    update MB_SYS_GIS_PERMISSION
+				set 				 
+			PROVINCE=?,
+			CITY=?,
+			COUNTY=?,
+			 ENODEB_GLB_ID=?,
+			 ENODEB_ID=?,
+			 ENODEB_NAME=?,
+			 NETGRID=?,
+			 ENVIRON=?,
+			 VENDOR=?,
+			 record_time=sysdate,UPDATE_TIME=sysdate 
+	,UPDATE_USER=?,ADDRESS=? 
+				where ENODEB_GLB_ID = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 删除4G基站位置信息 -->
+	<operation name="deleteLTEPERMISSION" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    delete MB_SYS_GIS_PERMISSION where ENODEB_GLB_ID = ?
+			]]>
+		</sql>
+	</operation>
+</table>	

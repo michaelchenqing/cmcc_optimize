@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_MR_RECORD -->
+    <resultMap id="RM-MB-MR-RECORD" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbMrRecordDO">
+        <result property="mmegroupid" column="MMEGROUPID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="mmecode" column="MMECODE" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="mmeues2apid" column="MMEUES2APID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellid" column="CELLID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="testDate" column="TEST_DATE" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="testTime" column="TEST_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="eventtype" column="EVENTTYPE" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="mrltescrsrp" column="MRLTESCRSRP" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="mrltencrsrp" column="MRLTENCRSRP" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="mrltescrsrq" column="MRLTESCRSRQ" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="mrltencrsrq" column="MRLTENCRSRQ" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="mrltescrttd" column="MRLTESCRTTD" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="mrltescphr" column="MRLTESCPHR" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="mrltescrip" column="MRLTESCRIP" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="mrltescaoa" column="MRLTESCAOA" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="mrltescplrdlqcix" column="MRLTESCPLRDLQCIX" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="freqBand" column="FREQ_BAND" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="mrltescsinrul" column="MRLTESCSINRUL" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="mrltescearfcn" column="MRLTESCEARFCN" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="mrltescpci" column="MRLTESCPCI" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbMrRecordDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbMrRecordDAO.getMRByLoginId -->
+    <select id="MS-MB-MR-RECORD-GET-MR-BY-LOGIN-ID" resultMap="RM-MB-MR-RECORD">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-MR-RECORD-GET-MR-BY-LOGIN-ID*/ mmegroupid, mmecode, mmeues2apid, cellid, test_date, test_time, eventtype, mrltescrsrp, mrltencrsrp, mrltescrsrq, mrltencrsrq, mrltescrttd, mrltescphr, mrltescrip, mrltescaoa, mrltescplrdlqcix, freq_band, mrltescsinrul, mrltescearfcn, mrltescpci from mb_mr_record where (mmegroupid = #value#)
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbMrRecordDAO.insertMr -->
+    <insert id="MS-MB-MR-RECORD-INSERT-MR">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-MR-RECORD-INSERT-MR*/ into mb_mr_record(mmegroupid,mmecode,mmeues2apid,cellid,test_date,test_time,eventtype,mrltescrsrp,mrltencrsrp,mrltescrsrq,mrltencrsrq,mrltescrttd,mrltescphr,mrltescrip,mrltescaoa,mrltescplrdlqcix,freq_band,mrltescsinrul,mrltescearfcn,mrltescpci) values (#mmegroupid#, #mmecode#, #mmeues2apid#, #cellid#, sysdate, sysdate, #eventtype#, #mrltescrsrp#, #mrltencrsrp#, #mrltescrsrq#, #mrltencrsrq#, #mrltescrttd#, #mrltescphr#, #mrltescrip#, #mrltescaoa#, #mrltescplrdlqcix#, #freqBand#, #mrltescsinrul#, #mrltescearfcn#, #mrltescpci#)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbMrRecordDAO.updateMR -->
+    <update id="MS-MB-MR-RECORD-UPDATE-MR">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-MR-RECORD-UPDATE-MR*/ mb_mr_record set DAY=sysdate, CELLID=#cellid#, EVENTTYPE='1' where (MMEGROUPID = #mmegroupid#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbMrRecordDAO.deleteMRRecord -->
+    <delete id="MS-MB-MR-RECORD-DELETE-MR-RECORD">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-MR-RECORD-DELETE-MR-RECORD*/ from mb_mr_record where (MMEGROUPID = #value#)
+    ]]>
+    </delete>
+
+    <!-- mapped statement for IbatisMbMrRecordDAO.getMultiMrRecord -->
+    <select id="MS-MB-MR-RECORD-GET-MULTI-MR-RECORD" resultMap="RM-MB-MR-RECORD">
+        select * from ( select row_.*, rownum rownum_ /*MS-CAS-DALGEN-MB-MR-RECORD-GET-MULTI-MR-RECORD*/ from (select mmegroupid,mmecode,mmeues2apid,cellid,test_date,test_time,eventtype,mrltescrsrp,mrltencrsrp,mrltescrsrq,mrltencrsrq,mrltescrttd,mrltescphr,mrltescrip,mrltescaoa,mrltescplrdlqcix,freq_band,mrltescsinrul,mrltescearfcn,mrltescpci from mb_mr_record where mmegroupid=#mmegroupid#  
+				<dynamic>
+					<isNotEmpty prepend="AND" property="cellid">
+		                	cellid = #cellid#
+		            </isNotEmpty>
+		            <isNotNull prepend="AND" property="eventtype">
+		                	eventtype like '%'||#${eventtype}#||'%'
+		            </isNotNull>
+				</dynamic>
+				 order by test_time desc ) row_ ) where rownum_ &gt; #startRow#  and rownum_ &lt; = #endRow#
+    </select>
+
+    <!-- mapped statement for IbatisMbMrRecordDAO.getMultiMrRecord, needed by paging -->
+    <select id="MS-MB-MR-RECORD-GET-MULTI-MR-RECORD-COUNT-FOR-PAGING" resultClass="int">
+        select  /*MS-CAS-DALGEN-MB-MR-RECORD-GET-MULTI-MR-RECORD-COUNT-FOR-PAGING*/  count(*) from mb_mr_record where mmegroupid=#mmegroupid#  
+				<dynamic>
+					<isNotEmpty prepend="AND" property="cellid">
+		                	cellid = #cellid#
+		            </isNotEmpty>
+		            <isNotNull prepend="AND" property="eventtype">
+		                	eventtype like '%'||#${eventtype}#||'%'
+		            </isNotNull>
+				</dynamic>
+				 
+    </select>
+
+</sqlMap>

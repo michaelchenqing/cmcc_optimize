@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="MB_SYS_GSMCELL_RF" dummyPk="CELL_ID">
+
+	<!-- 通过2G小区号查询小区RF信息 -->
+	<operation name="getGSMCellRFbyId" paramtype="primitive">
+		<sql>
+			<![CDATA[
+	select  CELL_ID,CELL_NAME,AZIMUTH,HEIGHT,MTILT,ETILT,ANTENNA
+	,FAKE_ANTENNA,UPDATE_TIME,RECORD_TIME,UPDATE_USER,CELL_GLB_ID,SITE_GLB_ID from 	
+	MB_SYS_GSMCELL_RF where CELL_ID = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 插入2G小区RF信息记录 -->
+	<operation name="insertGSMCellRF" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into MB_SYS_GSMCELL_RF 
+	  (   CELL_ID,CELL_NAME,AZIMUTH,HEIGHT,MTILT,ETILT,ANTENNA
+	,FAKE_ANTENNA,UPDATE_TIME,RECORD_TIME,UPDATE_USER,CELL_GLB_ID,SITE_GLB_ID)
+		values
+	  (?,?,?,?,?,?,?,?,sysdate,sysdate,?,?,?)
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 修改2G小区RF信息-->
+	<operation name="updateGSMCellRF" paramtype="object">
+		<sql>
+			<![CDATA[
+			    update MB_SYS_GSMCELL_RF
+				set 				 
+			 CELL_NAME=?,
+			 AZIMUTH=?,
+			 HEIGHT=?,
+			 MTILT=?,
+			 ETILT=?,
+			 ANTENNA=?
+	,FAKE_ANTENNA=?,
+	UPDATE_TIME=sysdate,RECORD_TIME=sysdate,UPDATE_USER=?,CELL_GLB_ID=?,SITE_GLB_ID=?
+				where CELL_ID = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 删除2G小区RF信息 -->
+	<operation name="deleteGSMCellRF" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    delete MB_SYS_GSMCELL_RF where CELL_ID = ?
+			]]>
+		</sql>
+	</operation>
+</table>	

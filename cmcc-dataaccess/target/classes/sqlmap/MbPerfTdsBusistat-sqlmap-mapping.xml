@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_PERF_TDS_BUSISTAT -->
+    <resultMap id="RM-MB-PERF-TDS-BUSISTAT" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbPerfTdsBusistatDO">
+        <result property="cellGlbId" column="CELL_GLB_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellId" column="CELL_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellName" column="CELL_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="period" column="PERIOD" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="traffic" column="TRAFFIC" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="hsThrou" column="HS_THROU" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="r9Throu" column="R9_THROU" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="operTime" column="OPER_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="recordTime" column="RECORD_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="city" column="CITY" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbPerfTdsBusistatDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbPerfTdsBusistatDAO.getTDSperfbyId -->
+    <select id="MS-MB-PERF-TDS-BUSISTAT-GET-TD-SPERFBY-ID" resultMap="RM-MB-PERF-TDS-BUSISTAT">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-PERF-TDS-BUSISTAT-GET-TD-SPERFBY-ID*/ cell_glb_id, CELL_ID, CELL_NAME, record_time, PERIOD, traffic, hs_throu, r9_throu, oper_time from mb_perf_tds_busistat where (CELL_GLB_ID = #value#)
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbPerfTdsBusistatDAO.insertTDSperf -->
+    <insert id="MS-MB-PERF-TDS-BUSISTAT-INSERT-TD-SPERF">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-PERF-TDS-BUSISTAT-INSERT-TD-SPERF*/ into mb_perf_tds_busistat(cell_glb_id,CELL_ID,CELL_NAME,record_time,PERIOD,traffic,hs_throu,r9_throu,oper_time) values (#cellGlbId#, #cellId#, #cellName#, #recordTime#, #period#, #traffic#, #hsThrou#, #r9Throu#, sysdate)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbPerfTdsBusistatDAO.updateTDSperf -->
+    <update id="MS-MB-PERF-TDS-BUSISTAT-UPDATE-TD-SPERF">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-PERF-TDS-BUSISTAT-UPDATE-TD-SPERF*/ mb_perf_tds_busistat set CELL_ID=#cellId#, CELL_NAME=#cellName#, record_time=#recordTime#, PERIOD=#period#, traffic=#traffic#, hs_throu=#hsThrou#, r9_throu=#r9Throu#, oper_time=sysdate where (CELL_GLB_ID = #cellGlbId#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbPerfTdsBusistatDAO.deleteTDSperfRecord -->
+    <delete id="MS-MB-PERF-TDS-BUSISTAT-DELETE-TD-SPERF-RECORD">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-PERF-TDS-BUSISTAT-DELETE-TD-SPERF-RECORD*/ from mb_perf_tds_busistat where (CELL_GLB_ID = #value#)
+    ]]>
+    </delete>
+
+</sqlMap>

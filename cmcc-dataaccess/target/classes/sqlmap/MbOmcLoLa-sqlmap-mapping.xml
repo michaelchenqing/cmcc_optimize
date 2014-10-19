@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_OMC_LO_LA -->
+    <resultMap id="RM-MB-OMC-LO-LA" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbOmcLoLaDO">
+        <result property="city" column="CITY" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="enodebId" column="ENODEB_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="enodebName" column="ENODEB_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="longitude" column="LONGITUDE" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="latitude" column="LATITUDE" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="recordTime" column="RECORD_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbOmcLoLaDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbOmcLoLaDAO.getOMClOlAByCity -->
+    <select id="MS-MB-OMC-LO-LA-GET-OM-CL-OL-A-BY-CITY" resultMap="RM-MB-OMC-LO-LA">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-OMC-LO-LA-GET-OM-CL-OL-A-BY-CITY*/ city, enodeb_id, enodeb_name, longitude, latitude, RECORD_TIME from mb_omc_lo_la where (city = #value#)
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbOmcLoLaDAO.getOmcLoLabyParam -->
+    <select id="MS-MB-OMC-LO-LA-GET-OMC-LO-LABY-PARAM" resultMap="RM-MB-OMC-LO-LA">
+        select * from ( select row_.*, rownum rownum_ /*MS-CAS-DALGEN-MB-OMC-LO-LA-GET-OMC-LO-LABY-PARAM*/ from (select city,enodeb_id,enodeb_name,longitude,latitude,RECORD_TIME from mb_omc_lo_la 
+				where RECORD_TIME =(select max(record_time) from mb_omc_lo_la)
+				<dynamic>
+					<isNotEmpty  prepend="AND"  property="list">
+						 city in         
+						<iterate close=")" open="(" conjunction="," property="list">
+						     #list[]#
+						</iterate>
+					</isNotEmpty>
+				</dynamic> ) row_ ) where rownum_ &gt; #startRow#  and rownum_ &lt; = #endRow#
+    </select>
+
+    <!-- mapped statement for IbatisMbOmcLoLaDAO.getOmcLoLabyParam, needed by paging -->
+    <select id="MS-MB-OMC-LO-LA-GET-OMC-LO-LABY-PARAM-COUNT-FOR-PAGING" resultClass="int">
+        select  /*MS-CAS-DALGEN-MB-OMC-LO-LA-GET-OMC-LO-LABY-PARAM-COUNT-FOR-PAGING*/  count(*) from mb_omc_lo_la 
+				where RECORD_TIME =(select max(record_time) from mb_omc_lo_la)
+				<dynamic>
+					<isNotEmpty  prepend="AND"  property="list">
+						 city in         
+						<iterate close=")" open="(" conjunction="," property="list">
+						     #list[]#
+						</iterate>
+					</isNotEmpty>
+				</dynamic>
+    </select>
+
+    <!-- mapped statement for IbatisMbOmcLoLaDAO.getOmcLoLaMaxDate -->
+    <select id="MS-MB-OMC-LO-LA-GET-OMC-LO-LA-MAX-DATE" resultClass="long">
+        select /*MS-CAS-DALGEN-MB-OMC-LO-LA-GET-OMC-LO-LA-MAX-DATE*/ count(1) counter  from mb_omc_lo_la where  RECORD_TIME =to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss')
+    </select>
+
+    <!-- mapped statement for IbatisMbOmcLoLaDAO.getOmcLoLabyDate -->
+    <select id="MS-MB-OMC-LO-LA-GET-OMC-LO-LABY-DATE" resultMap="RM-MB-OMC-LO-LA">
+        select * from ( select row_.*, rownum rownum_ /*MS-CAS-DALGEN-MB-OMC-LO-LA-GET-OMC-LO-LABY-DATE*/ from (select city,enodeb_id,enodeb_name,longitude,latitude,RECORD_TIME from mb_omc_lo_la 
+				where RECORD_TIME = to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss')
+				<dynamic>
+					<isNotEmpty  prepend="AND"  property="list">
+						 city in         
+						<iterate close=")" open="(" conjunction="," property="list">
+						     #list[]#
+						</iterate>
+					</isNotEmpty>
+				</dynamic> ) row_ ) where rownum_ &gt; #startRow#  and rownum_ &lt; = #endRow#
+    </select>
+
+    <!-- mapped statement for IbatisMbOmcLoLaDAO.getOmcLoLabyDate, needed by paging -->
+    <select id="MS-MB-OMC-LO-LA-GET-OMC-LO-LABY-DATE-COUNT-FOR-PAGING" resultClass="int">
+        select  /*MS-CAS-DALGEN-MB-OMC-LO-LA-GET-OMC-LO-LABY-DATE-COUNT-FOR-PAGING*/  count(*) from mb_omc_lo_la 
+				where RECORD_TIME = to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss')
+				<dynamic>
+					<isNotEmpty  prepend="AND"  property="list">
+						 city in         
+						<iterate close=")" open="(" conjunction="," property="list">
+						     #list[]#
+						</iterate>
+					</isNotEmpty>
+				</dynamic>
+    </select>
+
+    <!-- mapped statement for IbatisMbOmcLoLaDAO.insertOMClOlA -->
+    <insert id="MS-MB-OMC-LO-LA-INSERT-OM-CL-OL-A">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-OMC-LO-LA-INSERT-OM-CL-OL-A*/ into mb_omc_lo_la(city,enodeb_id,enodeb_name,longitude,latitude) values (#city#, #enodebId#, #enodebName#, #longitude#, #latitude#)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbOmcLoLaDAO.updateOMClOlA -->
+    <update id="MS-MB-OMC-LO-LA-UPDATE-OM-CL-OL-A">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-OMC-LO-LA-UPDATE-OM-CL-OL-A*/ mb_omc_lo_la set city=#city#, enodeb_id=#enodebId#, enodeb_name=#enodebName#, longitude=#longitude#, latitude=#latitude# where (city = #city2#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbOmcLoLaDAO.deleteLtesiteInfo -->
+    <delete id="MS-MB-OMC-LO-LA-DELETE-LTESITE-INFO">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-OMC-LO-LA-DELETE-LTESITE-INFO*/ from mb_omc_lo_la where (city = #value#)
+    ]]>
+    </delete>
+
+</sqlMap>

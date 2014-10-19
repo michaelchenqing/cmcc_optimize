@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="MB_SYS_GSMCELL_INFO" dummyPk="CELL_ID">
+
+	<!-- 通过2G小区号查询小区信息 -->
+	<operation name="getGSMCellInfobyId" paramtype="primitive">
+		<sql>
+			<![CDATA[
+	select  CELL_ID,CELL_NAME,CELL_ENGLISH_NAME,SITE_ID,CGI,RRU_REMOTE,CELL_LONGITUDE,CELL_LATITUDE,SECTOR_ID,POWERDIVISIONTYPE,POWERDIVISIONINDEX,
+	NCC,BCC,BCCH,COVERTYPE,BANDINDICATORFORFREQUENCY,RAC,RECORD_TIME,UPTIME_TIME,UPDATE_USER,CELL_GLB_ID,SITE_GLB_ID from 
+	MB_SYS_GSMCELL_INFO where CELL_ID = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 插入2G小区信息记录 -->
+	<operation name="insertGSMCellInfo" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into MB_SYS_GSMCELL_INFO 
+	  ( CELL_ID,CELL_NAME,CELL_ENGLISH_NAME,SITE_ID,CGI,RRU_REMOTE,CELL_LONGITUDE,CELL_LATITUDE,SECTOR_ID,POWERDIVISIONTYPE,POWERDIVISIONINDEX,
+	NCC,BCC,BCCH,COVERTYPE,BANDINDICATORFORFREQUENCY,RAC,RECORD_TIME,UPTIME_TIME,UPDATE_USER,CELL_GLB_ID,SITE_GLB_ID)
+		values
+	  (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,sysdate,?,?,?)
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 修改2G小区信息-->
+	<operation name="updateGSMCellInfo" paramtype="object">
+		<sql>
+			<![CDATA[
+			    update MB_SYS_GSMCELL_INFO
+				set 				 
+				CELL_NAME=?,
+				CELL_ENGLISH_NAME=?,
+				SITE_ID=?,
+				CGI=?,
+				RRU_REMOTE=?,
+				CELL_LONGITUDE=?,
+				CELL_LATITUDE=?,
+				SECTOR_ID=?,
+				POWERDIVISIONTYPE=?,
+				POWERDIVISIONINDEX=?,
+	NCC=?,BCC=?,BCCH=?,COVERTYPE=?,BANDINDICATORFORFREQUENCY=?,RAC=?,RECORD_TIME=sysdate,UPTIME_TIME=sysdate,UPDATE_USER=?,CELL_GLB_ID=?,SITE_GLB_ID=?
+	
+				where CELL_ID = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 删除2G小区信息 -->
+	<operation name="deleteGSMCellInfo" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    delete MB_SYS_GSMCELL_INFO where CELL_ID = ?
+			]]>
+		</sql>
+	</operation>
+</table>	

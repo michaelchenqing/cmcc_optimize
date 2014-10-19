@@ -1,0 +1,1 @@
+nohup java -cp cmcc-datasyc-0.0.1-SNAPSHOT.jar com.cmcc.optimize.datasyc.runtime.StartHdfsBackupMain >>/dev/null & 

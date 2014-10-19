@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_SYS_LTECELL_PARAM -->
+    <resultMap id="RM-MB-SYS-LTECELL-PARAM" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbSysLtecellParamDO">
+        <result property="cellGlbId" column="CELL_GLB_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellId" column="CELL_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellName" column="CELL_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="operastate" column="OPERASTATE" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="csfb" column="CSFB" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="drx" column="DRX" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="qci6DurLen" column="QCI6_DUR_LEN" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="qci7DurLen" column="QCI7_DUR_LEN" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="qci8DurLen" column="QCI8_DUR_LEN" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="qci9DurLen" column="QCI9_DUR_LEN" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="qci6ContTimer" column="QCI6_CONT_TIMER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="qci7ContTimer" column="QCI7_CONT_TIMER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="qci8ContTimer" column="QCI8_CONT_TIMER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="qci9ContTimer" column="QCI9_CONT_TIMER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="qci6NotrigTimer" column="QCI6_NOTRIG_TIMER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="qci7NotrigTimer" column="QCI7_NOTRIG_TIMER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="qci8NotrigTimer" column="QCI8_NOTRIG_TIMER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="qci9NotrigTimer" column="QCI9_NOTRIG_TIMER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="qci6WaitresendTimer" column="QCI6_WAITRESEND_TIMER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="qci7WaitresendTimer" column="QCI7_WAITRESEND_TIMER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="qci8WaitresendTimer" column="QCI8_WAITRESEND_TIMER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="qci9WaitresendTimer" column="QCI9_WAITRESEND_TIMER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="qci6ShortdurLen" column="QCI6_SHORTDUR_LEN" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="qci7ShortdurLen" column="QCI7_SHORTDUR_LEN" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="qci8ShortdurLen" column="QCI8_SHORTDUR_LEN" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="qci9ShortdurLen" column="QCI9_SHORTDUR_LEN" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="qci6ShortdurTimer" column="QCI6_SHORTDUR_TIMER" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="qci7ShortdurTimer" column="QCI7_SHORTDUR_TIMER" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="qci8ShortdurTimer" column="QCI8_SHORTDUR_TIMER" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="qci9ShortdurTimer" column="QCI9_SHORTDUR_TIMER" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="rrcNoactTimer" column="RRC_NOACT_TIMER" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="defPagingDur" column="DEF_PAGING_DUR" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="rfSigPower" column="RF_SIG_POWER" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="pdschRsRatio" column="PDSCH_RS_RATIO" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="pa" column="PA" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="initRecvPower" column="INIT_RECV_POWER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="preambleMaxCount" column="PREAMBLE_MAX_COUNT" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="powerIncStep" column="POWER_INC_STEP" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="accUeMaxPower" column="ACC_UE_MAX_POWER" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="upPucchPowerCtrl" column="UP_PUCCH_POWER_CTRL" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="pucchOptimalPower" column="PUCCH_OPTIMAL_POWER" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="upPuschPowerCtrl" column="UP_PUSCH_POWER_CTRL" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="pathlossCompParam" column="PATHLOSS_COMP_PARAM" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="instantOptimalPower" column="INSTANT_OPTIMAL_POWER" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="accMinLevel" column="ACC_MIN_LEVEL" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="cofreqMeasStartTh" column="COFREQ_MEAS_START_TH" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="QOffsetcell" column="Q_OFFSETCELL" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="QHyst" column="Q_HYST" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="a3OffsetHyst" column="A3_OFFSET_HYST" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="a3Hyst" column="A3_HYST" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="a3TimeTrig" column="A3_TIME_TRIG" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="ifA2Th" column="IF_A2_TH" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="iratA2TdsTh" column="IRAT_A2_TDS_TH" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="iratA2GsmTh" column="IRAT_A2_GSM_TH" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="iratA2ErrdefTh" column="IRAT_A2_ERRDEF_TH" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="updateTime" column="UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="updateUser" column="UPDATE_USER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="enodebName" column="ENODEB_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="enodebId" column="ENODEB_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="enodebGlbId" column="ENODEB_GLB_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="recordTime" column="RECORD_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbSysLtecellParamDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbSysLtecellParamDAO.getLtecellParamBycellId -->
+    <select id="MS-MB-SYS-LTECELL-PARAM-GET-LTECELL-PARAM-BYCELL-ID" resultMap="RM-MB-SYS-LTECELL-PARAM">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-SYS-LTECELL-PARAM-GET-LTECELL-PARAM-BYCELL-ID*/ cell_glb_id, cell_id, cell_name, operastate, csfb, drx, qci6_dur_len, qci7_dur_len, qci8_dur_len, qci9_dur_len, qci6_cont_timer, qci7_cont_timer, qci8_cont_timer, qci9_cont_timer, qci6_notrig_timer, qci7_notrig_timer, qci8_notrig_timer, qci9_notrig_timer, qci6_waitresend_timer, qci7_waitresend_timer, qci8_waitresend_timer, qci9_waitresend_timer, qci6_shortdur_len, qci7_shortdur_len, qci8_shortdur_len, qci9_shortdur_len, qci6_shortdur_timer, qci7_shortdur_timer, qci8_shortdur_timer, qci9_shortdur_timer, rrc_noact_timer, def_paging_dur, rf_sig_power, pdsch_rs_ratio, pa, init_recv_power, preamble_max_count, power_inc_step, acc_ue_max_power, up_pucch_power_ctrl, pucch_optimal_power, up_pusch_power_ctrl, pathloss_comp_param, instant_optimal_power, acc_min_level, cofreq_meas_start_th, q_offsetcell, q_hyst, a3_offset_hyst, a3_hyst, a3_time_trig, if_a2_th, irat_a2_tds_th, irat_a2_gsm_th, irat_a2_errdef_th, update_time, update_user, record_time from mb_sys_ltecell_param where (cell_glb_id = #value#)
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbSysLtecellParamDAO.insertLtecellParam -->
+    <insert id="MS-MB-SYS-LTECELL-PARAM-INSERT-LTECELL-PARAM">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-SYS-LTECELL-PARAM-INSERT-LTECELL-PARAM*/ into mb_sys_ltecell_param(cell_glb_id,cell_id,cell_name,operastate,csfb,drx,qci6_dur_len,qci7_dur_len,qci8_dur_len,qci9_dur_len,qci6_cont_timer,qci7_cont_timer,qci8_cont_timer,qci9_cont_timer,qci6_notrig_timer,qci7_notrig_timer,qci8_notrig_timer,qci9_notrig_timer,qci6_waitresend_timer,qci7_waitresend_timer,qci8_waitresend_timer,qci9_waitresend_timer,qci6_shortdur_len,qci7_shortdur_len,qci8_shortdur_len,qci9_shortdur_len,qci6_shortdur_timer,qci7_shortdur_timer,qci8_shortdur_timer,qci9_shortdur_timer,rrc_noact_timer,def_paging_dur,rf_sig_power,pdsch_rs_ratio,pa,init_recv_power,preamble_max_count,power_inc_step,acc_ue_max_power,up_pucch_power_ctrl,pucch_optimal_power,up_pusch_power_ctrl,pathloss_comp_param,instant_optimal_power,acc_min_level,cofreq_meas_start_th,q_offsetcell,q_hyst,a3_offset_hyst,a3_hyst,a3_time_trig,if_a2_th,irat_a2_tds_th,irat_a2_gsm_th,irat_a2_errdef_th,update_time,update_user,record_time) values (#cellGlbId#, #cellId#, #cellName#, #operastate#, #csfb#, #drx#, #qci6DurLen#, #qci7DurLen#, #qci8DurLen#, #qci9DurLen#, #qci6ContTimer#, #qci7ContTimer#, #qci8ContTimer#, #qci9ContTimer#, #qci6NotrigTimer#, #qci7NotrigTimer#, #qci8NotrigTimer#, #qci9NotrigTimer#, #qci6WaitresendTimer#, #qci7WaitresendTimer#, #qci8WaitresendTimer#, #qci9WaitresendTimer#, #qci6ShortdurLen#, #qci7ShortdurLen#, #qci8ShortdurLen#, #qci9ShortdurLen#, #qci6ShortdurTimer#, #qci7ShortdurTimer#, #qci8ShortdurTimer#, #qci9ShortdurTimer#, #rrcNoactTimer#, #defPagingDur#, #rfSigPower#, #pdschRsRatio#, #pa#, #initRecvPower#, #preambleMaxCount#, #powerIncStep#, #accUeMaxPower#, #upPucchPowerCtrl#, #pucchOptimalPower#, #upPuschPowerCtrl#, #pathlossCompParam#, #instantOptimalPower#, #accMinLevel#, #cofreqMeasStartTh#, #QOffsetcell#, #QHyst#, #a3OffsetHyst#, #a3Hyst#, #a3TimeTrig#, #ifA2Th#, #iratA2TdsTh#, #iratA2GsmTh#, #iratA2ErrdefTh#, sysdate, #updateUser#, #recordTime#)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbSysLtecellParamDAO.updateLtecellParam -->
+    <update id="MS-MB-SYS-LTECELL-PARAM-UPDATE-LTECELL-PARAM">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-SYS-LTECELL-PARAM-UPDATE-LTECELL-PARAM*/ mb_mr_record set cell_glb_id=#cellGlbId#, cell_id=#cellId#, cell_name=#cellName#, operastate=#operastate#, csfb=#csfb#, drx=#drx#, qci6_dur_len=#qci6DurLen#, qci7_dur_len=#qci7DurLen#, qci8_dur_len=#qci8DurLen#, qci9_dur_len=#qci9DurLen#, qci6_cont_timer=#qci6ContTimer#, qci7_cont_timer=#qci7ContTimer#, qci8_cont_timer=#qci8ContTimer#, qci9_cont_timer=#qci9ContTimer#, qci6_notrig_timer=#qci6NotrigTimer#, qci7_notrig_timer=#qci7NotrigTimer#, qci8_notrig_timer=#qci8NotrigTimer#, qci9_notrig_timer=#qci9NotrigTimer#, qci6_waitresend_timer=#qci6WaitresendTimer#, qci7_waitresend_timer=#qci7WaitresendTimer#, qci8_waitresend_timer=#qci8WaitresendTimer#, qci9_waitresend_timer=#qci9WaitresendTimer#, qci6_shortdur_len=#qci6ShortdurLen#, qci7_shortdur_len=#qci7ShortdurLen#, qci8_shortdur_len=#qci8ShortdurLen#, qci9_shortdur_len=#qci9ShortdurLen#, qci6_shortdur_timer=#qci6ShortdurTimer#, qci7_shortdur_timer=#qci7ShortdurTimer#, qci8_shortdur_timer=#qci8ShortdurTimer#, qci9_shortdur_timer=#qci9ShortdurTimer#, rrc_noact_timer=#rrcNoactTimer#, def_paging_dur=#defPagingDur#, rf_sig_power=#rfSigPower#, pdsch_rs_ratio=#pdschRsRatio#, pa=#pa#, init_recv_power=#initRecvPower#, preamble_max_count=#preambleMaxCount#, power_inc_step=#powerIncStep#, acc_ue_max_power=#accUeMaxPower#, up_pucch_power_ctrl=#upPucchPowerCtrl#, pucch_optimal_power=#pucchOptimalPower#, up_pusch_power_ctrl=#upPuschPowerCtrl#, pathloss_comp_param=#pathlossCompParam#, instant_optimal_power=#instantOptimalPower#, acc_min_level=#accMinLevel#, cofreq_meas_start_th=#cofreqMeasStartTh#, q_offsetcell=#QOffsetcell#, q_hyst=#QHyst#, a3_offset_hyst=#a3OffsetHyst#, a3_hyst=#a3Hyst#, a3_time_trig=#a3TimeTrig#, if_a2_th=#ifA2Th#, irat_a2_tds_th=#iratA2TdsTh#, irat_a2_gsm_th=#iratA2GsmTh#, irat_a2_errdef_th=#iratA2ErrdefTh#, update_time=#updateTime#, update_user=#updateUser#, record_time=#recordTime# where (cell_glb_id = #cellGlbId2#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbSysLtecellParamDAO.deleteLtecellParam -->
+    <delete id="MS-MB-SYS-LTECELL-PARAM-DELETE-LTECELL-PARAM">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-SYS-LTECELL-PARAM-DELETE-LTECELL-PARAM*/ from mb_sys_ltecell_param where (cell_glb_id = #value#)
+    ]]>
+    </delete>
+
+</sqlMap>

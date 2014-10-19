@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_SYS_TDSSITE_INFO -->
+    <resultMap id="RM-MB-SYS-TDSSITE-INFO" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbSysTdssiteInfoDO">
+        <result property="rncId" column="RNC_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="siteOid" column="SITE_OID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="siteName" column="SITE_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="lac" column="LAC" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="vendor" column="VENDOR" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="longitude" column="LONGITUDE" javaType="long" jdbcType="NUMBER" nullValue="0"/>
+        <result property="latitude" column="LATITUDE" javaType="long" jdbcType="NUMBER" nullValue="0"/>
+        <result property="netgrid" column="NETGRID" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="environ" column="ENVIRON" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="freqBand" column="FREQ_BAND" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="coverType" column="COVER_TYPE" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+        <result property="recordTime" column="RECORD_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="updateTime" column="UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="updateUser" column="UPDATE_USER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="siteGlbId" column="SITE_GLB_ID" javaType="int" jdbcType="NUMBER" nullValue="0"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbSysTdssiteInfoDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbSysTdssiteInfoDAO.getRNCByRncId -->
+    <select id="MS-MB-SYS-TDSSITE-INFO-GET-RNC-BY-RNC-ID" resultMap="RM-MB-SYS-TDSSITE-INFO">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-SYS-TDSSITE-INFO-GET-RNC-BY-RNC-ID*/ rnc_id, site_oid, site_name, lac, vendor, longitude, latitude, netgrid, environ, freq_band, cover_type, record_time, update_time, update_user, site_glb_id from mb_sys_tdssite_info where (rnc_id = #value#)
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbSysTdssiteInfoDAO.insertRNC -->
+    <insert id="MS-MB-SYS-TDSSITE-INFO-INSERT-RNC">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-SYS-TDSSITE-INFO-INSERT-RNC*/ into mb_sys_tdssite_info(rnc_id,site_oid,site_name,lac,vendor,longitude,latitude,netgrid,environ,freq_band,cover_type,record_time,update_time,update_user,site_glb_id) values (#rncId#, #siteOid#, #siteName#, #lac#, #vendor#, #longitude#, #latitude#, #netgrid#, #environ#, #freqBand#, #coverType#, sysdate, sysdate, #updateUser#, #siteGlbId#)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbSysTdssiteInfoDAO.updateRNC -->
+    <update id="MS-MB-SYS-TDSSITE-INFO-UPDATE-RNC">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-SYS-TDSSITE-INFO-UPDATE-RNC*/ mb_sys_tdssite_info set rnc_id=#rncId#, site_oid=#siteOid#, site_name=#siteName#, lac=#lac#, vendor=#vendor#, longitude=#longitude#, latitude=#latitude#, netgrid=#netgrid#, environ=#environ#, freq_band=#freqBand#, cover_type=#coverType#, update_user=#updateUser#, site_glb_id=#siteGlbId# where (rnc_id = #rncId2#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbSysTdssiteInfoDAO.deleteRNC -->
+    <delete id="MS-MB-SYS-TDSSITE-INFO-DELETE-RNC">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-SYS-TDSSITE-INFO-DELETE-RNC*/ from mb_sys_tdssite_info where (rnc_id = #value#)
+    ]]>
+    </delete>
+
+</sqlMap>

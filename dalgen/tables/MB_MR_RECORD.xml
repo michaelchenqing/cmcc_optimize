@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="mb_mr_record" dummyPk="mmegroupid">
+
+	<!-- 通过用户ID查询mr详情 -->
+	<operation name="getMRByLoginId" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    select mmegroupid,mmecode,mmeues2apid,cellid,test_date,test_time,eventtype,mrltescrsrp,mrltencrsrp,mrltescrsrq,mrltencrsrq,mrltescrttd,mrltescphr,mrltescrip,mrltescaoa,mrltescplrdlqcix,freq_band,mrltescsinrul,mrltescearfcn,mrltescpci from mb_mr_record where mmegroupid=?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 插入新mr记录 -->
+	<operation name="insertMr" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into mb_mr_record 
+	  (mmegroupid,mmecode,mmeues2apid,cellid,test_date,test_time,eventtype,mrltescrsrp,mrltencrsrp,mrltescrsrq,mrltencrsrq,mrltescrttd,mrltescphr,mrltescrip,mrltescaoa,mrltescplrdlqcix,freq_band,mrltescsinrul,mrltescearfcn,mrltescpci)
+		values
+	  (?,?,?,?,sysdate,sysdate,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 修改mr -->
+	<operation name="updateMR" paramtype="object">
+		<sql>
+			<![CDATA[
+			    update mb_mr_record
+				   set DAY = sysdate,
+				       CELLID = ?,
+				       EVENTTYPE = '1' 
+				  where MMEGROUPID = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 删除用户 -->
+	<operation name="deleteMRRecord" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    delete mb_mr_record where MMEGROUPID = ?
+			]]>
+		</sql>
+	</operation>
+	
+	<!-- 分页查询，直接通过sqlmap指定ibatis -->
+	<operation name="getMultiMrRecord" multiplicity="many" paging="true">
+		<extraparams>
+			<param name="mmegroupid" javatype="java.lang.String" />
+		</extraparams>
+		<extraparams>
+			<param name="cellid" javatype="java.lang.String" />
+		</extraparams>
+		<extraparams>
+			<param name="eventtype" javatype="java.lang.String" />
+		</extraparams>
+		
+		<!-- sql中是验证使用的示例sql，有sqlmap时，优先使用sqlmap -->
+		<sql><![CDATA[
+			select mmegroupid,mmecode,mmeues2apid,cellid,test_date,test_time,eventtype,mrltescrsrp,mrltencrsrp,mrltescrsrq,mrltencrsrq,mrltescrttd,mrltescphr,mrltescrip,mrltescaoa,mrltescplrdlqcix,freq_band,mrltescsinrul,mrltescearfcn,mrltescpci from mb_mr_record where mmegroupid='1' 
+			order by test_time desc
+            ]]>
+      	</sql>
+		<sqlmap><!-- cdata内部使用${cdata-satrt}和${cdata-end}标记，可不使用 -->
+			<![CDATA[
+			    select mmegroupid,mmecode,mmeues2apid,cellid,test_date,test_time,eventtype,mrltescrsrp,mrltencrsrp,mrltescrsrq,mrltencrsrq,mrltescrttd,mrltescphr,mrltescrip,mrltescaoa,mrltescplrdlqcix,freq_band,mrltescsinrul,mrltescearfcn,mrltescpci from mb_mr_record where mmegroupid=#mmegroupid#  
+				<dynamic>
+					<isNotEmpty prepend="AND" property="cellid">
+		                	cellid = #cellid#
+		            </isNotEmpty>
+		            <isNotNull prepend="AND" property="eventtype">
+		                	eventtype like '%'||#${eventtype}#||'%'
+		            </isNotNull>
+				</dynamic>
+				 order by test_time desc 
+			]]>
+		</sqlmap>
+	</operation>
+	
+</table>	

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ========================================================== -->
+<!-- 自定义扩展：通用sql存入，用于ftp文件映射 -->
+<!-- ========================================================== -->
+
+<!-- @author gaoqs -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+
+	<!-- 动态执行sql插入 -->
+	<insert id="CAS-SYS-COMMON-INSERT"  parameterClass="java.util.Map">
+	    <![CDATA[
+	        insert into  $tableName$ 
+	    ]]>
+	    <!-- 列 -->
+		<dynamic prepend=" ">
+			<isNotEmpty prepend="," property="columnList">
+				<iterate conjunction="," open=" (" close=") " property="columnList">
+					$columnList[]$
+				</iterate>
+			</isNotEmpty>
+		</dynamic>
+		<![CDATA[
+	       values 
+	    ]]>
+	    <!-- 值 -->
+	    <dynamic prepend=" ">
+			<isNotEmpty prepend="," property="valueList">
+				<iterate conjunction="," open=" (" close=") " property="valueList">
+					#valueList[]#
+				</iterate>
+			</isNotEmpty>
+		</dynamic>
+		
+	</insert>
+
+</sqlMap>

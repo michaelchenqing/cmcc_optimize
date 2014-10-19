@@ -1,0 +1,797 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ========================================================== -->
+<!-- 自定义扩展：自定义sql查询，返回List<Map<String,Object>> -->
+<!-- ========================================================== -->
+
+<!-- @author gaoqs -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+
+	<!-- 动态执行sql插入 -->
+	<select id="TEST-QUERY-SQL-LIST-WITH-MAPPING"  parameterClass="java.util.Map" resultClass="java.util.HashMap">
+	   select mmegroupid,mmecode,mmeues2apid,cellid,test_date,test_time,eventtype,mrltescrsrp,mrltencrsrp,mrltescrsrq,mrltencrsrq,
+	   mrltescrttd,mrltescphr,mrltescrip,mrltescaoa,mrltescplrdlqcix,freq_band,mrltescsinrul,mrltescearfcn,mrltescpci from mb_mr_record where mmegroupid=#mmegroupid#
+	</select>
+
+	<!-- 现网工参查询分页 -->
+	 <select id="MULTI-QUERY-PLANENBPARAMETER-SQL-LIST-WITH-MAPPING-PAGING"  parameterClass="java.util.Map" resultClass="java.util.HashMap">
+	 
+      select city,uids,grid,cgi,phase,tilt,azimuth,etilt,height,lon,lat,workfreq,ts,mindis,covertype from ( select row_.*, rownum rownum_  from ( 
+        select 
+         gp.city           city,
+         ci.cell_id    uids,
+         gp.netgrid        grid,
+         ci.cgi  cgi,
+         si.project_period phase,
+         cr.downtilt       tilt,
+         cr.azimuth        azimuth,
+         cr.e_downtilt     etilt,
+         cr.height         height,
+         si.longitude      lon,
+         si.latitude       lat,
+         si.freq_band      workfreq,
+         cr.record_time    ts,
+         ci.min_distance	mindis,
+         si.cover_type		covertype
+		from    
+		    (select distinct cc.min_distance,cc.cgi,cc.cell_glb_id,cc.enodeb_glb_id,cc.cell_id   from  MB_SYS_LTECELL_INFO cc
+		     where cc.record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss')  and cc.record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')  
+		    ) ci 
+		    left join  
+		    (select distinct longitude,latitude,freq_band,project_period,enodeb_glb_id,cover_type from   mb_sys_ltesite_info  si 
+		    where  si.record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss')  and si.record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')  
+		    )  si on ci.enodeb_glb_id = si.enodeb_glb_id  
+		    left join  
+		    (select distinct city,netgrid,enodeb_glb_id from mb_sys_gis_permission gp  
+		    where  gp.record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss')  and gp.record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss') 
+			<dynamic>
+				<isNotEmpty prepend="AND" property="list">
+					city in         
+					<iterate close=")" open="(" conjunction="," property="list">
+					     #list[]#
+					</iterate>
+				</isNotEmpty>
+			</dynamic> 
+		    )  gp on ci.enodeb_glb_id = gp.enodeb_glb_id 
+		    left join  mb_sys_ltecell_rf cr  on ci.cell_glb_id=cr.cell_glb_id and cr.record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss')  
+		    and cr.record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')  
+		 ) row_ ) where rownum_ &gt; #startRow#  and rownum_ &lt;= #endRow#
+    </select>
+    
+	<!-- 现网工参总数查询 -->
+    <select id="MULTI-QUERY-PLANENBPARAMETER-SQL-LIST-WITH-MAPPING-COUNTS" resultClass="int">
+        select  count(*) from    
+		    (select distinct cc.min_distance,cc.cgi,cc.cell_glb_id,cc.enodeb_glb_id,cc.cell_id   from  MB_SYS_LTECELL_INFO cc
+		     where cc.record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss')  and cc.record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')  
+		    ) ci 
+		    left join  
+		    (select distinct longitude,latitude,freq_band,project_period,enodeb_glb_id from   mb_sys_ltesite_info  si 
+		    where  si.record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss')  and si.record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')  
+		    )  si on ci.enodeb_glb_id = si.enodeb_glb_id  
+		    left join  
+		    (select distinct city,netgrid,enodeb_glb_id from mb_sys_gis_permission gp  
+		    where  gp.record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss')  and gp.record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss') 
+			<dynamic>
+				<isNotEmpty prepend="AND" property="list">
+					city in         
+					<iterate close=")" open="(" conjunction="," property="list">
+					     #list[]#
+					</iterate>
+				</isNotEmpty>
+			</dynamic> 
+		    )  gp on ci.enodeb_glb_id = gp.enodeb_glb_id 
+		    left join  mb_sys_ltecell_rf cr  on ci.cell_glb_id=cr.cell_glb_id and cr.record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss')  
+		    and cr.record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')  		 
+    </select>
+    
+	<!-- App 7天在线 -->
+	 <select id="MULTI-QUERY-PLAN7DAYSONLINE-SQL-LIST-WITH-MAPPING"  parameterClass="java.util.Map" resultClass="java.util.HashMap">
+select a.record_time ts,
+       a.city_name city,
+       nvl(a.PROJECTPHASE,'空') phase,
+       nvl(plansite_count, 0) planenbscnt,
+       nvl(onlinesite_count, 0) online7cnt,
+       case
+         when plansite_count = 0 then
+          0
+         else
+          nvl(round(onlinesite_count / plansite_count, 2) * 100, 0)
+       end ratio
+  from (select record_time,
+               city_name,
+               PROJECTPHASE,
+               count(PENODEBID) plansite_count
+          from (select record_time,
+                       city_name,
+                       case
+                         when PROJECTPHASE like '%一期%' then
+                          '一期'
+                         when PROJECTPHASE like '%二期%' then
+                          '二期'
+                         when PROJECTPHASE is null then
+                          '未规划'
+                         else
+                          PROJECTPHASE
+                       end PROJECTPHASE,
+                       PENODEBID
+                  from mb_plan_ltesite_info)
+         group by record_time, city_name, PROJECTPHASE) a,(
+         select record_time,city,PROJECT_period,sum(onlinesite_count) onlinesite_count from (
+       (select record_time,
+               city,
+                 case
+                         when PROJECT_period like '%一期%' then
+                          '一期'
+                         when PROJECT_period like '%二期%' then
+                          '二期'
+                         when PROJECT_period is null then
+                          '未规划'
+                         else
+                          PROJECT_period
+                       end PROJECT_period,     
+               count(PENODEBID) onlinesite_count
+          from  mb_plan_7days_online   
+  
+         where online_mark7days = 1
+         group by record_time, city, PROJECT_period))group by  record_time,city,PROJECT_period )  b
+ where a.record_time(+) = b.record_time
+   and a.city_name(+) = b.city
+   and a.PROJECTPHASE(+) = b.PROJECT_period 
+   and a.record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and a.record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		<dynamic>
+			<isNotEmpty prepend="AND" property="list">
+				a.city_name in         
+				<iterate close=")" open="(" conjunction="," property="list">
+					#list[]#
+				</iterate>
+			</isNotEmpty>
+		</dynamic>
+    </select>
+    
+    
+	<!-- 现网工参基站信息查询分页 -->
+	 <select id="MULTI-QUERY-NETWORKPARAMETER-SQL-LIST-WITH-MAPPING-PAGING"  parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		select gid, enbid, name, tac, vendor, prov, city, town, grid, phase, lon, lat, mindis, singlepass, covertype, env, workfreq, ts,regiontype
+		  from (select row_.*, rownum rownum_
+		          from (select si.enodeb_glb_id  gid,
+		                       si.enodeb_id      enbid,
+		                       si.enodeb_name    name,
+		                       si.tac            tac,
+		                       si.vendor         vendor,
+		                       gp.province       prov,
+		                       gp.city           city,
+		                       gp.county         town,
+		                       gp.netgrid        grid,
+		                       si.project_period phase,
+		                       si.longitude    lon,
+		                       si.latitude     lat,
+		                       ci.min_distance mindis,
+		                       si.single_pass  singlepass,
+		                       si.cover_type   covertype,
+		                       si.environ      env,
+		                       si.freq_band    workfreq,
+		                       gp.record_time  ts,
+		                       si.regiontype    regiontype
+		                  from (select distinct cc.min_distance, cc.enodeb_glb_id from mb_sys_ltecell_info cc
+		                         where cc.record_time &gt;= to_date(#startTime#, 'YYYY-MM-DD HH24:mi:ss') and cc.record_time &lt; to_date(#endTime#, 'YYYY-MM-DD HH24:mi:ss')) ci
+		                  left join (select distinct si.enodeb_glb_id,
+		                                            si.enodeb_id,
+		                                            si.enodeb_name,
+		                                            si.tac,
+		                                            si.vendor,
+		                                            si.project_period,
+		                                            si.longitude,
+		                                            si.latitude,
+		                                            si.single_pass,
+		                                            si.cover_type,
+		                                            si.environ,
+		                                            si.freq_band,
+		                                            si.regiontype
+		                              from mb_sys_ltesite_info si where si.record_time &gt;= to_date(#startTime#, 'YYYY-MM-DD HH24:mi:ss') and si.record_time &lt; to_date(#endTime#, 'YYYY-MM-DD HH24:mi:ss')) si on ci.enodeb_glb_id = si.enodeb_glb_id
+		                  left join (select gp.enodeb_glb_id,
+		                                   gp.province,
+		                                   gp.city,
+		                                   gp.county,
+		                                   gp.netgrid,
+		                                   gp.record_time
+		                              from mb_sys_gis_permission gp where gp.record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and gp.record_time &lt; to_date(#endTime#, 'YYYY-MM-DD HH24:mi:ss')
+										<dynamic>
+											<isNotEmpty prepend="AND" property="list">
+												gp.city in         
+												<iterate close=")" open="(" conjunction="," property="list">
+												     #list[]#
+												</iterate>
+											</isNotEmpty>
+										</dynamic>		                              
+		                               )gp on ci.enodeb_glb_id = gp.enodeb_glb_id) row_)
+		 where rownum_ &gt; #startRow# and rownum_ &lt;= #endRow#
+    </select>
+	<!-- 现网工参基站信息总数查询 -->
+    <select id="MULTI-QUERY-NETWORKPARAMETER-SQL-LIST-WITH-MAPPING-COUNTS" resultClass="int">
+		select count(*)
+		  from (select si.enodeb_glb_id  gid,si.enodeb_id      enbid,si.enodeb_name    name,si.tac            tac,si.vendor         vendor,gp.province       prov,gp.city           city,gp.county         town,gp.netgrid        grid,si.project_period phase,si.longitude      lon,si.latitude       lat,ci.min_distance   mindis,si.single_pass    singlepass,si.cover_type     covertype,si.environ        env,si.freq_band      workfreq,gp.record_time    ts，si.regiontype    regiontype from (select distinct cc.min_distance, cc.enodeb_glb_id
+		   from mb_sys_ltecell_info cc where cc.record_time &gt;= to_date(#startTime#, 'YYYY-MM-DD HH24:mi:ss') and cc.record_time &lt; to_date(#endTime#, 'YYYY-MM-DD HH24:mi:ss')) ci 
+		   left join (select distinct si.enodeb_glb_id,si.enodeb_id,si.enodeb_name,si.tac,si.vendor,si.project_period,si.longitude,si.latitude,si.single_pass,si.cover_type,si.environ,si.freq_band,si.regiontype 
+		 from mb_sys_ltesite_info si where si.record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and si.record_time &lt; to_date(#endTime#, 'YYYY-MM-DD HH24:mi:ss')) si on ci.enodeb_glb_id = si.enodeb_glb_id
+		    left join (select distinct gp.enodeb_glb_id,gp.province,gp.city,gp.county,gp.netgrid,gp.record_time
+		 from mb_sys_gis_permission gp where gp.record_time &gt;= to_date(#startTime#, 'YYYY-MM-DD HH24:mi:ss') and gp.record_time &lt; to_date(#endTime#, 'YYYY-MM-DD HH24:mi:ss')
+			<dynamic>
+				<isNotEmpty prepend="AND" property="list">
+					gp.city in         
+					<iterate close=")" open="(" conjunction="," property="list">
+					     #list[]#
+					</iterate>
+				</isNotEmpty>
+			</dynamic>
+		 ) gp on ci.enodeb_glb_id = gp.enodeb_glb_id)		 
+    </select>
+
+
+	<!-- 现网工参小区信息查询分页 -->
+	 <select id="MULTI-QUERY-NETCELLINFO-SQL-LIST-WITH-MAPPING-PAGING"  parameterClass="java.util.Map" resultClass="java.util.HashMap">
+		 select gid,genbid,enbid,ci,cname,pci,cgi,earfcn,rspower,sfassign,specsfr,alti,azimuth,tilt,etilt,mtilt,height,anttype,fake,ts,lon,lat,gid,pa
+		 from ( select row_.*, rownum rownum_  from ( 
+		select cr.altitude alti, cr.azimuth azimuth, cr.downtilt tilt, cr.e_downtilt etilt, cr.m_downtilt mtilt, cr.height height,
+	       cr.fake_antenna fake, cr.antenna anttype, ci.cell_glb_id gid, ci.enodeb_glb_id genbid, ci.cell_id ci, ci.cell_name cname,
+	       ci.pci pci,ci.cgi cgi, ci.earfcn earfcn, ci.rf_power rspower, ci.sfassign sfassign, ci.sepcsfpattern specsfr,
+	       ci.record_time ts, si.enodeb_id enbid, si.longitude lon, si.latitude lat,pp.pa
+		 from (select distinct cc.cell_glb_id, cc.enodeb_glb_id, cc.cell_id, cc.cell_name, cc.pci, cc.cgi, cc.earfcn, cc.rf_power, cc.sfassign, cc.sepcsfpattern, cc.record_time
+		 from MB_SYS_LTECELL_INFO cc where cc.record_time &gt;= to_date(#startTime#, 'YYYY-MM-DD HH24:mi:ss') and cc.record_time &lt; to_date(#endTime#, 'YYYY-MM-DD HH24:mi:ss')) ci
+		 left join ( select cp.pa,cp.cell_glb_id from mb_sys_ltecell_param cp where cp.record_time &gt;=to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and cp.record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')) pp on pp.cell_glb_id=ci.cell_glb_id 
+		 left join (select distinct si.enodeb_id, si.enodeb_glb_id, si.longitude, si.latitude
+		 from mb_sys_ltesite_info si where si.record_time &gt;= to_date(#startTime#, 'YYYY-MM-DD HH24:mi:ss') and si.record_time &lt; to_date(#endTime#, 'YYYY-MM-DD HH24:mi:ss')) si on ci.enodeb_glb_id = si.enodeb_glb_id
+		 left join (select distinct city, netgrid, enodeb_glb_id
+		 from mb_sys_gis_permission gp where gp.record_time &gt;= to_date(#startTime#, 'YYYY-MM-DD HH24:mi:ss') and gp.record_time &lt; to_date(#endTime#, 'YYYY-MM-DD HH24:mi:ss')) gp on ci.enodeb_glb_id = gp.enodeb_glb_id
+			<dynamic>
+				<isNotEmpty prepend="AND" property="list">
+					gp.city in         
+					<iterate close=")" open="(" conjunction="," property="list">
+					     #list[]#
+					</iterate>
+				</isNotEmpty>
+			</dynamic>
+		 left join mb_sys_ltecell_rf cr on ci.cell_glb_id = cr.cell_glb_id and cr.record_time &gt;= to_date(#startTime#, 'YYYY-MM-DD HH24:mi:ss') and cr.record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		 ) row_ ) where rownum_ &gt; #startRow#  and rownum_ &lt;= #endRow#
+    </select>
+    
+	<!-- 现网工参小区信息总数查询 -->
+    <select id="MULTI-QUERY-NETCELLINFO-SQL-LIST-WITH-MAPPING-COUNTS" resultClass="int">
+        select  count(*) from (
+		select cr.altitude alti, cr.azimuth azimuth, cr.downtilt tilt, cr.e_downtilt etilt, cr.m_downtilt mtilt, cr.height height,
+	       cr.fake_antenna fake, cr.antenna anttype, ci.cell_glb_id gid, ci.enodeb_glb_id genbid, ci.cell_id ci, ci.cell_name cname,
+	       ci.pci pci,ci.cgi cgi, ci.earfcn earfcn, ci.rf_power rspower, ci.sfassign sfassign, ci.sepcsfpattern specsfr,
+	       ci.record_time ts, si.enodeb_id enbid, si.enodeb_glb_id, si.longitude lon, si.latitude lat,pp.pa pa
+		 from (select distinct cc.cell_glb_id, cc.enodeb_glb_id, cc.cell_id, cc.cell_name, cc.pci, cc.cgi, cc.earfcn, cc.rf_power, cc.sfassign, cc.sepcsfpattern, cc.record_time
+		 from MB_SYS_LTECELL_INFO cc where cc.record_time &gt;= to_date(#startTime#, 'YYYY-MM-DD HH24:mi:ss') and cc.record_time &lt; to_date(#endTime#, 'YYYY-MM-DD HH24:mi:ss')) ci
+		 left join ( select cp.pa,cp.cell_glb_id from mb_sys_ltecell_param cp where cp.record_time &gt;=to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and cp.record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')) pp on pp.cell_glb_id=ci.cell_glb_id
+		 left join (select distinct si.enodeb_id, si.enodeb_glb_id, si.longitude, si.latitude
+		 from mb_sys_ltesite_info si where si.record_time &gt;= to_date(#startTime#, 'YYYY-MM-DD HH24:mi:ss') and si.record_time &lt; to_date(#endTime#, 'YYYY-MM-DD HH24:mi:ss')) si on ci.enodeb_glb_id = si.enodeb_glb_id
+		 left join (select distinct city, netgrid, enodeb_glb_id
+		 from mb_sys_gis_permission gp where gp.record_time &gt;= to_date(#startTime#, 'YYYY-MM-DD HH24:mi:ss') and gp.record_time &lt; to_date(#endTime#, 'YYYY-MM-DD HH24:mi:ss')) gp on ci.enodeb_glb_id = gp.enodeb_glb_id
+			<dynamic>
+				<isNotEmpty prepend="AND" property="list">
+					gp.city in         
+					<iterate close=")" open="(" conjunction="," property="list">
+					     #list[]#
+					</iterate>
+				</isNotEmpty>
+			</dynamic>
+		 left join mb_sys_ltecell_rf cr on ci.cell_glb_id = cr.cell_glb_id and cr.record_time &gt;= to_date(#startTime#, 'YYYY-MM-DD HH24:mi:ss') and cr.record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		)  		 
+    </select>
+	<!-- Report 数据概要-->
+	 <select id="MULTI-QUERY-DATAABSTRACT-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+select c.type,
+           nvl(c.allnum, 0) allnum,
+           nvl(days7, 0) days7,
+           nvl(today, 0) today
+      from (select type, round(sum(nvl(clean_data_num, 0)) / 10000, 0) today
+              from mb_data_report_info
+             where type in ('规划工参', '现网工参', '话统' )
+               and record_time &gt;= trunc(sysdate-1)
+               and record_time &lt; trunc(sysdate + 1)
+             group by type) a,
+           (select type, round(sum(nvl(clean_data_num, 0)) / 10000, 0) days7
+              from mb_data_report_info
+             where type in ('规划工参', '现网工参', '话统')
+                   and record_time &lt;= trunc(sysdate + 1)
+		           and record_time &gt;= trunc(sysdate - 7)
+                
+             group by type) b,
+           (select type, round(sum(nvl(clean_data_num, 0)) / 10000, 0) allnum
+              from mb_data_report_info
+             where type in ('规划工参', '现网工参', '话统')
+             group by type) c
+     where c.type = a.type(+)
+       and c.type = b.type(+)
+    union all
+    select c.type,
+           nvl(c.allnum, 0) allsize_M,
+           nvl(days7, 0) days7,
+           nvl（today,
+           0） today
+      from (select type, round(sum(nvl(original_file_size, 0)) , 0) today
+              from mb_bin_process_info
+             where type in ('MRO','路测')
+             and record_time &gt;= trunc(sysdate-1)
+		           and record_time &lt; trunc(sysdate + 1)
+             group by type) a,
+           (select type, round(sum(nvl(original_file_size, 0)), 0) days7
+              from mb_bin_process_info
+             where type in ('MRO','路测')
+                 and record_time &lt;= trunc(sysdate + 1)
+		           and record_time &gt;= trunc(sysdate - 7)
+                
+             group by type) b,
+           (select type, round(sum(nvl(original_file_size, 0)) , 0) allnum
+              from mb_bin_process_info
+             where type in ('MRO','路测')
+             group by type) c
+     where c.type = a.type(+)
+       and c.type = b.type(+)
+    union all 
+       select c.type,
+           nvl(c.allnum, 0) allsize_M,
+           nvl(days7, 0) days7,
+           nvl(today, 0) today
+      from (select type, round(sum(nvl(original_file_size,0)) / 1024, 0) today
+              from mb_bin_process_info
+             where type in ('信令')
+               and record_time &gt;= trunc(sysdate-1)
+               and record_time &lt; trunc(sysdate + 1)
+             group by type) a,
+           (select type, round(sum(nvl(original_file_size,0)) /  1024, 0) days7
+              from mb_bin_process_info
+             where type in ('信令')
+                 and record_time &lt;= trunc(sysdate + 1)
+		           and record_time &gt;= trunc(sysdate - 7) 
+                
+             group by type) b,
+           (select type, round(sum(nvl(original_file_size,0)) /  1024, 0) allnum
+              from mb_bin_process_info
+             where type in ('信令')    
+             group by type) c
+     where c.type = a.type(+)
+       and c.type = b.type(+)
+    </select>
+	<!-- Report  数据质量分析-->
+	 <select id="MULTI-QUERY-DATAANALYSIS-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+	 select * from (
+		select to_char(record_time,'yyyymmdd') record_time,type,case when sum(nvl(original_record_num,0)) =0 then 0 
+		else round(sum(nvl(clean_data_num,0))/sum(nvl(original_record_num,0))*100) end input_rate, case when sum(nvl(clean_data_num,0)) =0
+		 then 0  else round(sum(nvl(legal_data_num,0))/sum(nvl(clean_data_num,0))*100) end succ_rate from mb_data_report_info 
+		 where record_time &gt;=trunc(sysdate-14) and record_time &lt; trunc(sysdate+1) group by to_char(record_time,'yyyymmdd'),type 
+	) order by record_time
+	</select>
+	<!-- Report  数据总量-->
+	 <select id="MULTI-QUERY-DATAFILESIZE-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+select round(sum(sizes)) fs, type
+  from (select to_char(record_time, 'yyyymmdd'),
+               type,
+               max(original_file_size) sizes
+          from mb_data_report_info
+         where type in ('规划工参', '现网工参')
+         group by to_char(record_time, 'yyyymmdd'), type)
+ group by type
+union all
+select round(sum(sizes)) MB, type
+  from (select to_char(record_time, 'yyyymmdd hh24'),
+               type,
+               max(original_file_size) sizes
+          from mb_data_report_info
+         where type in ('话统')
+         group by to_char(record_time, 'yyyymmdd hh24'), type)
+ group by type
+union all
+select round(sum(sizes)) MB, type
+  from (select to_char(record_time, 'yyyymmdd hh24'),
+               type,
+               sum(original_file_size) / 1024  sizes
+          from mb_bin_process_info
+         where type in ('信令')
+         group by to_char(record_time, 'yyyymmdd hh24'), type)
+ group by type
+union all
+select round(sum(sizes)) MB, type
+  from (select to_char(record_time, 'yyyymmdd hh24'),
+               type,
+               sum(original_file_size) sizes
+          from mb_bin_process_info
+         where type in ('MRO', '路测')
+         group by to_char(record_time, 'yyyymmdd hh24'), type)
+ group by type
+	</select>
+	<!-- Report  应用支撑情况-->
+	 <select id="MULTI-QUERY-APPSTATUS-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+		select t.app_name name, max(to_char(t.api_call_time, 'yyyy/MM/dd')) time, sum(t.call_state) suc, count(1) reqs, count(distinct t.api_name) apis from mb_api_report_info t group by t.app_name  
+	</select>
+	<!-- Report  应用支撑情况-->
+	 <select id="MULTI-INSERT-APPSTATUS-SQL"  parameterClass="java.util.Map"  resultClass="int">
+		insert into mb_api_report_info (APP_NAME, API_NAME, REQUEST_API_TIME, API_CALL_TIME, CALL_STATE, CALL_IP) values (#APP_NAME#, #API_NAME#, #REQUEST_API_TIME#, #API_CALL_TIME#, #CALL_STATE#, #CALL_IP#)  
+	</select>
+	<!-- Report  数据量趋势分析-->
+	 <select id="MULTI-QUERY-DATAAMOUNT-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+	 select * from (
+select t.type ,to_char(record_time,'MM/dd') time,'' mouth, nvl(sum(t.original_record_num),0) num,case when round(max(original_file_size),0)/1024 &gt;=1 then  round(max(original_file_size),0)/1024
+else  round(max(original_file_size),0) end fs from mb_data_report_info t
+ where t.record_time &gt;=trunc(sysdate-14) 
+ and t.record_time &lt;=trunc(sysdate) and type in ('规划工参', '现网工参', '路测')
+ group by t.type , to_char(record_time,'MM/dd')
+  union all
+ select '话统' type,  record_time,'' mouth,sum(num) num,sum(0) fs from (
+select to_char(record_time,'MM/DD') record_time,max(cell_count) num,city,network_type from mb_sys_traffic_cell
+ where record_time &gt;=trunc(sysdate-14) 
+ and record_time &lt;=trunc(sysdate) group by to_char(record_time,'MM/DD'),city,network_type) group by record_time 
+ union all 
+ select type,time,data_origin, sum(num),sum(data_size_g) from (
+ select t.type ,to_char(record_time,'MM/dd') time, case when data_origin='A'  then 'CS域' when data_origin='GB' or data_origin='IUPS' or data_origin='LTE' then 'PS域' end data_origin,nvl(sum(t.original_record_num),0) num,round(sum(original_file_size)/1024/1024,0) data_size_G  from mb_bin_process_info t
+ where t.record_time &gt;=trunc(sysdate-14) 
+ and t.record_time &lt;=trunc(sysdate) and type in ('信令')
+ group by t.type , to_char(record_time,'MM/dd') ,data_origin
+ ) group by type,time,data_origin
+ union all 
+    select t.type,to_char(record_time,'MM/dd') time,'' ,nvl(sum(t.original_file_num),0) file_num,round(sum(original_file_size),0) data_size_M  from mb_bin_process_info t
+ where  type in ('MRO') and t.record_time &gt;=trunc(sysdate - 14)  and t.record_time &lt;=trunc(sysdate)
+ group by t.type , to_char(record_time,'MM/dd') ,city
+ order by type,time 
+ )  
+	</select>
+	<!-- Report  规划现网话统-->
+	 <select id="MULTI-QUERY-PLANNOWVOL-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+  select a.type,b.record_time,a.city, nvl(yestoday_num,0) yestoday_num, nvl(today_num,0) today_num from (
+ select type, to_char(record_time,'MM/DD') record_time ,city , round(sum(nvl(clean_data_num,0)))  yestoday_num
+          from mb_data_report_info
+         where type  in ('规划工参','现网工参') and  record_time&gt;= trunc(sysdate-2)  and     record_time &lt;trunc(sysdate-1) and city!='unkonw region'
+         group by type,city,to_char(record_time,'MM/DD') 
+         union all  
+     select TYPE,RECORD_TIME,CITY,SUM(NUM) FROM  (
+ select '话统' type,to_char(record_time,'MM/DD') RECORD_TIME,city,max(cell_count) num,network_type  from mb_sys_traffic_cell where record_time&gt;= trunc(sysdate-2)    and  record_time &lt; trunc(sysdate-1)  and city!='unkonw region'
+        group by to_char(record_time,'MM/DD'),city,network_type
+        ) GROUP BY  TYPE,RECORD_TIME,CITY
+ 
+  ) a left join (
+  select type, to_char(record_time,'MM/DD') record_time ,city,  round(sum(nvl(clean_data_num,0)))  today_num
+          from mb_data_report_info
+         where type in  ('规划工参','现网工参')  and  record_time&gt;= trunc(sysdate-1)   and  record_time &lt; trunc(sysdate+1)  
+         group by type,city,to_char(record_time,'MM/DD') 
+           union all  
+	select TYPE,RECORD_TIME,CITY,SUM(NUM) FROM  (
+ select '话统' type,to_char(record_time,'MM/DD') RECORD_TIME,city,max(cell_count) num,network_type  from mb_sys_traffic_cell where record_time&gt;= trunc(sysdate-1)   and  record_time &lt; trunc(sysdate)  and city!='unkonw region'
+        group by to_char(record_time,'MM/DD'),city,network_type
+        ) GROUP BY  TYPE,RECORD_TIME,CITY
+ 
+         ) b  on   a.city=b.city   and a.type =b.type      
+         order by type,city,record_time 
+	</select>
+	<!-- Report  各当天地市数据质量分析-->
+	 <select id="MULTI-QUERY-PLANNOWVOLTAB-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+ select a.record_time time,a.type,a.city,a.input_rate,a.succ_rate,
+ case when nvl(yestoday_input,0) = 0 then 0 else  round(( today_input- nvl(yestoday_input,0))/yestoday_input*100) end  down_rate  from (
+   select to_char(record_time,'yyyymmdd') record_time,type,city,case when sum(nvl(original_record_num,0)) =0 then 0 
+else round(sum(nvl(clean_data_num,0))/sum(nvl(original_record_num,0))*100) end input_rate,sum(nvl(clean_data_num,0)) today_input ,
+case when sum(nvl(clean_data_num,0)) =0 then 0 
+else round(sum(nvl(legal_data_num,0))/sum(nvl(clean_data_num,0))*100) end succ_rate
+  from mb_data_report_info where record_time &gt;=trunc(sysdate-1)  and record_time &lt;trunc(sysdate)   and city!='unkonw region'
+  and type in  ('规划工参','现网工参')  
+  group by to_char(record_time,'yyyymmdd'),type ,city 
+  ) a  left join (
+     select  type,city, sum(nvl(clean_data_num,0)) yestoday_input 
+  from mb_data_report_info where record_time &gt;=trunc(sysdate-2) and record_time &lt;trunc(sysdate-1) and city!='unkonw region'
+  and type in  ('规划工参','现网工参')
+  group by to_char(record_time,'yyyymmdd') ,type ,city  
+  ) b on   a.type=b.type and a.city=b.city 
+  union all 
+  select a.record_time,a.type,a.city,0,0,case when nvl(yestoday_num,0) =0 then 0 else round((today_num - nvl(yestoday_num,0))/yestoday_num*100) end  down_rate from (
+    select TYPE,RECORD_TIME,CITY,SUM(NUM) today_num FROM  (
+ select '话统' type,to_char(record_time,'yyyymmdd') RECORD_TIME,city,max(cell_count) num,network_type  from mb_sys_traffic_cell where record_time&gt;= trunc(sysdate-1)    and  record_time &lt; trunc(sysdate)  and city!='unkonw region'
+        group by to_char(record_time,'yyyymmdd'),city,network_type
+        ) GROUP BY  TYPE,RECORD_TIME,CITy
+        ) a, (
+    select TYPE,RECORD_TIME,CITY,SUM(NUM) yestoday_num FROM  (
+ select '话统' type,to_char(record_time,'yyyymmdd') RECORD_TIME,city,max(cell_count) num,network_type  from mb_sys_traffic_cell where record_time&gt;= trunc(sysdate-2)    and  record_time &lt; trunc(sysdate-1)  and city!='unkonw region'
+        group by to_char(record_time,'yyyymmdd'),city,network_type
+        ) GROUP BY  TYPE,RECORD_TIME,CITy
+        )  b  where a.type =b.type and a.city = b.city 
+	</select>
+    <!-- 存储过程请求参数 -->
+	<!-- Report  MRO数据量趋势分析-->
+	 <select id="MULTI-QUERY-REPORTMROAMOUNT-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+    select t.type ,city,to_char(record_time,'MM/dd') time,'' ,nvl(sum(t.original_file_num),0) file_num,round(sum(original_file_size),0) data_size_M  from mb_bin_process_info t
+ where  type in ('MRO') and t.record_time &gt;=trunc(sysdate - 14)  and t.record_time &lt;=trunc(sysdate)
+ group by t.type , to_char(record_time,'MM/dd') ,city
+ order by type,time 
+	</select>
+	<!-- Report  MRO各地市文件大小分析-->
+	 <select id="MULTI-QUERY-REPORTMROFS-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+  select a.type,a.record_time,a.city,nvl(a.yestoday_size,0) yestoday_size_M,nvl(today_size,0) today_size_M from (
+ select type, to_char(record_time,'MM/DD') record_time ,city , round(sum(nvl(original_file_size,0)))  yestoday_size
+          from mb_bin_process_info
+         where type  in ('MRO') and  record_time &gt;= trunc(sysdate - 2) and     record_time &lt; trunc(sysdate - 1) and city!='unkonw region'
+         group by type,city,to_char(record_time,'MM/DD') 
+         ) a
+ left join (
+  select type, to_char(record_time,'MM/DD') record_time ,city,  round(sum(nvl(original_file_size,0)))  today_size
+          from mb_bin_process_info
+         where type in  ('MRO')  and  record_time &gt;= trunc(sysdate - 1)  and  record_time &lt; trunc(sysdate+1)  
+         group by type,city,to_char(record_time,'MM/DD') 
+         ) b  on a.record_time = b.record_time and a.city=b.city         
+         order by type,city,record_time  
+	</select>
+	<!-- Report  MROMRO地市数据质量分析表格-->
+	 <select id="MULTI-QUERY-REPORTMROTAB-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+    select a.record_time,a.type,a.city,a.today_file_num,a.today_file_size,  
+    case when nvl(yestoday_file_size,0) = 0 then 0 else  round((today_file_size - nvl(yestoday_file_size,0))/yestoday_file_size*100) end down_rate
+      from (
+   select to_char(record_time,'yyyymmdd') record_time,type,city, sum(original_file_num) today_file_num ,sum(original_file_size) today_file_size
+ 
+  from mb_bin_process_info where record_time &gt;=trunc(sysdate-1) and record_time &lt;trunc(sysdate+1) and city&lt;&gt;'unkonw region'
+  and type in  ('MRO')
+  group by to_char(record_time,'yyyymmdd'),type ,city 
+  ) a  left join (
+     select  type,city, sum(original_file_size)  yestoday_file_size
+ 
+  from mb_bin_process_info where record_time &gt;=trunc(sysdate-2) and record_time &lt; trunc(sysdate-1) and city&lt;&gt;'unkonw region'
+  and type in  ('MRO')
+  group by to_char(record_time,'yyyymmdd'),type ,city 
+  ) b on   a.type=b.type and a.city=b.city 
+	</select>
+	<!-- Report 信令各地市数据量分析-->
+	 <select id="MULTI-QUERY-SIGNAL-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+ select type,city,time,max(decode(DATA_origin,'A',DATA_SIZE_G,null)) A,max(decode(DATA_origin,'GB',DATA_SIZE_G,null)) GB from (
+  select t.type ,city, to_char(record_time,'MM/dd') time,data_origin, round(sum(original_file_size)/1024/1024,0) data_size_G  from mb_bin_process_info t
+ where t.record_time &gt;=trunc(sysdate-1)
+ and t.record_time &lt;=trunc(sysdate+1) and type in ('信令') and city!='unkonw region'
+ group by t.type , to_char(record_time,'MM/dd') ,data_origin,city
+ )   group by  time,city,type        
+  order by city,time
+	</select>
+    <!-- 存储过程请求参数 -->
+    <parameterMap class="map" id="reqParameters"> 
+		<parameter property="table"  javaType="java.lang.String" jdbcType="varchar" mode="IN"/> 
+		<parameter property="day"  javaType="java.lang.String" jdbcType="varchar" mode="IN"/> 
+	</parameterMap>
+
+    <!-- 调用存储过程，进行重复数据删除 -->
+    <procedure id="DAY-DATA-MULTI-CLEAN-PROCEDURE"  parameterMap="reqParameters">
+		{call proc_delrows(?,?)}      
+	</procedure>    
+	
+	<!-- 处理数据统计 -->
+	<!-- 存储过程请求参数 -->
+	<!-- 
+		sichuan_mianyang_Lte_zte_LteProject_YY_201406201557和sichuan_mianyang_Lte_zte_LtePlan_YY_201406201551
+		 都入库完了并且已经将你的计算结果插入到中间表之后就调用proc_data_num();
+	 -->
+    <procedure id="CALL_PROC_DATA_NUM_PROCEDURE">
+		{call proc_data_num()}      
+	</procedure>    
+	
+	<!-- 存储过程请求参数 -->
+    <parameterMap class="map" id="reqParameters_proc_data_num_hour"> 
+		<parameter property="startHour"  javaType="java.lang.String" jdbcType="varchar" mode="IN"/> 
+		<parameter property="endHour"  javaType="java.lang.String" jdbcType="varchar" mode="IN"/> 
+		<parameter property="typeStr"  javaType="java.lang.String" jdbcType="varchar" mode="IN"/> 
+	</parameterMap>
+	
+	<!-- 按时间点的数据统计 -->
+	<!-- 
+		sichuan_Lte_LteTraffic_YY_20140627和sicuan_mianyang_Lte_DT_TY_02_20140613095143MS3
+		表所对应的文件都入库完了并且已经将你的计算结果插入到中间表之后就调用proc_data_num_hour('20140519 22','20140719 23')，
+		时间参数是本次入库处理的数据时间段，如果开始时间和结束时间相同就传相同的值
+	 -->
+    <procedure id="CALL_PROC_DATA_NUM_HOUR_PROCEDURE"  parameterMap="reqParameters_proc_data_num_hour">
+		{call proc_data_num_hour(?,?,?)}      
+	</procedure>  
+	
+	<!-- 扫频缺失字段计算，存储过程请求参数 -->
+    <parameterMap class="map" id="reqParameters_proc_scanfreq_cell"> 
+		<parameter property="today"  javaType="java.lang.String" jdbcType="varchar" mode="IN"/>
+	</parameterMap>
+	
+	<!-- 计算扫频数据缺失的字段 -->
+	<procedure id="CALL_PROC_SCANFREQ_CELL_PROCEDURE"  parameterMap="reqParameters_proc_scanfreq_cell">
+		{call proc_SCANFREQ_cell(?)}
+	</procedure>
+	<!-- 扫频数据RECORD_TIME范围内TEST_TIME查询 -->
+	<select id="MULTI-QUERY-SCANFREQ-TIME-CITY-GRID-SYSDATE-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap" parameterClass="java.util.Map">
+		select distinct to_char(test_time,'yyyyMMdd') test_time from mb_test_scanfreq where test_time is not null
+		and record_time>=to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		<dynamic>
+			<isNotEmpty prepend="and" property="city">
+				city = #city#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="grid">
+				grid = #grid#
+			</isNotEmpty>
+		</dynamic>
+    </select>
+	<!-- 扫频数据质量对标地市网格查询 -->
+	<select id="MULTI-QUERY-SCANFREQ-CITY-GRID-SYSDATE-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+		select city, grid, count(1) count from mb_test_scanfreq  where city is not null and grid is not null
+		<dynamic>
+			<isNotEmpty prepend="and" property="startTime">
+				record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') 
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="endTime">
+				record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="testStartTime">
+				test_time &gt;= to_date(#testStartTime#,'YYYY-MM-DD HH24:mi:ss') 
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="testendTime">
+				test_time &lt; to_date(#testendTime#,'YYYY-MM-DD HH24:mi:ss')
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="city">
+				city = #city#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="grid">
+				grid = #grid#
+			</isNotEmpty>
+		</dynamic>
+		 group by city, grid 
+    </select>
+	<!-- 扫频数据质量对标分页查询 -->
+	<select id="MULTI-QUERY-SCANFREQ-ZL-SQL-LIST-WITH-MAPPING-PAGING"  parameterClass="java.util.Map" resultClass="java.util.HashMap">
+	    select to_char(test_time,'YYYY-MM-DD HH24:mi:ss') test_time,longitude,latitude,cell_id,cell_name,earfcn,pci,rsrp,rs_cinr_sinr from ( select row_.*, rownum rownum_  from (  
+		 select test_time,longitude,latitude,cell_id,cell_name,earfcn,pci,rsrp,rs_cinr_sinr from mb_test_scanfreq 
+		  where city = #city# and grid= #grid#
+		<dynamic>
+			<isNotEmpty prepend="and" property="startTime">
+				record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') 
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="endTime">
+				record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="testStartTime">
+				test_time &gt;= to_date(#testStartTime#,'YYYY-MM-DD HH24:mi:ss') 
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="testendTime">
+				test_time &lt; to_date(#testendTime#,'YYYY-MM-DD HH24:mi:ss')
+			</isNotEmpty>
+		</dynamic>
+		 order by record_time desc
+		 ) row_ ) where rownum_ &gt; #startRow#  and rownum_ &lt;= #endRow#
+    </select>
+	<!-- 扫频数据射频优化分页查询 -->
+	<select id="MULTI-QUERY-SCANFREQ-SP-SQL-LIST-WITH-MAPPING-PAGING"  parameterClass="java.util.Map" resultClass="java.util.HashMap">
+	    select to_char(test_time,'YYYY-MM-DD HH24:mi:ss') test_time,longitude,latitude,earfcn,pci,sss_rssi,sss_rp,rsrp,rsrq,rs_cinr_sinr from ( select row_.*, rownum rownum_  from (  
+		 select test_time,longitude,latitude,earfcn,pci,sss_rssi,sss_rp,rsrp,rsrq,rs_cinr_sinr from mb_test_scanfreq 
+		  where city = #city# and grid= #grid#
+		<dynamic>
+			<isNotEmpty prepend="and" property="startTime">
+				record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') 
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="endTime">
+				record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="testStartTime">
+				test_time &gt;= to_date(#testStartTime#,'YYYY-MM-DD HH24:mi:ss') 
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="testendTime">
+				test_time &lt; to_date(#testendTime#,'YYYY-MM-DD HH24:mi:ss')
+			</isNotEmpty>
+		</dynamic>
+		 order by record_time desc
+		 ) row_ ) where rownum_ &gt; #startRow#  and rownum_ &lt;= #endRow#
+    </select>
+	<!-- 扫频数据射频优化分页查询 -->
+	<select id="MULTI-QUERY-SCANFREQ-ASPS-SQL-LIST-WITH-MAPPING-PAGING"  parameterClass="java.util.Map" resultClass="java.util.HashMap">
+	    select to_char(test_time,'YYYY-MM-DD HH24:mi:ss') test_time,longitude,latitude,cell_id,cell_name,cgi,pci,city,grid,earfcn,rsrp,rs_cinr_sinr,rsrq,sss_rssi,sss_rp from ( select row_.*, rownum rownum_  from (  
+		 select test_time,longitude,latitude,cell_id,cell_name,cgi,pci,city,grid,earfcn,rsrp,rs_cinr_sinr,rsrq,sss_rssi,sss_rp from mb_test_scanfreq 
+		  where city = #city# and grid= #grid#
+		<dynamic>
+			<isNotEmpty prepend="and" property="startTime">
+				record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') 
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="endTime">
+				record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="testStartTime">
+				test_time &gt;= to_date(#testStartTime#,'YYYY-MM-DD HH24:mi:ss') 
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="testendTime">
+				test_time &lt; to_date(#testendTime#,'YYYY-MM-DD HH24:mi:ss')
+			</isNotEmpty>
+		</dynamic>
+		 order by record_time desc
+		 ) row_ ) where rownum_ &gt; #startRow#  and rownum_ &lt;= #endRow#
+    </select>
+    
+    <!-- 手机测速计算，存储过程请求参数 -->
+    <parameterMap class="map" id="reqParameters_proc_st_data_statistics"> 
+		<parameter property="today"  javaType="java.lang.String" jdbcType="varchar" mode="IN"/>
+		<parameter property="fileType"  javaType="java.lang.String" jdbcType="varchar" mode="IN"/>
+	</parameterMap>
+	
+	<!--手机测速计算存储过程 -->
+	<procedure id="CALL_PROC_ST_DATA_STATISTICS_PROCEDURE"  parameterMap="reqParameters_proc_st_data_statistics">
+		{call proc_st_data_statistics(?,?)}
+	</procedure>
+	
+	<!-- 单站验收 -->
+	<select id="MULTI-QUERY-SINGLE-SQL-LIST-WITH-MAPPING-PAGING" parameterClass="java.util.Map" resultClass="java.util.HashMap">
+      select  to_char(eventtimestamp,'YYYY-MM-DD HH24:mi:ss') "eventTimestamp",province "province",city "city",region "region",base_Name "baseName",address "address",base_Id "baseId",gps_longitude "gpsLongitude",gps_latitude "gpsLatitude",same_address_type "sameAddressType",base_type_phy "baseTypePhy",build_floor_num "buildFloorNum",build_height "buildHeight",antenna_type_old "antennaTypeOld",antenna_type_new "antennaTypeNew",tower_type_new "towerTypeNew",build_function "buildFunction",cell_identity "cellIdentity",height "height",azimuth "azimuth",titl_t "titl_t",titl_e "titl_e",titl_m "titl_m",antenna_vender "antennaVender",antenna_type "antennaType",ante_block "anteBlock",to_char(record_time,'YYYY-MM-DD HH24:mi:ss') "recordTime" from ( select row_.*, rownum rownum_  from ( 
+		select eventtimestamp,province,city,region,base_name,address,base_id,gps_longitude,gps_latitude,same_address_type,base_type_phy,build_floor_num,build_height,antenna_type_old,antenna_type_new,tower_type_new,build_function,cell_identity,height,azimuth,titl_t,titl_e,titl_m,antenna_vender,antenna_type,ante_block,record_time from mb_single_station_check
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		<dynamic>
+			<isNotEmpty prepend="AND" property="list">
+				city in         
+				<iterate close=")" open="(" conjunction="," property="list">
+					#list[]#
+				</iterate>
+			</isNotEmpty>
+		</dynamic>
+		order by record_time desc
+		 ) row_ ) where rownum_ &gt; #startRow#  and rownum_ &lt;= #endRow#
+	</select>
+	<!-- 单站验收 -->
+	<select id="MULTI-QUERY-SINGLE-SQL-LIST-WITH-MAPPING-COUNT" parameterClass="java.util.Map" resultClass="int">
+		select count(*) from (
+		select eventtimestamp,province,city,region,base_name,address,base_id,gps_longitude,gps_latitude,same_address_type,base_type_phy,build_floor_num,build_height,antenna_type_old,antenna_type_new,tower_type_new,build_function,cell_identity,height,azimuth,titl_t,titl_e,titl_m,antenna_vender,antenna_type,ante_block,record_time from mb_single_station_check
+		where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+		<dynamic>
+			<isNotEmpty prepend="AND" property="list">
+				city in         
+				<iterate close=")" open="(" conjunction="," property="list">
+					#list[]#
+				</iterate>
+			</isNotEmpty>
+		</dynamic>
+		order by record_time desc)
+	</select>
+	<!-- Report TD/GSM最近14天数据量走势-->
+	 <select id="MULTI-QUERY-TD-GSM-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+		 select to_char(record_time, 'mm/dd') day, sum(original_record_num) amount from mb_bin_process_info where type = 'TD/GSM' and record_time &gt;= trunc(sysdate - 14) group by to_char(record_time, 'mm/dd') order by day
+	</select>
+	<!-- Report 单验最近14天数据量走势-->
+	 <select id="MULTI-QUERY-SINGLETON-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+		 select  to_char(record_time,'mm/dd') day,sum(original_record_num) amount from mb_bin_process_info where type='LTE_TY' and record_time &gt;=trunc(sysdate-14)  group by  to_char(record_time,'mm/dd') order by day
+	</select>
+	<!-- Report 扫频最近有数据的15天数据量分析-->
+	 <select id="MULTI-QUERY-SCANFREQ-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+		 select time,num from (select f.*,row_number() over(order by time) rn from ( select to_char(record_time,'yyyy-MM-dd') time,sum(original_record_num) num from mb_bin_process_info where type='SCAN' group by to_char(record_time,'yyyy-MM-dd')  ) f ) where rn&lt;15	 
+	</select>
+	<!-- Report 扫频各地市月数据对比-->
+	 <select id="MULTI-QUERY-SCANFREQ-CITY-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+		select b.day,b.city,nvl(b.month_counter,0) month_counter,nvl(a.last_month_counter,0) last_month_counter from ( select COUNT(1) last_month_counter,TO_CHAR(RECORD_TIME,'YYYYMM') DAY,CITY from MB_TEST_SCANFREQ  WHERE RECORD_TIME &gt;= add_months(trunc(sysdate,'mm'),-1) and record_time &gt; trunc(sysdate,'mm') GROUP BY TO_CHAR(RECORD_TIME,'YYYYMM'),CITY )a ,( select COUNT(1) month_counter,TO_CHAR(RECORD_TIME,'YYYYMM') DAY,CITY from MB_TEST_SCANFREQ  WHERE RECORD_TIME &gt;=trunc(sysdate,'mm') GROUP BY TO_CHAR(RECORD_TIME,'YYYYMM'),CITY )b where a.day(+) = b.day and a.city(+) = b.city
+	</select>
+	<!-- Report 单站验收地市数据对比-->
+	 <select id="MULTI-QUERY-SINGLETON-CITY-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+select a.day record_time,a.city ,nvl(b.yestoday_num,0) yestoday_num,nvl(a.today_num,0) today_num from (
+ select to_char(record_time,'yyyymmdd') day,city,count(1) today_num from mb_single_station_check  where record_time &gt;=trunc(sysdate-1) and record_time&lt;trunc(sysdate)
+ and city is not null group by to_char(record_time,'yyyymmdd'),city ) a left join (
+ select to_char(record_time,'yyyymmdd') day,city,count(1) yestoday_num from mb_single_station_check  where record_time &gt;=trunc(sysdate-2) and record_time&lt;trunc(sysdate-1)
+  and city is not null group by to_char(record_time,'yyyymmdd'),city ) b on a.day = b.day and a.city = b.city
+	</select>
+	<!-- Report 扩减容入库完整率-->
+	 <select id="MULTI-QUERY-TD-GSM-INPUT-CITY-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+		select * from (select '扩减容' type,a.record_time,case when row_num is null or row_num=0 then 0 else round(input_num_rows/row_num*100) end  input_rate from (
+		select record_time,sum(num_rows) input_num_rows from (select replace(partition_name,'PART_','') record_time,nvl(num_rows,0) num_rows from user_tab_partitions  where table_name in ('MB_TCC_CELL','MB_TCC_TCO_PRO_CELL','MB_TER_CNT_CELL','MB_TER_CNT_CELL_GPRS','MB_THW_CNT_CELL2_6K','MB_THW_CNT_CELL_GPRS_6K','MB_THW_CNT_CELL_HO_6K','MB_TNK_CNT_CELL_GPRS_PACK','MB_TNK_CNT_CELL_RES_AVAIL','MB_TPA_STS_CELL_GPRS_NE','MB_TPA_STS_CELL_NE','MB_TZX_CNT_CELL2_V3','MB_TZX_CNT_CELL_GPRS_DL_V3','MB_TZX_CNT_CELL_GPRS_UL_V3','MB_TCC_CARRIER','MB_TCC_UTRANCELL','MB_TCC_TCO_PRO_UTRANCELL','MB_TCC_RNC','MB_TPD_STS_CARRIER_Q','MB_TPD_STS_UTRANCELL1_Q','MB_TPD_STS_UTRANCELL2_Q')
+		 and partition_name &gt;= (select 'PART_'||to_char(sysdate-7,'yyyymmdd') from dual) and partition_name &lt; (select 'PART_'||to_char(sysdate,'yyyymmdd') from dual) ) group by record_time ) a,(
+		 select to_char(record_time,'yyyymmdd') record_time,sum(original_record_num) row_num from mb_bin_process_info where type='TD/GSM' and record_time &gt;=trunc(sysdate-7) and record_time &lt; trunc(sysdate)group by to_char(record_time,'yyyymmdd')) b where a.record_time = b.record_time(+)) order by record_time 
+	</select>
+	<!-- Report 单站验收入库完整率&合规率-->
+	 <select id="MULTI-QUERY-SINGLETON-ANAL-CITY-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+		select '单验' type,a.record_time,case when row_num is null or row_num=0 then 0 else round(input_num_rows/row_num*100) end  input_rate,
+		case when input_num_rows is null or input_num_rows=0 then 0 else round(valid_num/input_num_rows*100) end  succ_rate from (
+		select replace(partition_name,'PART_','') record_time,nvl(num_rows,0) input_num_rows from user_tab_partitions  where table_name=upper( 'mb_single_station_check') and partition_name = (select 'PART_'||to_char(sysdate-1,'yyyymmdd') from dual)
+		) a,(select to_char(record_time,'yyyymmdd') record_time,nvl(sum(original_record_num),0) row_num from mb_bin_process_info where type='LTE_TY' and record_time &gt;=trunc(sysdate-1) and record_time&lt;trunc(sysdate)
+		 group by to_char(record_time,'yyyymmdd')) b,(select to_char(record_time,'yyyymmdd') record_time,count(1) valid_num from mb_single_station_check where record_time &gt;= trunc(sysdate-1) and record_time &lt; trunc(sysdate) and 
+		BASE_ID is not null and GPS_LONGITUDE is not null  and GPS_LATITUDE is not null and BASE_NAME is not null and AZIMUTH is not null and TITL_T  is not null  and city is not null 
+		group by  to_char(record_time,'yyyymmdd')) c where a.record_time = b.record_time(+) and a.record_time = c.record_time(+) 
+	</select>
+	<!-- Report 单验各地市数据质量分析(表格)-->
+	 <select id="MULTI-QUERY-SINGLETON-ANAL-CITY-TAB-SQL-LIST-WITH-MAPPING-PAGING" resultClass="java.util.HashMap">
+ select a.day,a.city,case when file_num = 0  or file_num is null then 0 else round(today_num/file_num*100) end input_rate,
+ case when today_num = 0 or today_num is null then 0 else round(valid_num/today_num*100) end succ_rate,   case when yestoday_num =0 or yestoday_num is null then 0 else round((today_num -yestoday_num)/yestoday_num*100 ) end down_rate  from (
+  select to_char(record_time,'yyyymmdd') day,city,count(1) today_num from mb_single_station_check  where record_time &gt;=trunc(sysdate-1) and record_time&lt;trunc(sysdate)
+ and city is not null group by to_char(record_time,'yyyymmdd'),city  ) a,( select to_char(record_time,'yyyymmdd') day,city ,nvl(sum(original_record_num),0) file_num from mb_bin_process_info where record_time &gt;=trunc(sysdate-1) and record_time&lt;trunc(sysdate)  and type='LTE_TY' group by to_char(record_time,'yyyymmdd'),city ) b ,(
+ select to_char(record_time,'yyyymmdd') record_time,count(1) valid_num,city from mb_single_station_check where record_time &gt;= trunc(sysdate-1) and record_time &lt; trunc(sysdate) and 
+BASE_ID is not null and GPS_LONGITUDE is not null  and GPS_LATITUDE is not null and BASE_NAME is not null and AZIMUTH is not null and TITL_T	is not null  and city is not null group by  to_char(record_time,'yyyymmdd'),city
+ ) c,( select to_char(record_time,'yyyymmdd') day,city,count(1) yestoday_num from mb_single_station_check  where record_time &gt;=trunc(sysdate-2) and record_time&lt;trunc(sysdate-1)
+ and city is not null group by to_char(record_time,'yyyymmdd'),city ) d where   a.city = b.city(+) and a.city = c.city(+) and a.city = d.city(+)
+	</select>
+</sqlMap>	

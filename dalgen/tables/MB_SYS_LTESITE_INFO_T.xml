@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="mb_sys_ltesite_info_t" dummyPk="INT_ID">
+
+	<!-- 通过基站的全局ID编号查询4G基站参数详情 -->
+	<operation name="getLteSiteByEnodebGlbId_t" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    select record_time,int_id,object_rdn,name,zh_name,omc_id,vendor_id,city_id,time_stamp,update_stamp,confirmed,
+			    state,enodeb_id,enbid,x2blacklist,x2whitelist,x2hoblacklist,cover_area_info,x2ipaddresslist,max_throughput_rate,
+			    administrativestate,operationalstate,x2_num,integrityprotalgorithm,cipheringalgorithm,related_me from MB_SYS_LTESITE_INFO_T where int_id=?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 插入新4G基站参数记录 -->
+	<operation name="insertLteSite_t" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into mb_sys_ltesite_info_t 
+	  ( record_time,int_id,object_rdn,name,zh_name,omc_id,vendor_id,city_id,time_stamp,update_stamp,confirmed,
+			    state,enodeb_id,enbid,x2blacklist,x2whitelist,x2hoblacklist,cover_area_info,x2ipaddresslist,max_throughput_rate,
+			    administrativestate,operationalstate,x2_num,integrityprotalgorithm,cipheringalgorithm,related_me)
+		values
+	  (sysdate,?,?,?,?,?,?,?,sysdate,sysdate,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+			]]>
+		</sql>
+	</operation>
+	
+	<!-- 查询基站信息 -->
+	<operation name="getLteSiteByParam_t" paramtype="primitive" multiplicity="many"  paging="true">
+		<extraparams>
+			<param name="startTime" javatype="java.lang.String" />
+		</extraparams>
+		<extraparams>
+			<param name="endTime" javatype="java.lang.String" />
+		</extraparams>
+		<extraparams>
+			<param name="list" javatype="java.util.List" />
+		</extraparams>
+		<sql>
+			<![CDATA[
+			select record_time,int_id,object_rdn,name,zh_name,omc_id,vendor_id,city_id,time_stamp,update_stamp,confirmed,
+			    state,enodeb_id,enbid,x2blacklist,x2whitelist,x2hoblacklist,cover_area_info,x2ipaddresslist,max_throughput_rate,
+			    administrativestate,operationalstate,x2_num,integrityprotalgorithm,cipheringalgorithm,related_me from MB_SYS_LTESITE_INFO_T
+ 				where record_time >='' and record_time < ''
+
+			]]>
+		</sql>
+		<sqlmap><![CDATA[
+			select record_time,int_id,object_rdn,name,zh_name,omc_id,vendor_id,city_id,time_stamp,update_stamp,confirmed,
+			    state,enodeb_id,enbid,x2blacklist,x2whitelist,x2hoblacklist,cover_area_info,x2ipaddresslist,max_throughput_rate,
+			    administrativestate,operationalstate,x2_num,integrityprotalgorithm,cipheringalgorithm,related_me from MB_SYS_LTESITE_INFO_T
+ 				where record_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and record_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss') 
+				<dynamic>
+					<isNotEmpty prepend="AND" property="list">
+						city_id in         
+						<iterate close=")" open="(" conjunction="," property="list">
+						     #list[]#
+						</iterate>
+					</isNotEmpty>
+				</dynamic>
+        ]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 修改4G基站参数 -->
+	<operation name="updateLteSite_t" paramtype="object">
+		<sql>
+			<![CDATA[
+			    update MB_SYS_LTESITE_INFO_T
+				   set 
+				   name=?,
+				  zh_name=?
+				 
+				  where int_id = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 删除4G基站参数 -->
+	<operation name="deleteLteSiteRecord_t" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    delete MB_SYS_LTESITE_INFO_T where int_id = ?
+			]]>
+		</sql>
+	</operation>
+</table>	

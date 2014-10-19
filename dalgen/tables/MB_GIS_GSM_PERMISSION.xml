@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="MB_SYS_GIS_GSMPERMISSION" dummyPk="SITE_GLB_ID">
+
+	<!-- 通过2G基站ID查询位置信息 -->
+	<operation name="getGSMPERMISSIONbyId" paramtype="primitive">
+		<sql>
+			<![CDATA[
+	select  PROVINCE,CITY,COUNTY,BSC_NAME,SITE_NAME,NETGRID,ENVIRON,VENDOR,RECORD_TIME,UPDATE_TIME,UPDATE_USER,
+	SITE_GLB_ID from 
+	MB_SYS_GIS_GSMPERMISSION where SITE_GLB_ID = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 插入2G基站位置信息 -->
+	<operation name="insertGSMPERMISSION" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into MB_SYS_GIS_GSMPERMISSION 
+	  (PROVINCE,CITY,COUNTY,BSC_NAME,SITE_NAME,NETGRID,ENVIRON,VENDOR,RECORD_TIME,UPDATE_TIME,UPDATE_USER,
+	SITE_GLB_ID)
+		values
+	  (?,?,?,?,?,?,?,?,sysdate,sysdate,?,?)
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 修改2G基站位置信息 -->
+	<operation name="updateGSMPERMISSION" paramtype="object">
+		<sql>
+			<![CDATA[
+			    update MB_SYS_GIS_GSMPERMISSION
+				set 				 
+				PROVINCE=?,CITY=?,COUNTY=?,
+				BSC_NAME=?,SITE_NAME=?,
+				NETGRID=?,
+				ENVIRON=?,VENDOR=?,
+				RECORD_TIME=sysdate,UPDATE_TIME=sysdate,
+				UPDATE_USER=?
+	
+				where SITE_GLB_ID = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 删除2G基站位置信息 -->
+	<operation name="deleteGSMPERMISSION" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    delete MB_SYS_GIS_GSMPERMISSION where SITE_GLB_ID = ?
+			]]>
+		</sql>
+	</operation>
+</table>	

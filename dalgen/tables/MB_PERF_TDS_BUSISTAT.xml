@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="mb_perf_tds_busistat" dummyPk="cell_glb_id">
+
+	<!-- 通过TDS小区ID查询业务量 -->
+	<operation name="getTDSperfbyId" paramtype="primitive">
+		<sql>
+			<![CDATA[
+	select cell_glb_id,CELL_ID,CELL_NAME,record_time,PERIOD,  traffic ,hs_throu,r9_throu,oper_time from 
+	mb_perf_tds_busistat where CELL_GLB_ID = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 插入新TDS小区业务量记录 -->
+	<operation name="insertTDSperf" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into mb_perf_tds_busistat 
+	  (cell_glb_id,CELL_ID,CELL_NAME,record_time,PERIOD,  traffic ,hs_throu,r9_throu,oper_time)
+		values
+	  (?,?,?,?,?,?,?,?,sysdate)
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 修改TDS小区业务量 -->
+	<operation name="updateTDSperf" paramtype="object">
+		<sql>
+			<![CDATA[
+			    update mb_perf_tds_busistat
+				set 
+				CELL_ID=?,CELL_NAME=?,record_time=?,PERIOD=?,
+				  traffic=? ,hs_throu=?,r9_throu=?,oper_time=sysdate
+				where CELL_GLB_ID = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 删除TDS小区业务量 -->
+	<operation name="deleteTDSperfRecord" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    delete mb_perf_tds_busistat where CELL_GLB_ID = ?
+			]]>
+		</sql>
+	</operation>
+</table>	

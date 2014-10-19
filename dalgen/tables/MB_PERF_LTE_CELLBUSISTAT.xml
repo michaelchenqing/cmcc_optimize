@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="mb_perf_lte_cellbusistat" dummyPk="cell_glb_id">
+
+	<!-- 通过4G小区ID查询业务量 -->
+	<operation name="getLTEperfbyId" paramtype="primitive">
+		<sql>
+			<![CDATA[
+	select CELL_GLB_ID,CELL_ID,CELL_NAME,record_time,PERIOD, pusch_prbs_used,uplink_prbs,pdsch_prbs_used,downlink_prbs,pdcp_uplink_throu,
+	pdcp_downlink_throu,oper_time from 
+	mb_perf_lte_cellbusistat where CELL_GLB_ID = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 插入新4G小区业务量记录 -->
+	<operation name="insertLTEperf" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into mb_perf_lte_cellbusistat 
+	  (CELLCELL_GLB_ID,CELL_ID,CELL_NAME,record_time,PERIOD, pusch_prbs_used,uplink_prbs,pdsch_prbs_used,downlink_prbs,pdcp_uplink_throu,
+	pdcp_downlink_throu,oper_time)
+		values
+	  (?,?,?,?,?,?,?,?,?,?,?,sysdate)
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 修改4G小区业务量 -->
+	<operation name="updateLTEperf" paramtype="object">
+		<sql>
+			<![CDATA[
+			    update mb_perf_lte_cellbusistat
+				set 
+				CELL_ID=?,
+				CELL_NAME=?,
+				record_time=?,
+				PERIOD=?,
+				 pusch_prbs_used=?,
+				 uplink_prbs=?,
+				 pdsch_prbs_used=?,
+				 downlink_prbs=?,
+				 pdcp_uplink_throu=?,
+	pdcp_downlink_throu=?,
+	oper_time = sysdate
+				where CELL_GLB_ID = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 删除4G小区业务量 -->
+	<operation name="deleteLTEperfRecord" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    delete mb_perf_lte_cellbusistat where CELL_GLB_ID = ?
+			]]>
+		</sql>
+	</operation>
+</table>	

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+    <settings cacheModelsEnabled="true" enhancementEnabled="false" lazyLoadingEnabled="false" maxRequests="3000" maxSessions="3000" maxTransactions="3000" useStatementNamespaces="false"/>
+    
+    <sqlMap resource="sqlmap/common-sqlmap-mapping.xml"/>
+#foreach ($table in $plugin.sortedTables)            
+    <sqlMap resource="sqlmap/${table.baseClassName}-sqlmap-mapping.xml"/>
+#end
+
+	<!-- extends dao config for groups sql count,sum,etc-->
+	<sqlMap resource="sqlmap/Ext-CommonProcess-sqlmap-mapping.xml"/>	
+	<sqlMap resource="sqlmap/Ext-CustomProcess-sqlmap-mapping.xml"/>
+	<sqlMap resource="sqlmap/Ext-Speed-sqlmap-mapping.xml"/>	
+	<sqlMap resource="sqlmap/Ext-ExpVolReduction-sqlmap-mapping.xml"/>
+</sqlMapConfig>

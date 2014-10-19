@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 数据文件转换模板 -->
+<root>
+	<template_desc>
+		<name>4G小区信息临时表</name>
+		<desc>4G小区信息临时表</desc>
+		<ver>1.0</ver>
+		<other>sichuan_Lte_LteEutranCell_YY_20140701.csv.gz</other>
+		<split_flag>,</split_flag>
+		<ignore_rows>1</ignore_rows>
+	</template_desc>
+
+	<!-- 4G小区信息临时表 -->
+	<mapping table="MB_SYS_LTECELL_INFO_T">
+		<field>
+			<col_index>0</col_index><!-- 数据文件中的列值 -->
+			<db_column>record_time</db_column><!-- 数据库表字段 -->
+			<data_type>timestamp</data_type><!-- 数据类型，java的基础类型及对象类型 -->
+			<rule_valid>.{0,256}</rule_valid><!-- 数据校验规则，校验失败时，将整个文件不进行导入 -->
+		</field>
+		<field>
+			<col_index>1</col_index><!-- 数据文件中的列值 -->
+			<db_column>int_id</db_column><!-- 数据库表字段 -->
+			<data_type>string</data_type><!-- 数据类型，java的基础类型及对象类型 -->
+			<rule_valid>.{0,256}</rule_valid><!-- 数据校验规则，校验失败时，将整个文件不进行导入 -->
+		</field>
+		<field>
+			<col_index>13</col_index>
+			<db_column>cgi</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>3</col_index>
+			<db_column>name</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>4</col_index>
+			<db_column>zh_name</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>-1</col_index>
+			<db_column>TIME_STAMP</db_column>
+			<data_type>timestamp</data_type>
+			<rule_valid></rule_valid>
+			<defaultValue>${sysdate}</defaultValue><!-- 默认存入时间 -->
+		</field>
+		<field>
+			<col_index>8</col_index>
+			<db_column>UPDATE_STAMP</db_column>
+			<data_type>timestamp</data_type>
+			<rule_valid></rule_valid>
+			<data_format>yyyy-MM-dd HH:mm:ss</data_format>
+		</field>
+		<field>
+			<handlerClass>com.cmcc.optimize.datamodel.sync.generator.GeneratorMd5StrValue</handlerClass>
+			<handlerParam>#{1}</handlerParam>
+			<db_column>CELL_GLB_ID</db_column>
+			<data_type>string</data_type>
+		</field>
+		<field>
+			<col_index>7</col_index>
+			<db_column>city_id</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,16}</rule_valid>
+		</field>
+		<field>
+			<col_index>12</col_index>
+			<db_column>related_enodeb</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>17</col_index>
+			<db_column>cellsize</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,16}</rule_valid>
+		</field>
+		<field>
+			<col_index>16</col_index>
+			<db_column>cell_type</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,16}</rule_valid>
+		</field>
+		<field>
+			<col_index>27</col_index>
+			<db_column>operationalstate</db_column>
+			<data_type>number</data_type>
+			<rule_valid>[0-9]{0,4}</rule_valid>
+		</field>
+		<field>
+			<col_index>6</col_index>
+			<db_column>vendor_id</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,16}</rule_valid>
+		</field>
+		<!-- 
+		<field>
+			<col_index>1</col_index>
+			<db_column>object_rdn</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,512}</rule_valid>
+		</field>
+	
+
+		<field>
+			<col_index>4</col_index>
+			<db_column>omc_id</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>9</col_index>
+			<db_column>confirmed</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,16}</rule_valid>
+		</field>
+		<field>
+			<col_index>10</col_index>
+			<db_column>state</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,16}</rule_valid>
+		</field>
+
+	
+		<field>
+			<col_index>13</col_index>
+			<db_column>eutrancell_id</db_column>
+			<data_type>string</data_type>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>14</col_index>
+			<db_column>cell_identity</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+		</field>
+
+		<field>
+			<col_index>17</col_index>
+			<db_column>plmnidlist</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,64}</rule_valid>
+		</field>
+		<field>
+			<col_index>18</col_index>
+			<db_column>tac</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>19</col_index>
+			<db_column>pci</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>20</col_index>
+			<db_column>pcilist</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,512}</rule_valid>
+		</field>
+		<field>
+			<col_index>21</col_index>
+			<db_column>maximumtransmissionpower</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?(([1-9]{1}\d{0,3})|((([1-9]{1}\d{0,3})|(0))\.\d{1,4})))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>22</col_index>
+			<db_column>referencesignalpower</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?(([1-9]{1}\d{0,3})|((([1-9]{1}\d{0,3})|(0))\.\d{1,4})))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>23</col_index>
+			<db_column>pb</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?(([1-9]{1}\d{0,3})|((([1-9]{1}\d{0,3})|(0))\.\d{1,4})))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>24</col_index>
+			<db_column>part_of_sectorpower</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?(([1-9]{1}\d{0,3})|((([1-9]{1}\d{0,3})|(0))\.\d{1,4})))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>25</col_index>
+			<db_column>administrativestate</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>27</col_index>
+			<db_column>celllocalid</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>28</col_index>
+			<db_column>relatedrrulist</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,512}</rule_valid>
+		</field>
+		<field>
+			<col_index>29</col_index>
+			<db_column>relatedantennalist</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,512}</rule_valid>
+		</field>
+		<field>
+			<col_index>30</col_index>
+			<db_column>cellresvinfo</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,512}</rule_valid>
+		</field>
+		<field>
+			<col_index>31</col_index>
+			<db_column>bandindicator</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>32</col_index>
+			<db_column>earfcn</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>33</col_index>
+			<db_column>bandwidth</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>34</col_index>
+			<db_column>sfassignment</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>35</col_index>
+			<db_column>specialsfpatterns</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>36</col_index>
+			<db_column>mbmsswitch</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>37</col_index>
+			<db_column>adj_td_num</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>38</col_index>
+			<db_column>adj_lte_num</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>39</col_index>
+			<db_column>adj_gsm_num</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>40</col_index>
+			<db_column>u_sf_num</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>41</col_index>
+			<db_column>d_sf_num</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>42</col_index>
+			<db_column>totalprb</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>43</col_index>
+			<db_column>ecarrier_num</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>44</col_index>
+			<db_column>dwpts_over_9</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+		</field>
+		<field>
+			<col_index>45</col_index>
+			<db_column>adj_lte_frqlst</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,512}</rule_valid>
+		</field>
+		<field>
+			<col_index>46</col_index>
+			<db_column>adj_td_frqlst</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,512}</rule_valid>
+		</field>
+		<field>
+			<col_index>47</col_index>
+			<db_column>adj_gsm_frqlst</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,512}</rule_valid>
+		</field>
+		 -->
+		
+	</mapping>
+
+	<!-- 复杂映射,指定类解析 ，传入指定参数 -->
+	<!-- <mapping params="tbl_table2,1000"> <parser_class>com.xxxx.proj.ccc.Class</parser_class> 
+		</mapping> -->
+
+	<!-- 复杂映射,指定类外挂脚本解析，传入指定参数，参见：com.cmcc.optimize.datasyc.parser.RuleEngineParserHelper -->
+	<!-- <mapping params="tbl_table3,1000"> <extends_code>extends/10001.rule</extends_code> 
+		</mapping> -->
+
+</root>

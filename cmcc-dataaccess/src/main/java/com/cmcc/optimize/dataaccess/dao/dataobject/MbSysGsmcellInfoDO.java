@@ -1,0 +1,530 @@
+/*
+ * generated dao ibatis class
+ *
+ * @author gaoqs
+ * Copyright (c) 2014 All Rights Reserved.
+ */
+package com.cmcc.optimize.dataaccess.dao.dataobject;
+
+// auto generated imports
+import java.util.Date;
+
+/**
+ * A data object class directly models database table <tt>MB_SYS_GSMCELL_INFO</tt>.
+ *
+ *
+ * @author gaoqs
+ */
+public class MbSysGsmcellInfoDO {
+    private static final long serialVersionUID = 741231858441822688L;
+
+    //========== properties ==========
+
+	/**
+	 * This property corresponds to db column <tt>CELL_ID</tt>.
+	 */
+	private long cellId;
+
+	/**
+	 * This property corresponds to db column <tt>CELL_NAME</tt>.
+	 */
+	private String cellName;
+
+	/**
+	 * This property corresponds to db column <tt>CELL_ENGLISH_NAME</tt>.
+	 */
+	private String cellEnglishName;
+
+	/**
+	 * This property corresponds to db column <tt>SITE_ID</tt>.
+	 */
+	private String siteId;
+
+	/**
+	 * This property corresponds to db column <tt>CGI</tt>.
+	 */
+	private String cgi;
+
+	/**
+	 * This property corresponds to db column <tt>RRU_REMOTE</tt>.
+	 */
+	private String rruRemote;
+
+	/**
+	 * This property corresponds to db column <tt>CELL_LONGITUDE</tt>.
+	 */
+	private int cellLongitude;
+
+	/**
+	 * This property corresponds to db column <tt>CELL_LATITUDE</tt>.
+	 */
+	private int cellLatitude;
+
+	/**
+	 * This property corresponds to db column <tt>SECTOR_ID</tt>.
+	 */
+	private int sectorId;
+
+	/**
+	 * This property corresponds to db column <tt>POWERDIVISIONTYPE</tt>.
+	 */
+	private String powerdivisiontype;
+
+	/**
+	 * This property corresponds to db column <tt>POWERDIVISIONINDEX</tt>.
+	 */
+	private String powerdivisionindex;
+
+	/**
+	 * This property corresponds to db column <tt>NCC</tt>.
+	 */
+	private String ncc;
+
+	/**
+	 * This property corresponds to db column <tt>BCC</tt>.
+	 */
+	private String bcc;
+
+	/**
+	 * This property corresponds to db column <tt>BCCH</tt>.
+	 */
+	private String bcch;
+
+	/**
+	 * This property corresponds to db column <tt>COVERTYPE</tt>.
+	 */
+	private String covertype;
+
+	/**
+	 * This property corresponds to db column <tt>BANDINDICATORFORFREQUENCY</tt>.
+	 */
+	private String bandindicatorforfrequency;
+
+	/**
+	 * This property corresponds to db column <tt>RAC</tt>.
+	 */
+	private String rac;
+
+	/**
+	 * This property corresponds to db column <tt>RECORD_TIME</tt>.
+	 */
+	private Date recordTime;
+
+	/**
+	 * This property corresponds to db column <tt>UPTIME_TIME</tt>.
+	 */
+	private Date uptimeTime;
+
+	/**
+	 * This property corresponds to db column <tt>UPDATE_USER</tt>.
+	 */
+	private String updateUser;
+
+	/**
+	 * This property corresponds to db column <tt>CELL_GLB_ID</tt>.
+	 */
+	private int cellGlbId;
+
+	/**
+	 * This property corresponds to db column <tt>SITE_GLB_ID</tt>.
+	 */
+	private int siteGlbId;
+
+    //========== getters and setters ==========
+
+    /**
+     * Getter method for property <tt>cellId</tt>.
+     *
+     * @return property value of cellId
+     */
+	public long getCellId() {
+		return cellId;
+	}
+	
+	/**
+	 * Setter method for property <tt>cellId</tt>.
+	 * 
+	 * @param cellId value to be assigned to property cellId
+     */
+	public void setCellId(long cellId) {
+		this.cellId = cellId;
+	}
+
+    /**
+     * Getter method for property <tt>cellName</tt>.
+     *
+     * @return property value of cellName
+     */
+	public String getCellName() {
+		return cellName;
+	}
+	
+	/**
+	 * Setter method for property <tt>cellName</tt>.
+	 * 
+	 * @param cellName value to be assigned to property cellName
+     */
+	public void setCellName(String cellName) {
+		this.cellName = cellName;
+	}
+
+    /**
+     * Getter method for property <tt>cellEnglishName</tt>.
+     *
+     * @return property value of cellEnglishName
+     */
+	public String getCellEnglishName() {
+		return cellEnglishName;
+	}
+	
+	/**
+	 * Setter method for property <tt>cellEnglishName</tt>.
+	 * 
+	 * @param cellEnglishName value to be assigned to property cellEnglishName
+     */
+	public void setCellEnglishName(String cellEnglishName) {
+		this.cellEnglishName = cellEnglishName;
+	}
+
+    /**
+     * Getter method for property <tt>siteId</tt>.
+     *
+     * @return property value of siteId
+     */
+	public String getSiteId() {
+		return siteId;
+	}
+	
+	/**
+	 * Setter method for property <tt>siteId</tt>.
+	 * 
+	 * @param siteId value to be assigned to property siteId
+     */
+	public void setSiteId(String siteId) {
+		this.siteId = siteId;
+	}
+
+    /**
+     * Getter method for property <tt>cgi</tt>.
+     *
+     * @return property value of cgi
+     */
+	public String getCgi() {
+		return cgi;
+	}
+	
+	/**
+	 * Setter method for property <tt>cgi</tt>.
+	 * 
+	 * @param cgi value to be assigned to property cgi
+     */
+	public void setCgi(String cgi) {
+		this.cgi = cgi;
+	}
+
+    /**
+     * Getter method for property <tt>rruRemote</tt>.
+     *
+     * @return property value of rruRemote
+     */
+	public String getRruRemote() {
+		return rruRemote;
+	}
+	
+	/**
+	 * Setter method for property <tt>rruRemote</tt>.
+	 * 
+	 * @param rruRemote value to be assigned to property rruRemote
+     */
+	public void setRruRemote(String rruRemote) {
+		this.rruRemote = rruRemote;
+	}
+
+    /**
+     * Getter method for property <tt>cellLongitude</tt>.
+     *
+     * @return property value of cellLongitude
+     */
+	public int getCellLongitude() {
+		return cellLongitude;
+	}
+	
+	/**
+	 * Setter method for property <tt>cellLongitude</tt>.
+	 * 
+	 * @param cellLongitude value to be assigned to property cellLongitude
+     */
+	public void setCellLongitude(int cellLongitude) {
+		this.cellLongitude = cellLongitude;
+	}
+
+    /**
+     * Getter method for property <tt>cellLatitude</tt>.
+     *
+     * @return property value of cellLatitude
+     */
+	public int getCellLatitude() {
+		return cellLatitude;
+	}
+	
+	/**
+	 * Setter method for property <tt>cellLatitude</tt>.
+	 * 
+	 * @param cellLatitude value to be assigned to property cellLatitude
+     */
+	public void setCellLatitude(int cellLatitude) {
+		this.cellLatitude = cellLatitude;
+	}
+
+    /**
+     * Getter method for property <tt>sectorId</tt>.
+     *
+     * @return property value of sectorId
+     */
+	public int getSectorId() {
+		return sectorId;
+	}
+	
+	/**
+	 * Setter method for property <tt>sectorId</tt>.
+	 * 
+	 * @param sectorId value to be assigned to property sectorId
+     */
+	public void setSectorId(int sectorId) {
+		this.sectorId = sectorId;
+	}
+
+    /**
+     * Getter method for property <tt>powerdivisiontype</tt>.
+     *
+     * @return property value of powerdivisiontype
+     */
+	public String getPowerdivisiontype() {
+		return powerdivisiontype;
+	}
+	
+	/**
+	 * Setter method for property <tt>powerdivisiontype</tt>.
+	 * 
+	 * @param powerdivisiontype value to be assigned to property powerdivisiontype
+     */
+	public void setPowerdivisiontype(String powerdivisiontype) {
+		this.powerdivisiontype = powerdivisiontype;
+	}
+
+    /**
+     * Getter method for property <tt>powerdivisionindex</tt>.
+     *
+     * @return property value of powerdivisionindex
+     */
+	public String getPowerdivisionindex() {
+		return powerdivisionindex;
+	}
+	
+	/**
+	 * Setter method for property <tt>powerdivisionindex</tt>.
+	 * 
+	 * @param powerdivisionindex value to be assigned to property powerdivisionindex
+     */
+	public void setPowerdivisionindex(String powerdivisionindex) {
+		this.powerdivisionindex = powerdivisionindex;
+	}
+
+    /**
+     * Getter method for property <tt>ncc</tt>.
+     *
+     * @return property value of ncc
+     */
+	public String getNcc() {
+		return ncc;
+	}
+	
+	/**
+	 * Setter method for property <tt>ncc</tt>.
+	 * 
+	 * @param ncc value to be assigned to property ncc
+     */
+	public void setNcc(String ncc) {
+		this.ncc = ncc;
+	}
+
+    /**
+     * Getter method for property <tt>bcc</tt>.
+     *
+     * @return property value of bcc
+     */
+	public String getBcc() {
+		return bcc;
+	}
+	
+	/**
+	 * Setter method for property <tt>bcc</tt>.
+	 * 
+	 * @param bcc value to be assigned to property bcc
+     */
+	public void setBcc(String bcc) {
+		this.bcc = bcc;
+	}
+
+    /**
+     * Getter method for property <tt>bcch</tt>.
+     *
+     * @return property value of bcch
+     */
+	public String getBcch() {
+		return bcch;
+	}
+	
+	/**
+	 * Setter method for property <tt>bcch</tt>.
+	 * 
+	 * @param bcch value to be assigned to property bcch
+     */
+	public void setBcch(String bcch) {
+		this.bcch = bcch;
+	}
+
+    /**
+     * Getter method for property <tt>covertype</tt>.
+     *
+     * @return property value of covertype
+     */
+	public String getCovertype() {
+		return covertype;
+	}
+	
+	/**
+	 * Setter method for property <tt>covertype</tt>.
+	 * 
+	 * @param covertype value to be assigned to property covertype
+     */
+	public void setCovertype(String covertype) {
+		this.covertype = covertype;
+	}
+
+    /**
+     * Getter method for property <tt>bandindicatorforfrequency</tt>.
+     *
+     * @return property value of bandindicatorforfrequency
+     */
+	public String getBandindicatorforfrequency() {
+		return bandindicatorforfrequency;
+	}
+	
+	/**
+	 * Setter method for property <tt>bandindicatorforfrequency</tt>.
+	 * 
+	 * @param bandindicatorforfrequency value to be assigned to property bandindicatorforfrequency
+     */
+	public void setBandindicatorforfrequency(String bandindicatorforfrequency) {
+		this.bandindicatorforfrequency = bandindicatorforfrequency;
+	}
+
+    /**
+     * Getter method for property <tt>rac</tt>.
+     *
+     * @return property value of rac
+     */
+	public String getRac() {
+		return rac;
+	}
+	
+	/**
+	 * Setter method for property <tt>rac</tt>.
+	 * 
+	 * @param rac value to be assigned to property rac
+     */
+	public void setRac(String rac) {
+		this.rac = rac;
+	}
+
+    /**
+     * Getter method for property <tt>recordTime</tt>.
+     *
+     * @return property value of recordTime
+     */
+	public Date getRecordTime() {
+		return recordTime;
+	}
+	
+	/**
+	 * Setter method for property <tt>recordTime</tt>.
+	 * 
+	 * @param recordTime value to be assigned to property recordTime
+     */
+	public void setRecordTime(Date recordTime) {
+		this.recordTime = recordTime;
+	}
+
+    /**
+     * Getter method for property <tt>uptimeTime</tt>.
+     *
+     * @return property value of uptimeTime
+     */
+	public Date getUptimeTime() {
+		return uptimeTime;
+	}
+	
+	/**
+	 * Setter method for property <tt>uptimeTime</tt>.
+	 * 
+	 * @param uptimeTime value to be assigned to property uptimeTime
+     */
+	public void setUptimeTime(Date uptimeTime) {
+		this.uptimeTime = uptimeTime;
+	}
+
+    /**
+     * Getter method for property <tt>updateUser</tt>.
+     *
+     * @return property value of updateUser
+     */
+	public String getUpdateUser() {
+		return updateUser;
+	}
+	
+	/**
+	 * Setter method for property <tt>updateUser</tt>.
+	 * 
+	 * @param updateUser value to be assigned to property updateUser
+     */
+	public void setUpdateUser(String updateUser) {
+		this.updateUser = updateUser;
+	}
+
+    /**
+     * Getter method for property <tt>cellGlbId</tt>.
+     *
+     * @return property value of cellGlbId
+     */
+	public int getCellGlbId() {
+		return cellGlbId;
+	}
+	
+	/**
+	 * Setter method for property <tt>cellGlbId</tt>.
+	 * 
+	 * @param cellGlbId value to be assigned to property cellGlbId
+     */
+	public void setCellGlbId(int cellGlbId) {
+		this.cellGlbId = cellGlbId;
+	}
+
+    /**
+     * Getter method for property <tt>siteGlbId</tt>.
+     *
+     * @return property value of siteGlbId
+     */
+	public int getSiteGlbId() {
+		return siteGlbId;
+	}
+	
+	/**
+	 * Setter method for property <tt>siteGlbId</tt>.
+	 * 
+	 * @param siteGlbId value to be assigned to property siteGlbId
+     */
+	public void setSiteGlbId(int siteGlbId) {
+		this.siteGlbId = siteGlbId;
+	}
+}

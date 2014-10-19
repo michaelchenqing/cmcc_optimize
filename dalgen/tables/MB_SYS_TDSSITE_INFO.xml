@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="mb_sys_tdssite_info" dummyPk="rnc_id">
+
+	<!-- 通过基站ID查询3G基站信息详情 -->
+	<operation name="getRNCByRncId" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    select rnc_id,site_oid,site_name,lac,vendor,longitude,latitude,netgrid,environ,freq_band,cover_type,record_time,update_time,update_user,site_glb_id from mb_sys_tdssite_info where rnc_id=?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 插入新3G基站信息记录 -->
+	<operation name="insertRNC" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into mb_sys_tdssite_info 
+	  (rnc_id,site_oid,site_name,lac,vendor,longitude,latitude,netgrid,environ,freq_band,cover_type,record_time,update_time,update_user,site_glb_id)
+		values
+	  (?,?,?,?,?,?,?,?,?,?,?,sysdate,sysdate,?,?)
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 修改3G基站信息 -->
+	<operation name="updateRNC" paramtype="object">
+		<sql>
+			<![CDATA[
+ 			    update mb_sys_tdssite_info 
+ 				   set rnc_id=?, 
+ 				   site_oid=?, 
+ 				   site_name=?, 
+ 				   lac=?,
+ 				   vendor=?, 
+ 				   longitude=?, 
+ 				   latitude=?, 
+ 				   netgrid=?, 
+ 				   environ=?, 
+ 				   freq_band=?, 
+ 				   cover_type=?, 
+ 				   update_user=?, 
+ 				   site_glb_id=? 
+ 				  where rnc_id = ? 
+ 			]]> 
+		</sql>
+	</operation>
+
+	<!-- 删除3G基站信息 -->
+	<operation name="deleteRNC" paramtype="primitive">
+		<sql>
+			<![CDATA[
+				delete from  mb_sys_tdssite_info where rnc_id = ?
+			]]>
+		</sql>
+	</operation>
+</table>	

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="MB_SYS_TDSCELL_RF" dummyPk="cell_id">
+
+	<!-- 插入新mr记录 -->
+	<operation name="insertSysTD" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into MB_SYS_TDSCELL_RF 
+	  (cell_id,cell_name,azimuth,height,mtilt,etilt,antenna,fake_antenna,update_time,record_time,update_user,cell_glb_id,site_glb_id)
+		values
+	  (?,?,?,?,?,?,?,?,?,?,?,?,?) 
+			]]>
+		</sql>
+	</operation>
+
+</table>	

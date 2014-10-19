@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="mb_sys_ltecell_param" dummyPk="cell_glb_id">
+
+	<!-- 通过小区ID查询4G基站参数详情 -->
+	<operation name="getLtecellParamBycellId" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    select cell_glb_id,cell_id,cell_name,operastate,csfb,drx,qci6_dur_len,qci7_dur_len,qci8_dur_len,qci9_dur_len,qci6_cont_timer,qci7_cont_timer,qci8_cont_timer,qci9_cont_timer,qci6_notrig_timer,qci7_notrig_timer,qci8_notrig_timer,qci9_notrig_timer,qci6_waitresend_timer,qci7_waitresend_timer,qci8_waitresend_timer,qci9_waitresend_timer,qci6_shortdur_len,qci7_shortdur_len,qci8_shortdur_len,qci9_shortdur_len,qci6_shortdur_timer,qci7_shortdur_timer,qci8_shortdur_timer,qci9_shortdur_timer,rrc_noact_timer,def_paging_dur,rf_sig_power,pdsch_rs_ratio,pa,init_recv_power,preamble_max_count,power_inc_step,acc_ue_max_power,up_pucch_power_ctrl,pucch_optimal_power,up_pusch_power_ctrl,pathloss_comp_param,instant_optimal_power,acc_min_level,cofreq_meas_start_th,q_offsetcell,q_hyst,a3_offset_hyst,a3_hyst,a3_time_trig,if_a2_th,irat_a2_tds_th,irat_a2_gsm_th,irat_a2_errdef_th,update_time,update_user,record_time from mb_sys_ltecell_param where cell_glb_id=?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 插入新4G基站参数记录 -->
+	<operation name="insertLtecellParam" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into mb_sys_ltecell_param 
+	  (cell_glb_id,cell_id,cell_name,operastate,csfb,drx,qci6_dur_len,qci7_dur_len,qci8_dur_len,qci9_dur_len,qci6_cont_timer,qci7_cont_timer,qci8_cont_timer,qci9_cont_timer,qci6_notrig_timer,qci7_notrig_timer,qci8_notrig_timer,qci9_notrig_timer,qci6_waitresend_timer,qci7_waitresend_timer,qci8_waitresend_timer,qci9_waitresend_timer,qci6_shortdur_len,qci7_shortdur_len,qci8_shortdur_len,qci9_shortdur_len,qci6_shortdur_timer,qci7_shortdur_timer,qci8_shortdur_timer,qci9_shortdur_timer,rrc_noact_timer,def_paging_dur,rf_sig_power,pdsch_rs_ratio,pa,init_recv_power,preamble_max_count,power_inc_step,acc_ue_max_power,up_pucch_power_ctrl,pucch_optimal_power,up_pusch_power_ctrl,pathloss_comp_param,instant_optimal_power,acc_min_level,cofreq_meas_start_th,q_offsetcell,q_hyst,a3_offset_hyst,a3_hyst,a3_time_trig,if_a2_th,irat_a2_tds_th,irat_a2_gsm_th,irat_a2_errdef_th,update_time,update_user,record_time)
+		values
+	  (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,?,?)
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 修改4G基站参数 -->
+	<operation name="updateLtecellParam" paramtype="object">
+		<sql>
+			<![CDATA[
+			    update mb_mr_record
+				   set 
+				   cell_glb_id=?,
+				   cell_id=?,
+				   cell_name=?,
+				   operastate=?,
+				   csfb=?,drx=?,
+				   qci6_dur_len=?,
+				   qci7_dur_len=?,
+				   qci8_dur_len=?,
+				   qci9_dur_len=?,
+				   qci6_cont_timer=?,
+				   qci7_cont_timer=?,
+				   qci8_cont_timer=?,
+				   qci9_cont_timer=?,
+				   qci6_notrig_timer=?,
+				   qci7_notrig_timer=?,
+				   qci8_notrig_timer=?,
+				   qci9_notrig_timer=?,
+				   qci6_waitresend_timer=?,
+				   qci7_waitresend_timer=?,
+				   qci8_waitresend_timer=?,
+				   qci9_waitresend_timer=?,
+				   qci6_shortdur_len=?,
+				   qci7_shortdur_len=?,
+				   qci8_shortdur_len=?,
+				   qci9_shortdur_len=?,
+				   qci6_shortdur_timer=?,
+				   qci7_shortdur_timer=?,
+				   qci8_shortdur_timer=?,
+				   qci9_shortdur_timer=?,
+				   rrc_noact_timer=?,
+				   def_paging_dur=?,
+				   rf_sig_power=?,
+				   pdsch_rs_ratio=?,
+				   pa=?,
+				   init_recv_power=?,
+				   preamble_max_count=?,
+				   power_inc_step=?,
+				   acc_ue_max_power=?,
+				   up_pucch_power_ctrl=?,
+				   pucch_optimal_power=?,
+				   up_pusch_power_ctrl=?,
+				   pathloss_comp_param=?,
+				   instant_optimal_power=?,
+				   acc_min_level=?,
+				   cofreq_meas_start_th=?,
+				   q_offsetcell=?,
+				   q_hyst=?,
+				   a3_offset_hyst=?,
+				   a3_hyst=?,
+				   a3_time_trig=?,
+				   if_a2_th=?,
+				   irat_a2_tds_th=?,
+				   irat_a2_gsm_th=?,
+				   irat_a2_errdef_th=?,
+				   update_time=?,
+				   update_user=?,
+				   record_time=?  
+				  where cell_glb_id = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 删除4G基站参数 -->
+	<operation name="deleteLtecellParam" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    delete mb_sys_ltecell_param where cell_glb_id = ?
+			]]>
+		</sql>
+	</operation>
+</table>	

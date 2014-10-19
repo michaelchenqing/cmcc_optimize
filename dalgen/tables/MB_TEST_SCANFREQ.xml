@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="mb_test_scanfreq" dummyPk="task_id">
+
+	<!-- 通过任务计划ID查询扫频数据详情 -->
+	<operation name="getScanfreqByTackId" paramtype="primitive">
+		<sql>
+			<![CDATA[
+		    select task_id,cell_glb_id,cell_id,cell_name,pci,earfcn,rs_rp,rs_cinr_sinr,test_time from mb_test_scanfreq where task_id = ? 
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 插入新扫频数据记录 -->
+	<operation name="insertScanfreq" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into mb_test_scanfreq (task_id,cell_glb_id,cell_id,cell_name,pci,earfcn,rs_rp,rs_cinr_sinr,test_time) values (?,?,?,?,?,?,?,?,sysdate); 
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 修改扫频数据 -->
+	<operation name="updateScanfreq" paramtype="object">
+		<sql>
+			<![CDATA[
+			update mb_test_scanfreq set 
+				task_id=?,
+				cell_glb_id=?,
+				cell_id=?,
+				cell_name=?,
+				pci=?,
+				earfcn=?,
+				rs_rp=?,
+				rs_cinr_sinr=?,
+				test_time=? where task_id=? 
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 删除扫频数据 -->
+	<operation name="deleteScanfreq" paramtype="primitive">
+		<sql>
+			<![CDATA[
+				delete from mb_test_scanfreq where task_id=?
+			]]>
+		</sql>
+	</operation>
+</table>	

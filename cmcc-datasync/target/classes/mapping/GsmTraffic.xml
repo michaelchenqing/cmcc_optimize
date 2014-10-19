@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 数据文件转换模板 -->
+<root>
+	<template_desc>
+		<name>2G话务量</name>
+		<desc>2G话务量</desc>
+		<ver>1.0</ver>
+		<other>sichuan_Lte_GSMTraffic_YY_20140627.csv.gz</other>
+		<split_flag>,</split_flag>
+		<ignore_rows>1</ignore_rows>
+	</template_desc>
+
+	<!-- 2G小区话务量表 -->
+	<mapping table="MB_PERF_GSM_BUSISTAT">
+		<field>
+			<!-- TODO 需要改为亿阳的小区int_id ,csv文件需要提供该列 -->
+			<handlerClass>com.cmcc.optimize.datamodel.sync.generator.GeneratorMd5StrValue</handlerClass>
+			<handlerParam>#{3}</handlerParam>
+			<db_column>CELL_GLB_ID</db_column><!-- 数据库表字段 -->
+			<data_type>string</data_type><!-- 数据类型，java的基础类型及对象类型 -->
+			<rule_valid>.{0,256}</rule_valid><!-- 数据校验规则，校验失败时，将整个文件不进行导入 -->
+		</field>
+		<field>
+			<col_index>5</col_index>
+			<db_column>city</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,32}</rule_valid>
+		</field>
+		<field>
+			<col_index>-1</col_index>
+			<db_column>Cell_ID</db_column>
+			<data_type>number</data_type>
+			<rule_valid></rule_valid>
+			<defaultValue></defaultValue>
+		</field>
+		<field>
+			<col_index>4</col_index>
+			<db_column>Cell_Name</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,256}</rule_valid>
+		</field>
+		<field>
+			<col_index>0</col_index>
+			<db_column>CYCLE_DATE</db_column>
+			<data_type>timestamp</data_type>
+			<rule_valid></rule_valid>
+			<data_format>yyyy-MM-dd HH:mm:ss</data_format>
+		</field>
+		<field>
+			<col_index>0</col_index>
+			<db_column>record_time</db_column>
+			<data_type>timestamp</data_type>
+			<rule_valid></rule_valid>
+			<data_format>yyyy-MM-dd HH:mm:ss</data_format>
+		</field>
+		<field>
+			<col_index>2</col_index>
+			<db_column>Period</db_column>
+			<data_type>string</data_type>
+			<rule_valid>.{0,4}</rule_valid>
+		</field>
+		<field>
+			<col_index>6</col_index>
+			<db_column>Traffic</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?(([1-9]{1}\d{0,11})|((([1-9]{1}\d{0,11})|(0))\.\d{1,8})))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>7</col_index>
+			<db_column>GPRS_Throu</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?(([1-9]{1}\d{0,11})|((([1-9]{1}\d{0,11})|(0))\.\d{1,8})))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>8</col_index>
+			<db_column>EGPRS_Throu</db_column>
+			<data_type>number</data_type>
+			<rule_valid>|(null)|(([-]?(([1-9]{1}\d{0,11})|((([1-9]{1}\d{0,11})|(0))\.\d{1,8})))|[0])</rule_valid>
+		</field>
+		<field>
+			<col_index>-1</col_index>
+			<db_column>Oper_Time</db_column>
+			<data_type>timestamp</data_type>
+			<rule_valid></rule_valid>
+			<defaultValue>${sysdate}</defaultValue><!-- 默认存入时间 -->
+		</field>
+	</mapping>
+
+	<!-- 复杂映射,指定类解析 ，传入指定参数 -->
+	<!-- <mapping params="tbl_table2,1000"> <parser_class>com.xxxx.proj.ccc.Class</parser_class> 
+		</mapping> -->
+
+	<!-- 复杂映射,指定类外挂脚本解析，传入指定参数，参见：com.cmcc.optimize.datasyc.parser.RuleEngineParserHelper -->
+	<!-- <mapping params="tbl_table3,1000"> <extends_code>extends/10001.rule</extends_code> 
+		</mapping> -->
+
+</root>

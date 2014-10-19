@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_SYS_LTECELL_INFO_T -->
+    <resultMap id="RM-MB-SYS-LTECELL-INFO-T" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbSysLtecellInfoTDO">
+        <result property="intId" column="INT_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="objectRdn" column="OBJECT_RDN" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="name" column="NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="zhName" column="ZH_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="omcId" column="OMC_ID" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="vendorId" column="VENDOR_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cityId" column="CITY_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="timeStamp" column="TIME_STAMP" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="updateStamp" column="UPDATE_STAMP" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="confirmed" column="CONFIRMED" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="state" column="STATE" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="relatedEnodeb" column="RELATED_ENODEB" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cgi" column="CGI" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="eutrancellId" column="EUTRANCELL_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellIdentity" column="CELL_IDENTITY" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="cellType" column="CELL_TYPE" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellsize" column="CELLSIZE" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="plmnidlist" column="PLMNIDLIST" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="tac" column="TAC" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="pci" column="PCI" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="pcilist" column="PCILIST" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="maximumtransmissionpower" column="MAXIMUMTRANSMISSIONPOWER" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="referencesignalpower" column="REFERENCESIGNALPOWER" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="pb" column="PB" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="partOfSectorpower" column="PART_OF_SECTORPOWER" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="administrativestate" column="ADMINISTRATIVESTATE" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="operationalstate" column="OPERATIONALSTATE" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="celllocalid" column="CELLLOCALID" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="relatedrrulist" column="RELATEDRRULIST" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="relatedantennalist" column="RELATEDANTENNALIST" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellresvinfo" column="CELLRESVINFO" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="bandindicator" column="BANDINDICATOR" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="earfcn" column="EARFCN" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="bandwidth" column="BANDWIDTH" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="sfassignment" column="SFASSIGNMENT" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="specialsfpatterns" column="SPECIALSFPATTERNS" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="mbmsswitch" column="MBMSSWITCH" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="adjTdNum" column="ADJ_TD_NUM" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="adjLteNum" column="ADJ_LTE_NUM" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="adjGsmNum" column="ADJ_GSM_NUM" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="USfNum" column="U_SF_NUM" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="DSfNum" column="D_SF_NUM" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="totalprb" column="TOTALPRB" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="ecarrierNum" column="ECARRIER_NUM" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="dwptsOver9" column="DWPTS_OVER_9" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="adjLteFrqlst" column="ADJ_LTE_FRQLST" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="adjTdFrqlst" column="ADJ_TD_FRQLST" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="adjGsmFrqlst" column="ADJ_GSM_FRQLST" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellGlbId" column="CELL_GLB_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="recordTime" column="RECORD_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbSysLtecellInfoTDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbSysLtecellInfoTDAO.getLtecellByIntId -->
+    <select id="MS-MB-SYS-LTECELL-INFO-T-GET-LTECELL-BY-INT-ID" resultMap="RM-MB-SYS-LTECELL-INFO-T">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-SYS-LTECELL-INFO-T-GET-LTECELL-BY-INT-ID*/ int_id, object_rdn, name, zh_name, omc_id, vendor_id, city_id, time_stamp, update_stamp, confirmed, state, related_enodeb, cgi, eutrancell_id, cell_identity, cell_type, cellsize, plmnidlist, tac, pci, pcilist, maximumtransmissionpower, referencesignalpower, pb, part_of_sectorpower, administrativestate, operationalstate, celllocalid, relatedrrulist, relatedantennalist, cellresvinfo, bandindicator, earfcn, bandwidth, sfassignment, specialsfpatterns, mbmsswitch, adj_td_num, adj_lte_num, adj_gsm_num, u_sf_num, d_sf_num, totalprb, ecarrier_num, dwpts_over_9, adj_lte_frqlst, adj_td_frqlst, adj_gsm_frqlst, CELL_GLB_ID, RECORD_TIME from mb_sys_ltecell_info_t where (int_id = #value#)
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbSysLtecellInfoTDAO.getLtecellByParam -->
+    <select id="MS-MB-SYS-LTECELL-INFO-T-GET-LTECELL-BY-PARAM" resultMap="RM-MB-SYS-LTECELL-INFO-T">
+        select * from ( select row_.*, rownum rownum_ /*MS-CAS-DALGEN-MB-SYS-LTECELL-INFO-T-GET-LTECELL-BY-PARAM*/ from (select int_id,object_rdn,name,zh_name,omc_id,vendor_id,city_id,time_stamp,update_stamp,confirmed,state,related_enodeb,cgi,eutrancell_id,cell_identity,cell_type,cellsize,plmnidlist,tac,pci,pcilist,maximumtransmissionpower,referencesignalpower,pb,part_of_sectorpower,administrativestate,operationalstate,celllocalid,relatedrrulist,relatedantennalist,cellresvinfo,bandindicator,earfcn,bandwidth,sfassignment,specialsfpatterns,mbmsswitch,adj_td_num,adj_lte_num,adj_gsm_num,u_sf_num,d_sf_num,totalprb,ecarrier_num,dwpts_over_9,adj_lte_frqlst,adj_td_frqlst,adj_gsm_frqlst,CELL_GLB_ID,RECORD_TIME from mb_sys_ltecell_info_t   
+		 	  where RECORD_TIME &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and RECORD_TIME &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss') 
+				<dynamic>
+					<isNotEmpty prepend="AND" property="list">
+						city_id in         
+						<iterate close=")" open="(" conjunction="," property="list">
+						     #list[]#
+						</iterate>
+					</isNotEmpty>
+				</dynamic> ) row_ ) where rownum_ &gt; #startRow#  and rownum_ &lt; = #endRow#
+    </select>
+
+    <!-- mapped statement for IbatisMbSysLtecellInfoTDAO.getLtecellByParam, needed by paging -->
+    <select id="MS-MB-SYS-LTECELL-INFO-T-GET-LTECELL-BY-PARAM-COUNT-FOR-PAGING" resultClass="int">
+        select  /*MS-CAS-DALGEN-MB-SYS-LTECELL-INFO-T-GET-LTECELL-BY-PARAM-COUNT-FOR-PAGING*/  count(*) from mb_sys_ltecell_info_t   
+		 	  where RECORD_TIME &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and RECORD_TIME &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss') 
+				<dynamic>
+					<isNotEmpty prepend="AND" property="list">
+						city_id in         
+						<iterate close=")" open="(" conjunction="," property="list">
+						     #list[]#
+						</iterate>
+					</isNotEmpty>
+				</dynamic>
+    </select>
+
+    <!-- mapped statement for IbatisMbSysLtecellInfoTDAO.insertLtecell -->
+    <insert id="MS-MB-SYS-LTECELL-INFO-T-INSERT-LTECELL">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-SYS-LTECELL-INFO-T-INSERT-LTECELL*/ into mb_sys_ltecell_info_t(int_id,object_rdn,name,zh_name,omc_id,vendor_id,city_id,time_stamp,update_stamp,confirmed,state,related_enodeb,cgi,eutrancell_id,cell_identity,cell_type,cellsize,plmnidlist,tac,pci,pcilist,maximumtransmissionpower,referencesignalpower,pb,part_of_sectorpower,administrativestate,operationalstate,celllocalid,relatedrrulist,relatedantennalist,cellresvinfo,bandindicator,earfcn,bandwidth,sfassignment,specialsfpatterns,mbmsswitch,adj_td_num,adj_lte_num,adj_gsm_num,u_sf_num,d_sf_num,totalprb,ecarrier_num,dwpts_over_9,adj_lte_frqlst,adj_td_frqlst,adj_gsm_frqlst,CELL_GLB_ID,RECORD_TIME) values (#intId#, #objectRdn#, #name#, #zhName#, #omcId#, #vendorId#, #cityId#, #timeStamp#, #updateStamp#, #confirmed#, #state#, #relatedEnodeb#, #cgi#, #eutrancellId#, #cellIdentity#, #cellType#, #cellsize#, #plmnidlist#, #tac#, #pci#, #pcilist#, #maximumtransmissionpower#, #referencesignalpower#, #pb#, #partOfSectorpower#, #administrativestate#, #operationalstate#, #celllocalid#, #relatedrrulist#, #relatedantennalist#, #cellresvinfo#, #bandindicator#, #earfcn#, #bandwidth#, #sfassignment#, #specialsfpatterns#, #mbmsswitch#, #adjTdNum#, #adjLteNum#, #adjGsmNum#, #USfNum#, #DSfNum#, #totalprb#, #ecarrierNum#, #dwptsOver9#, #adjLteFrqlst#, #adjTdFrqlst#, #adjGsmFrqlst#, #cellGlbId#, #recordTime#)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbSysLtecellInfoTDAO.updateLtecell -->
+    <update id="MS-MB-SYS-LTECELL-INFO-T-UPDATE-LTECELL">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-SYS-LTECELL-INFO-T-UPDATE-LTECELL*/ mb_sys_ltecell_info_t set int_id=#intId#, object_rdn=#objectRdn#, name=#name#, zh_name=#zhName#, omc_id=#omcId#, vendor_id=#vendorId#, city_id=#cityId#, time_stamp=#timeStamp#, update_stamp=#updateStamp#, confirmed=#confirmed#, state=#state#, related_enodeb=#relatedEnodeb#, cgi=#cgi#, eutrancell_id=#eutrancellId#, cell_identity=#cellIdentity#, cell_type=#cellType#, cellsize=#cellsize#, plmnidlist=#plmnidlist#, tac=#tac#, pci=#pci#, pcilist=#pcilist#, maximumtransmissionpower=#maximumtransmissionpower#, referencesignalpower=#referencesignalpower#, pb=#pb#, part_of_sectorpower=#partOfSectorpower#, administrativestate=#administrativestate#, operationalstate=#operationalstate#, celllocalid=#celllocalid#, relatedrrulist=#relatedrrulist#, relatedantennalist=#relatedantennalist#, cellresvinfo=#cellresvinfo#, bandindicator=#bandindicator#, earfcn=#earfcn#, bandwidth=#bandwidth#, sfassignment=#sfassignment#, specialsfpatterns=#specialsfpatterns#, mbmsswitch=#mbmsswitch#, adj_td_num=#adjTdNum#, adj_lte_num=#adjLteNum#, adj_gsm_num=#adjGsmNum#, u_sf_num=#USfNum#, d_sf_num=#DSfNum#, totalprb=#totalprb#, ecarrier_num=#ecarrierNum#, dwpts_over_9=#dwptsOver9#, adj_lte_frqlst=#adjLteFrqlst#, adj_td_frqlst=#adjTdFrqlst#, adj_gsm_frqlst=#adjGsmFrqlst#, CELL_GLB_ID=#cellGlbId# where (int_id = #intId2#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbSysLtecellInfoTDAO.deleteltecell -->
+    <delete id="MS-MB-SYS-LTECELL-INFO-T-DELETELTECELL">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-SYS-LTECELL-INFO-T-DELETELTECELL*/ from mb_sys_ltecell_info_t where (int_id = #value#)
+    ]]>
+    </delete>
+
+</sqlMap>

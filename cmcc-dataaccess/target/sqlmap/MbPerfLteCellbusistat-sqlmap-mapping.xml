@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_PERF_LTE_CELLBUSISTAT -->
+    <resultMap id="RM-MB-PERF-LTE-CELLBUSISTAT" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbPerfLteCellbusistatDO">
+        <result property="cellGlbId" column="CELL_GLB_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellId" column="CELL_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellName" column="CELL_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="recordTime" column="RECORD_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="period" column="PERIOD" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="puschPrbsUsed" column="PUSCH_PRBS_USED" javaType="long" jdbcType="NUMBER" nullValue="0"/>
+        <result property="uplinkPrbs" column="UPLINK_PRBS" javaType="long" jdbcType="NUMBER" nullValue="0"/>
+        <result property="pdschPrbsUsed" column="PDSCH_PRBS_USED" javaType="long" jdbcType="NUMBER" nullValue="0"/>
+        <result property="downlinkPrbs" column="DOWNLINK_PRBS" javaType="long" jdbcType="NUMBER" nullValue="0"/>
+        <result property="pdcpUplinkThrou" column="PDCP_UPLINK_THROU" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="pdcpDownlinkThrou" column="PDCP_DOWNLINK_THROU" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="operTime" column="OPER_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="city" column="CITY" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbPerfLteCellbusistatDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbPerfLteCellbusistatDAO.getLTEperfbyId -->
+    <select id="MS-MB-PERF-LTE-CELLBUSISTAT-GET-LT-EPERFBY-ID" resultMap="RM-MB-PERF-LTE-CELLBUSISTAT">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-PERF-LTE-CELLBUSISTAT-GET-LT-EPERFBY-ID*/ CELL_GLB_ID, CELL_ID, CELL_NAME, record_time, PERIOD, pusch_prbs_used, uplink_prbs, pdsch_prbs_used, downlink_prbs, pdcp_uplink_throu, pdcp_downlink_throu, oper_time from mb_perf_lte_cellbusistat where (CELL_GLB_ID = #value#)
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbPerfLteCellbusistatDAO.insertLTEperf -->
+    <insert id="MS-MB-PERF-LTE-CELLBUSISTAT-INSERT-LT-EPERF">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-PERF-LTE-CELLBUSISTAT-INSERT-LT-EPERF*/ into mb_perf_lte_cellbusistat(CELLCELL_GLB_ID,CELL_ID,CELL_NAME,record_time,PERIOD,pusch_prbs_used,uplink_prbs,pdsch_prbs_used,downlink_prbs,pdcp_uplink_throu,pdcp_downlink_throu,oper_time) values (#cellcellGlbId#, #cellId#, #cellName#, #recordTime#, #period#, #puschPrbsUsed#, #uplinkPrbs#, #pdschPrbsUsed#, #downlinkPrbs#, #pdcpUplinkThrou#, #pdcpDownlinkThrou#, sysdate)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbPerfLteCellbusistatDAO.updateLTEperf -->
+    <update id="MS-MB-PERF-LTE-CELLBUSISTAT-UPDATE-LT-EPERF">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-PERF-LTE-CELLBUSISTAT-UPDATE-LT-EPERF*/ mb_perf_lte_cellbusistat set CELL_ID=#cellId#, CELL_NAME=#cellName#, record_time=#recordTime#, PERIOD=#period#, pusch_prbs_used=#puschPrbsUsed#, uplink_prbs=#uplinkPrbs#, pdsch_prbs_used=#pdschPrbsUsed#, downlink_prbs=#downlinkPrbs#, pdcp_uplink_throu=#pdcpUplinkThrou#, pdcp_downlink_throu=#pdcpDownlinkThrou#, oper_time=sysdate where (CELL_GLB_ID = #cellGlbId#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbPerfLteCellbusistatDAO.deleteLTEperfRecord -->
+    <delete id="MS-MB-PERF-LTE-CELLBUSISTAT-DELETE-LT-EPERF-RECORD">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-PERF-LTE-CELLBUSISTAT-DELETE-LT-EPERF-RECORD*/ from mb_perf_lte_cellbusistat where (CELL_GLB_ID = #value#)
+    ]]>
+    </delete>
+
+</sqlMap>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="MB_SYS_GIS_TDSPERMISSION" dummyPk="SITE_GLB_ID">
+
+	<!-- 通过3G基站ID查询位置信息 -->
+	<operation name="getTDSPERMISSIONbyId" paramtype="primitive">
+		<sql>
+			<![CDATA[
+	select  PROVINCE,CITY,COUNTY, RNCID,SITE_OID,SITE_NAME,NETGRID,ENVIRON,VENDOR,RECORD_TIME,UPDATE_TIME,UPDATE_USER,SITE_GLB_ID  from 
+	MB_SYS_GIS_TDSPERMISSION where SITE_GLB_ID = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 插入3G基站位置信息 -->
+	<operation name="insertTDSPERMISSION" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into MB_SYS_GIS_TDSPERMISSION 
+	  ( PROVINCE,CITY,COUNTY, RNCID,SITE_OID,SITE_NAME,NETGRID,ENVIRON,VENDOR,RECORD_TIME,UPDATE_TIME,UPDATE_USER,SITE_GLB_ID)
+		values
+	  (?,?,?,?,?,?,?,?,?,syadate,sysdate,?,?)
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 修改3G基站位置信息 -->
+	<operation name="updateTDSPERMISSION" paramtype="object">
+		<sql>
+			<![CDATA[
+			    update MB_SYS_GIS_TDSPERMISSION
+				set 				 
+			 PROVINCE=?,
+			 CITY=?,
+			 COUNTY=?,
+			  RNCID=?,
+			  SITE_OID=?,
+			  SITE_NAME=?,
+			  NETGRID=?,
+			  ENVIRON=?,
+			  VENDOR=?,
+			  RECORD_TIME=sysdate,
+			  UPDATE_TIME=sysdate,
+			  UPDATE_USER=?
+				where SITE_GLB_ID = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 删除3G基站位置信息 -->
+	<operation name="deleteTDSPERMISSION" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    delete MB_SYS_GIS_TDSPERMISSION where SITE_GLB_ID = ?
+			]]>
+		</sql>
+	</operation>
+</table>	

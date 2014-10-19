@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="mb_sys_ltecell_info" dummyPk="cell_glb_id">
+
+	<!-- 通过小区ID查询4G小区信息详情 -->
+	<operation name="getLtecellByCellId" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    select cell_glb_id,enodeb_glb_id,cell_id,cell_name,cell_english_name,cgi,sector_id,pci,earfcn,rf_power,sfassign,sepcsfpattern,record_time,update_time,update_user,MIN_DISTANCE from mb_sys_ltecell_info where cell_glb_id
+			]]>
+		</sql>
+	</operation>
+	
+	<!-- 查询小区信息 -->
+	<operation name="getLtecellByParam" paramtype="private" multiplicity="many" paging="true">
+		<extraparams>
+			<param name="startTime" javatype="java.lang.String" />
+		</extraparams>
+		<extraparams>
+			<param name="endTime" javatype="java.lang.String" />
+		</extraparams>
+		<sql>
+			<![CDATA[
+				select cell_glb_id,enodeb_glb_id,cell_id,cell_name,cell_english_name,cgi,sector_id,pci,earfcn,rf_power,sfassign,sepcsfpattern,record_time,update_time,update_user,MIN_DISTANCE from mb_sys_ltecell_info 
+		 	  where update_time >= '' and update_time < ''
+		 	  ]]>
+		</sql>
+		<sqlmap><![CDATA[
+            select cell_glb_id,enodeb_glb_id,cell_id,cell_name,cell_english_name,cgi,sector_id,pci,earfcn,rf_power,sfassign,sepcsfpattern,record_time,update_time,update_user,MIN_DISTANCE from mb_sys_ltecell_info 
+		 	  where update_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and update_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss') 
+        ]]>
+		</sqlmap>
+	</operation>
+
+	<!-- 插入新4G小区信息记录 -->
+	<operation name="insertLtecell" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into mb_sys_ltecell_info 
+	  (cell_glb_id,enodeb_glb_id,cell_id,cell_name,cell_english_name,cgi,sector_id,pci,earfcn,rf_power,sfassign,sepcsfpattern,record_time,update_time,update_user,MIN_DISTANCE)
+		values
+	  (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,sysdate,sysdate,?,?)
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 修改4G小区信息 -->
+	<operation name="updateLtecell" paramtype="object">
+		<sql>
+			<![CDATA[
+			    update mb_sys_ltecell_info
+				   set 
+				   cell_glb_id=?,
+				   enodeb_glb_id=?,
+				   cell_id=?,
+				   cell_name=?,
+				   cell_english_name=?,
+				   cgi=?,sector_id=?,
+				   pci=?,
+				   earfcn=?,
+				   rf_power=?,
+				   sfassign=?,
+				   sepcsfpattern=?,
+				   record_time=?,
+				   update_time=?,
+				   update_user=?, 
+				   MIN_DISTANCE=? 
+				  where cell_glb_id = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 删除4G小区信息 -->
+	<operation name="deleteltecell" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    delete mb_sys_ltecell_info where cell_glb_id = ?
+			]]>
+		</sql>
+	</operation>
+</table>	

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_SYS_LTECELL_INFO -->
+    <resultMap id="RM-MB-SYS-LTECELL-INFO" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbSysLtecellInfoDO">
+        <result property="cellGlbId" column="CELL_GLB_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="enodebGlbId" column="ENODEB_GLB_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellId" column="CELL_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellName" column="CELL_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cellEnglishName" column="CELL_ENGLISH_NAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="cgi" column="CGI" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="sectorId" column="SECTOR_ID" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="pci" column="PCI" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="earfcn" column="EARFCN" javaType="java.lang.Integer" jdbcType="NUMBER"/>
+        <result property="rfPower" column="RF_POWER" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="sfassign" column="SFASSIGN" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="sepcsfpattern" column="SEPCSFPATTERN" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="recordTime" column="RECORD_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="updateTime" column="UPDATE_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="updateUser" column="UPDATE_USER" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="minDistance" column="MIN_DISTANCE" javaType="java.lang.Float" jdbcType="NUMBER"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbSysLtecellInfoDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbSysLtecellInfoDAO.getLtecellByCellId -->
+    <select id="MS-MB-SYS-LTECELL-INFO-GET-LTECELL-BY-CELL-ID" resultMap="RM-MB-SYS-LTECELL-INFO">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-SYS-LTECELL-INFO-GET-LTECELL-BY-CELL-ID*/ cell_glb_id, enodeb_glb_id, cell_id, cell_name, cell_english_name, cgi, sector_id, pci, earfcn, rf_power, sfassign, sepcsfpattern, record_time, update_time, update_user, MIN_DISTANCE from mb_sys_ltecell_info where cell_glb_id
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbSysLtecellInfoDAO.getLtecellByParam -->
+    <select id="MS-MB-SYS-LTECELL-INFO-GET-LTECELL-BY-PARAM" resultMap="RM-MB-SYS-LTECELL-INFO">
+        select * from ( select row_.*, rownum rownum_ /*MS-CAS-DALGEN-MB-SYS-LTECELL-INFO-GET-LTECELL-BY-PARAM*/ from (select cell_glb_id,enodeb_glb_id,cell_id,cell_name,cell_english_name,cgi,sector_id,pci,earfcn,rf_power,sfassign,sepcsfpattern,record_time,update_time,update_user,MIN_DISTANCE from mb_sys_ltecell_info 
+		 	  where update_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and update_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss') ) row_ ) where rownum_ &gt; #startRow#  and rownum_ &lt; = #endRow#
+    </select>
+
+    <!-- mapped statement for IbatisMbSysLtecellInfoDAO.getLtecellByParam, needed by paging -->
+    <select id="MS-MB-SYS-LTECELL-INFO-GET-LTECELL-BY-PARAM-COUNT-FOR-PAGING" resultClass="int">
+        select  /*MS-CAS-DALGEN-MB-SYS-LTECELL-INFO-GET-LTECELL-BY-PARAM-COUNT-FOR-PAGING*/  count(*) from mb_sys_ltecell_info 
+		 	  where update_time &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and update_time &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss')
+    </select>
+
+    <!-- mapped statement for IbatisMbSysLtecellInfoDAO.insertLtecell -->
+    <insert id="MS-MB-SYS-LTECELL-INFO-INSERT-LTECELL">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-SYS-LTECELL-INFO-INSERT-LTECELL*/ into mb_sys_ltecell_info(cell_glb_id,enodeb_glb_id,cell_id,cell_name,cell_english_name,cgi,sector_id,pci,earfcn,rf_power,sfassign,sepcsfpattern,record_time,update_time,update_user,MIN_DISTANCE) values (#cellGlbId#, #enodebGlbId#, #cellId#, #cellName#, #cellEnglishName#, #cgi#, #sectorId#, #pci#, #earfcn#, #rfPower#, #sfassign#, #sepcsfpattern#, #recordTime#, #updateTime#, #updateUser#, #minDistance#, ?, sysdate, sysdate, ?, ?)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbSysLtecellInfoDAO.updateLtecell -->
+    <update id="MS-MB-SYS-LTECELL-INFO-UPDATE-LTECELL">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-SYS-LTECELL-INFO-UPDATE-LTECELL*/ mb_sys_ltecell_info set cell_glb_id=#cellGlbId#, enodeb_glb_id=#enodebGlbId#, cell_id=#cellId#, cell_name=#cellName#, cell_english_name=#cellEnglishName#, cgi=#cgi#, sector_id=#sectorId#, pci=#pci#, earfcn=#earfcn#, rf_power=#rfPower#, sfassign=#sfassign#, sepcsfpattern=#sepcsfpattern#, record_time=#recordTime#, update_time=#updateTime#, update_user=#updateUser#, MIN_DISTANCE=#minDistance# where (cell_glb_id = #cellGlbId2#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbSysLtecellInfoDAO.deleteltecell -->
+    <delete id="MS-MB-SYS-LTECELL-INFO-DELETELTECELL">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-SYS-LTECELL-INFO-DELETELTECELL*/ from mb_sys_ltecell_info where (cell_glb_id = #value#)
+    ]]>
+    </delete>
+
+</sqlMap>

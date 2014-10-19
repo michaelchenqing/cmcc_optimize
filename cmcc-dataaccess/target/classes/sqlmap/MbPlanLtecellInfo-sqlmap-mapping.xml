@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- ==========================================================  -->
+<!-- Configuration for ibatis sqlmap mapping.                    -->
+<!-- ==========================================================  -->
+
+<!-- @author gaoqs                                                              -->
+<!-- ============================================================================= -->
+
+<sqlMap namespace="cas">
+    <!-- ============================================= -->
+    <!-- RESULT MAPS                                   -->
+    <!-- ============================================= -->
+
+    <!-- result maps for database table MB_PLAN_LTECELL_INFO -->
+    <resultMap id="RM-MB-PLAN-LTECELL-INFO" class="com.cmcc.optimize.dataaccess.dao.dataobject.MbPlanLtecellInfoDO">
+        <result property="recordTime" column="RECORD_TIME" javaType="java.util.Date" jdbcType="TIMESTAMP(6)"/>
+        <result property="cellId" column="CELL_ID" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="city" column="CITY" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="contry" column="CONTRY" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="minDistance" column="MIN_DISTANCE" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="projectphase" column="PROJECTPHASE" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="coverType" column="COVER_TYPE" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="high" column="HIGH" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="longitude" column="LONGITUDE" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="latitude" column="LATITUDE" javaType="java.lang.Float" jdbcType="NUMBER"/>
+        <result property="ischecktype" column="ISCHECKTYPE" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+        <result property="netgrname" column="NETGRNAME" javaType="java.lang.String" jdbcType="VARCHAR2"/>
+    </resultMap>
+
+
+    <!-- ============================================= -->
+    <!-- mapped statements for IbatisMbPlanLtecellInfoDAO -->
+    <!-- ============================================= -->
+    <!-- mapped statement for IbatisMbPlanLtecellInfoDAO.getPlanCellByTime -->
+    <select id="MS-MB-PLAN-LTECELL-INFO-GET-PLAN-CELL-BY-TIME" resultMap="RM-MB-PLAN-LTECELL-INFO">
+    <![CDATA[
+        select /*MS-CAS-DALGEN-MB-PLAN-LTECELL-INFO-GET-PLAN-CELL-BY-TIME*/ record_time, cell_id, city, contry, min_distance, projectphase, cover_type, high, longitude, latitude, ISCHECKTYPE, NETGRNAME from mb_plan_ltecell_info where (record_time = #value#)
+    ]]>
+    </select>
+
+    <!-- mapped statement for IbatisMbPlanLtecellInfoDAO.getPlanCellParam -->
+    <select id="MS-MB-PLAN-LTECELL-INFO-GET-PLAN-CELL-PARAM" resultMap="RM-MB-PLAN-LTECELL-INFO">
+        select * from ( select row_.*, rownum rownum_ /*MS-CAS-DALGEN-MB-PLAN-LTECELL-INFO-GET-PLAN-CELL-PARAM*/ from (select record_time,cell_id,city,contry,min_distance,projectphase,cover_type,high,longitude,latitude,ISCHECKTYPE,NETGRNAME  from mb_plan_ltecell_info 
+						 	  where RECORD_TIME &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and RECORD_TIME &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss') 
+				
+				<dynamic>
+					<isNotEmpty prepend="AND" property="list">
+						  city in         
+						<iterate close=")" open="(" conjunction="," property="list">
+						     #list[]#
+						</iterate>
+					</isNotEmpty>
+				</dynamic> ) row_ ) where rownum_ &gt; #startRow#  and rownum_ &lt; = #endRow#
+    </select>
+
+    <!-- mapped statement for IbatisMbPlanLtecellInfoDAO.getPlanCellParam, needed by paging -->
+    <select id="MS-MB-PLAN-LTECELL-INFO-GET-PLAN-CELL-PARAM-COUNT-FOR-PAGING" resultClass="int">
+        select  /*MS-CAS-DALGEN-MB-PLAN-LTECELL-INFO-GET-PLAN-CELL-PARAM-COUNT-FOR-PAGING*/  count(*) from mb_plan_ltecell_info 
+						 	  where RECORD_TIME &gt;= to_date(#startTime#,'YYYY-MM-DD HH24:mi:ss') and RECORD_TIME &lt; to_date(#endTime#,'YYYY-MM-DD HH24:mi:ss') 
+				
+				<dynamic>
+					<isNotEmpty prepend="AND" property="list">
+						  city in         
+						<iterate close=")" open="(" conjunction="," property="list">
+						     #list[]#
+						</iterate>
+					</isNotEmpty>
+				</dynamic>
+    </select>
+
+    <!-- mapped statement for IbatisMbPlanLtecellInfoDAO.insertPlanCell -->
+    <insert id="MS-MB-PLAN-LTECELL-INFO-INSERT-PLAN-CELL">
+    <![CDATA[
+        insert /*MS-CAS-DALGEN-MB-PLAN-LTECELL-INFO-INSERT-PLAN-CELL*/ into mb_plan_ltecell_info(record_time,cell_id,city,contry,min_distance,projectphase,cover_type,high,longitude,latitude,ISCHECKTYPE,NETGRNAME) values (#recordTime#, #cellId#, #city#, #contry#, #minDistance#, #projectphase#, #coverType#, #high#, #longitude#, #latitude#, #ischecktype#, #netgrname#)
+    ]]>
+    </insert>
+
+    <!-- mapped statement for IbatisMbPlanLtecellInfoDAO.updatePlanCell -->
+    <update id="MS-MB-PLAN-LTECELL-INFO-UPDATE-PLAN-CELL">
+    <![CDATA[
+        update /*MS-CAS-DALGEN-MB-PLAN-LTECELL-INFO-UPDATE-PLAN-CELL*/ mb_plan_ltecell_info set record_time=#recordTime#, cell_id=#cellId#, city=#city#, contry=#contry#, min_distance=#minDistance#, projectphase=#projectphase#, cover_type=#coverType#, high=#high#, longitude=#longitude#, latitude=#latitude#, ISCHECKTYPE=#ischecktype#, NETGRNAME=#netgrname# where (record_time = #recordTime2#)
+    ]]>
+    </update>
+
+    <!-- mapped statement for IbatisMbPlanLtecellInfoDAO.deleteLPlanCell -->
+    <delete id="MS-MB-PLAN-LTECELL-INFO-DELETE-L-PLAN-CELL">
+    <![CDATA[
+        delete /*MS-CAS-DALGEN-MB-PLAN-LTECELL-INFO-DELETE-L-PLAN-CELL*/ from mb_plan_ltecell_info where (record_time = #value#)
+    ]]>
+    </delete>
+
+</sqlMap>

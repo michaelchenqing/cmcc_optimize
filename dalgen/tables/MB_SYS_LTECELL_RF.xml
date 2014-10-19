@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 表无主键时，需要使用dummyPk指定虚拟主键 -->
+<table sqlname="mb_sys_ltecell_rf" dummyPk="cell_glb_id">
+
+	<!-- 通过小区ID查询4G小区RF详情 -->
+	<operation name="getLtecellBycellID" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    select cell_glb_id,azimuth,downtilt,m_downtilt,e_downtilt,height,altitude,antenna,fake_antenna,record_time,update_time,update_user,SHARE_RFS,ANTENNA_TYPE_OLD from mb_sys_ltecell_rf where cell_glb_id=?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 插入新4G小区RF记录 -->
+	<operation name="insertLtecell" paramtype="object">
+		<sql>
+			<![CDATA[
+				  insert into mb_sys_ltecell_rf 
+	  (cell_glb_id,azimuth,downtilt,m_downtilt,e_downtilt,height,altitude,antenna,fake_antenna,record_time,update_time,update_user,SHARE_RFS,ANTENNA_TYPE_OLD)
+		values
+	  (?,?,?,?,?,?,?,?,?,sysdate,sysdate,?,?,?)
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 修改4G小区RF -->
+	<operation name="updateLtecell" paramtype="object">
+		<sql>
+			<![CDATA[
+			    update mb_sys_ltecell_rf
+				   set 
+				   cell_glb_id=?,
+				   azimuth=?,
+				   downtilt=?,
+				   m_downtilt=?,
+				   e_downtilt=?,
+				   height=?,
+				   altitude=?,
+				   antenna=?,
+				   fake_antenna=?,
+				   record_time=?,
+				   update_time=?,
+				   update_user=?,SHARE_RFS=?,ANTENNA_TYPE_OLD=? 
+				  where cell_glb_id = ?
+			]]>
+		</sql>
+	</operation>
+
+	<!-- 删除4G小区RF -->
+	<operation name="deleteLtecell" paramtype="primitive">
+		<sql>
+			<![CDATA[
+			    delete mb_sys_ltecell_rf where cell_glb_id = ?
+			]]>
+		</sql>
+	</operation>
+</table>	
